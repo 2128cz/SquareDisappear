@@ -2,22 +2,22 @@
   "936c4f64-8503-4d06-a265-aa69e930b284": {
     "asset": 1658106789909,
     "meta": 1658106899181,
-    "relativePath": "prefabs"
+    "relativePath": "resources\\prefabs"
   },
   "48f7d105-dfd2-424b-ab37-be5730867702": {
     "asset": 1658106899185,
     "meta": 1658106899185,
-    "relativePath": "prefabs\\block.prefab"
+    "relativePath": "resources\\prefabs\\block.prefab"
   },
   "abc15aaf-090d-4ef2-a116-cde8cba516cd": {
     "asset": 1658106899185,
     "meta": 1658106899185,
-    "relativePath": "prefabs\\iceNode.prefab"
+    "relativePath": "resources\\prefabs\\iceNode.prefab"
   },
   "4ecdd7a0-6980-44de-b4e6-e0341b3b0de6": {
     "asset": 1658114946288,
     "meta": 1658114946290,
-    "relativePath": "prefabs\\rank ui.prefab"
+    "relativePath": "resources\\prefabs\\rank ui.prefab"
   },
   "36876e4a-1921-42e0-b845-a529c9980108": {
     "asset": 1658111816183,
@@ -27,7 +27,7 @@
   "dd17a024-167e-40fb-b88b-2f230f14b79c": {
     "asset": 1667470428661,
     "meta": 1667470428662,
-    "relativePath": "prefabs\\sound node.prefab"
+    "relativePath": "resources\\prefabs\\sound node.prefab"
   },
   "79315729-5964-42d7-88a8-f4aba8f3a9d6": {
     "asset": 1658106790003,
@@ -1144,16 +1144,6 @@
     "meta": 1667799154011,
     "relativePath": "prefab\\webview.prefab"
   },
-  "ee72a687-2e1d-4ecb-a3fb-912046961c14": {
-    "asset": 1667798181947,
-    "meta": 1667799156304,
-    "relativePath": "scripts\\base\\DevelopersToolClass.ts"
-  },
-  "3e934dc5-867e-49ac-8af4-149370ad7097": {
-    "asset": 1667798180983,
-    "meta": 1667799160168,
-    "relativePath": "scripts\\base\\DynaminPanelClass.ts"
-  },
   "23e20daa-7697-44cf-972a-30c026080e1c": {
     "asset": 1667798182362,
     "meta": 1667799154257,
@@ -1163,5 +1153,35 @@
     "asset": 1664154961603,
     "meta": 1667799154378,
     "relativePath": "model\\primitives.fbx"
+  },
+  "ee72a687-2e1d-4ecb-a3fb-912046961c14": {
+    "asset": 1667800902508,
+    "meta": 1667800903068,
+    "relativePath": "scripts\\base\\DevelopersToolClass.ts"
+  },
+  "3e934dc5-867e-49ac-8af4-149370ad7097": {
+    "asset": 1667800773492,
+    "meta": 1667800903076,
+    "relativePath": "scripts\\base\\DynaminPanelClass.ts"
+  },
+  "4915abbe-de44-4a39-b10a-e94c7b07b610": {
+    "asset": 1667800953666,
+    "meta": 1667800953667,
+    "relativePath": "resources\\prefabs\\ui"
+  },
+  "8ed440de-7be5-457f-b105-5953b92b311e": {
+    "asset": 1667800960939,
+    "meta": 1667800960944,
+    "relativePath": "resources\\prefabs\\ui\\start ui.prefab"
+  },
+  "6b9bb8f3-7494-4740-b365-b113d651da98": {
+    "asset": 1667800963829,
+    "meta": 1667800963832,
+    "relativePath": "resources\\prefabs\\ui\\over ui.prefab"
+  },
+  "69d4d6eb-0ce9-443b-a06a-420ff9cf0d70": {
+    "asset": 1667800966936,
+    "meta": 1667800966946,
+    "relativePath": "resources\\prefabs\\ui\\game ui.prefab"
   }
 }

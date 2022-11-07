@@ -1,19 +1,14 @@
-const {ccclass, property} = cc._decorator;
-
+const { ccclass, property } = cc._decorator;
+import DevelopersToolClass from './DevelopersToolClass';
 @ccclass
-export default class NewClass extends cc.Component {
+export default class NewClass extends DevelopersToolClass {
 
-    @property(cc.Label)
-    label: cc.Label = null;
-
-    @property
-    text: string = 'hello';
 
     // LIFE-CYCLE CALLBACKS:
 
     // onLoad () {}
 
-    start () {
+    start() {
 
     }
 

@@ -9,6 +9,13 @@ export default class NewClass extends cc.Component {
     @property
     text: string = 'hello';
 
+    /**
+     * 构造函数
+     */
+    ctor() {
+        
+    }
+
     // LIFE-CYCLE CALLBACKS:
 
     // onLoad () {}
@@ -18,4 +25,6 @@ export default class NewClass extends cc.Component {
     }
 
     // update (dt) {}
+
+
 }

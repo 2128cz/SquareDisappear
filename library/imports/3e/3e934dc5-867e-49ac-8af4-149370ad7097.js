@@ -24,30 +24,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
+var DevelopersToolClass_1 = require("./DevelopersToolClass");
 var NewClass = /** @class */ (function (_super) {
     __extends(NewClass, _super);
     function NewClass() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.label = null;
-        _this.text = 'hello';
-        return _this;
-        // update (dt) {}
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     // LIFE-CYCLE CALLBACKS:
     // onLoad () {}
     NewClass.prototype.start = function () {
     };
-    __decorate([
-        property(cc.Label)
-    ], NewClass.prototype, "label", void 0);
-    __decorate([
-        property
-    ], NewClass.prototype, "text", void 0);
     NewClass = __decorate([
         ccclass
     ], NewClass);
     return NewClass;
-}(cc.Component));
+}(DevelopersToolClass_1.default));
 exports.default = NewClass;
 
 cc._RF.pop();

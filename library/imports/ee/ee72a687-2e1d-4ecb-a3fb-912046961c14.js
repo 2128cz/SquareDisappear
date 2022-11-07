@@ -33,6 +33,11 @@ var NewClass = /** @class */ (function (_super) {
         return _this;
         // update (dt) {}
     }
+    /**
+     * 构造函数
+     */
+    NewClass.prototype.ctor = function () {
+    };
     // LIFE-CYCLE CALLBACKS:
     // onLoad () {}
     NewClass.prototype.start = function () {
