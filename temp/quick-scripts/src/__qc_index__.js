@@ -1,19 +1,6 @@
 
 require('./assets/load/Loading');
-require('./assets/scripts/BombEffectSc');
-require('./assets/scripts/BrickSc');
-require('./assets/scripts/CheckOverSc');
-require('./assets/scripts/DelayDelSc');
-require('./assets/scripts/GameOverSc');
-require('./assets/scripts/GameSc');
-require('./assets/scripts/GameTouchSc');
-require('./assets/scripts/IceEffectSc');
-require('./assets/scripts/IconCooldownSc');
-require('./assets/scripts/MessageBoxSc');
-require('./assets/scripts/Msger');
-require('./assets/scripts/PropUISc');
-require('./assets/scripts/SceneManagerSc');
-require('./assets/scripts/SoundConctrollerSc');
-require('./assets/scripts/SplinteringConctrollerSc');
-require('./assets/scripts/StartSc');
-require('./assets/scripts/WXManager');
+require('./assets/scripts/base/class/DevelopersToolClass');
+require('./assets/scripts/base/class/DiologClass');
+require('./assets/scripts/base/class/DynaminPanelClass');
+require('./assets/scripts/base/tool/Global');
