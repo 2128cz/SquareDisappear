@@ -1,0 +1,14 @@
+{
+  "__type__": "dragonBones.DragonBonesAtlasAsset",
+  "_name": "xiaochu_tex",
+  "_objFlags": 0,
+  "_native": "",
+  "_atlasJson": "{\"imagePath\":\"xiaochu_tex.png\",\"width\":1024,\"height\":512,\"name\":\"xiaochu\",\"SubTexture\":[{\"width\":681,\"y\":1,\"height\":195,\"name\":\"0\",\"x\":1},{\"width\":633,\"y\":262,\"height\":47,\"name\":\"1\",\"x\":1},{\"width\":211,\"y\":1,\"height\":211,\"name\":\"2\",\"x\":684},{\"width\":169,\"y\":214,\"height\":169,\"name\":\"2a\",\"x\":636},{\"width\":509,\"y\":198,\"height\":62,\"name\":\"Upstar1\",\"x\":1},{\"width\":425,\"y\":311,\"height\":69,\"name\":\"Upstar2\",\"x\":1},{\"width\":246,\"y\":385,\"height\":54,\"name\":\"Lowstar1\",\"x\":444},{\"width\":441,\"y\":382,\"height\":53,\"name\":\"Lowstar2\",\"x\":1}]}",
+  "_texture": {
+    "__uuid__": "86a08f6f-9e6d-4740-b25e-19587f55c0c1"
+  },
+  "texture": {
+    "__uuid__": "86a08f6f-9e6d-4740-b25e-19587f55c0c1"
+  },
+  "_textureAtlasData": null
+}

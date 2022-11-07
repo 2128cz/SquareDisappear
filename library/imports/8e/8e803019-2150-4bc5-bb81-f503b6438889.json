@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "fk-tx-quanji_tex",
+    "texture": "4691a813-834c-4098-bdcb-4801791d9853",
+    "atlas": "",
+    "rect": [
+      1,
+      1,
+      951,
+      872
+    ],
+    "offset": [
+      -35.5,
+      75
+    ],
+    "originalSize": [
+      1024,
+      1024
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

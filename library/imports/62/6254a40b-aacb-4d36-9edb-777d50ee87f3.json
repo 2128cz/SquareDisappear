@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "bottom line",
+    "texture": "58a5cb60-3035-462c-bead-0c0f40ac6cc3",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      720,
+      86
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      720,
+      86
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

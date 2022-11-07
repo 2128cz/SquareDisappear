@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "prop iocn 3",
+    "texture": "256bdd9d-c4cf-437b-9689-0dc0224137e5",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      72,
+      100
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      72,
+      100
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

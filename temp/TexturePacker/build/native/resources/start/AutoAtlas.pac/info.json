@@ -1,0 +1,757 @@
+{
+  "projectPath": "D:\\cocosDemo\\砖块打的6-ccc2.4.0",
+  "mtimes": {
+    "6f6f8985-69b5-499b-9937-d86160fb8cd0": {
+      "assetMtime": 1608947275000,
+      "metaMtime": 1658106900137
+    },
+    "01631340-4f15-4ee6-8bcf-dcd60d6d2c3a": {
+      "assetMtime": 1583565892000,
+      "metaMtime": 1658106900283
+    },
+    "b21387f5-d9a4-4fe1-be46-4c8f01911f21": {
+      "assetMtime": 1583565892000,
+      "metaMtime": 1658106900283
+    },
+    "033d9c6b-66f7-41fd-8a0b-9739886057ee": {
+      "assetMtime": 1583565892000,
+      "metaMtime": 1658106900153
+    },
+    "f13504b3-865e-426b-b75d-bea5d9dd3837": {
+      "assetMtime": 1583565892000,
+      "metaMtime": 1658106900153
+    },
+    "051d0dd8-29ad-4239-8319-9711fd269116": {
+      "assetMtime": 1583565892000,
+      "metaMtime": 1658106900219
+    },
+    "69753459-85b4-4498-bfbe-f121fad18263": {
+      "assetMtime": 1583565892000,
+      "metaMtime": 1658106900219
+    },
+    "12c1b2b9-b572-449a-a831-5bfe5c6c6c0b": {
+      "assetMtime": 1658113029276,
+      "metaMtime": 1658113029295
+    },
+    "31302d7b-b7bb-43a6-ba27-dd7f56e178ac": {
+      "assetMtime": 1658113029276,
+      "metaMtime": 1658113029295
+    },
+    "2dbe3634-1b3f-4958-9c81-1cb886ae34bb": {
+      "assetMtime": 1583565892000,
+      "metaMtime": 1658106900209
+    },
+    "8a9e960c-b29f-4742-bbc1-e606d8a32254": {
+      "assetMtime": 1583565892000,
+      "metaMtime": 1658106900209
+    },
+    "3b1533eb-f6d6-4cbe-89bc-83dac727bb79": {
+      "assetMtime": 1583565892000,
+      "metaMtime": 1658106900251
+    },
+    "256bdd9d-c4cf-437b-9689-0dc0224137e5": {
+      "assetMtime": 1583565892000,
+      "metaMtime": 1658106900251
+    },
+    "3bd9d922-fea5-4927-b4bc-e0af27581c52": {
+      "assetMtime": 1583565892000,
+      "metaMtime": 1658106900219
+    },
+    "7acc17c3-77af-48a3-9b1c-494eda23dead": {
+      "assetMtime": 1583565892000,
+      "metaMtime": 1658106900219
+    },
+    "3d0b20a3-da97-400d-8950-1920baf2b965": {
+      "assetMtime": 1583565892000,
+      "metaMtime": 1658106900209
+    },
+    "45fa3f42-b37d-4336-bb9d-87df9200c339": {
+      "assetMtime": 1583565892000,
+      "metaMtime": 1658106900209
+    },
+    "52202ab5-a0bf-47fc-8f90-cd21674c67a4": {
+      "assetMtime": 1583565892000,
+      "metaMtime": 1658106900235
+    },
+    "33bec8fe-224f-4fde-88db-8d78605111e5": {
+      "assetMtime": 1583565892000,
+      "metaMtime": 1658106900235
+    },
+    "5295852e-1504-4ec0-a872-5cca1806dfb4": {
+      "assetMtime": 1583565892000,
+      "metaMtime": 1658106900262
+    },
+    "8a8afc7c-70d3-4ee0-a4db-3490d8b63bff": {
+      "assetMtime": 1583565892000,
+      "metaMtime": 1658106900262
+    },
+    "58eaadcf-512b-4981-ac42-87493fa610de": {
+      "assetMtime": 1583565892000,
+      "metaMtime": 1658106900198
+    },
+    "4a85de1b-6b3a-433c-aa42-c9b82f89069b": {
+      "assetMtime": 1583565892000,
+      "metaMtime": 1658106900198
+    },
+    "5cafc9b2-0a54-44c2-9f22-0dda91894b05": {
+      "assetMtime": 1658111411523,
+      "metaMtime": 1658111411551
+    },
+    "9f2d8078-b79d-41df-984d-0ea77712c6aa": {
+      "assetMtime": 1658111411523,
+      "metaMtime": 1658111411551
+    },
+    "64805067-3864-4883-a3fc-e8901942b158": {
+      "assetMtime": 1583565892000,
+      "metaMtime": 1658106900262
+    },
+    "0a287e3b-a1c2-44e1-83d7-6f63070fe153": {
+      "assetMtime": 1583565892000,
+      "metaMtime": 1658106900262
+    },
+    "77e13a6c-143a-47f6-b32d-7bdbfbcdab80": {
+      "assetMtime": 1583565892000,
+      "metaMtime": 1658106900235
+    },
+    "d97a9985-9231-46bc-a42e-0c227276e329": {
+      "assetMtime": 1583565892000,
+      "metaMtime": 1658106900235
+    },
+    "8ff580d7-1b10-4c7f-bb1a-5cd24e5e851e": {
+      "assetMtime": 1583565892000,
+      "metaMtime": 1658106900251
+    },
+    "fd63093d-a63f-4190-b441-93ad88a3039e": {
+      "assetMtime": 1583565892000,
+      "metaMtime": 1658106900251
+    },
+    "a62e8221-9202-4a70-b34d-25cf94b8e2b8": {
+      "assetMtime": 1583565892000,
+      "metaMtime": 1658106900179
+    },
+    "24e49db4-1d96-472b-ace7-ca2cf87d11d4": {
+      "assetMtime": 1583565892000,
+      "metaMtime": 1658106900179
+    },
+    "a973f029-2d09-4c39-973b-f63f39587935": {
+      "assetMtime": 1583565892000,
+      "metaMtime": 1658106900160
+    },
+    "357a9c5a-e97c-4fbd-99d9-d8158d4c736e": {
+      "assetMtime": 1583565892000,
+      "metaMtime": 1658106900160
+    },
+    "b12f671b-f494-4f5b-b1dd-22ecc6d52456": {
+      "assetMtime": 1583565892000,
+      "metaMtime": 1658106900166
+    },
+    "c03b2c9e-7bf1-4be4-a33e-83cb34e232a3": {
+      "assetMtime": 1583565892000,
+      "metaMtime": 1658106900166
+    },
+    "b6b7a08b-d55a-4af4-add4-4b23daf15231": {
+      "assetMtime": 1583565892000,
+      "metaMtime": 1658106900272
+    },
+    "835eb0f2-56b6-4bc9-99d1-bf292ddcf737": {
+      "assetMtime": 1583565892000,
+      "metaMtime": 1658106900272
+    },
+    "c6eff789-ec12-4f22-b2cc-06d9652a7a2a": {
+      "assetMtime": 1583565892000,
+      "metaMtime": 1658106900272
+    },
+    "25ba4c64-d47d-4e2c-848e-767b02b6102a": {
+      "assetMtime": 1583565892000,
+      "metaMtime": 1658106900272
+    },
+    "e2fb2b36-a481-4ccc-98b6-8106285e964e": {
+      "assetMtime": 1583565892000,
+      "metaMtime": 1658106900179
+    },
+    "aece6a4a-b1ee-4f4f-ba22-65d6290de522": {
+      "assetMtime": 1583565892000,
+      "metaMtime": 1658106900179
+    },
+    "e570160b-a183-4dfb-b06d-1f2d03b92a4f": {
+      "assetMtime": 1583565892000,
+      "metaMtime": 1658106900283
+    },
+    "7d8e8712-d84a-452a-9b3b-8ec2dec50731": {
+      "assetMtime": 1583565892000,
+      "metaMtime": 1658106900283
+    }
+  },
+  "result": {
+    "name": "AutoAtlas-2",
+    "width": 214,
+    "height": 481,
+    "ver": "1.2.0",
+    "uuid": "6f6f8985-69b5-499b-9937-d86160fb8cd0",
+    "maxWidth": 1024,
+    "maxHeight": 1024,
+    "padding": 2,
+    "allowRotation": true,
+    "forceSquared": false,
+    "powerOfTwo": false,
+    "algorithm": "MaxRects",
+    "format": "png",
+    "quality": 80,
+    "contourBleed": true,
+    "paddingBleed": true,
+    "filterUnused": false,
+    "packable": false,
+    "premultiplyAlpha": false,
+    "filterMode": "bilinear",
+    "platformSettings": {},
+    "subMetas": {},
+    "bleed": 1,
+    "atlases": [
+      {
+        "files": [
+          {
+            "name": "panel bg",
+            "uuid": "58eaadcf-512b-4981-ac42-87493fa610de",
+            "textureUuid": "4a85de1b-6b3a-433c-aa42-c9b82f89069b",
+            "path": "D:\\cocosDemo\\砖块打的6-ccc2.4.0\\temp\\trimImages\\spritesheet_js_1658113652873_image_10.png",
+            "trim": {
+              "x": 3,
+              "y": 3,
+              "width": 560,
+              "height": 612,
+              "rotatedWidth": 560,
+              "rotatedHeight": 612
+            },
+            "rawWidth": 560,
+            "rawHeight": 612,
+            "width": 566,
+            "height": 618,
+            "originalPath": "D:/cocosDemo/砖块打的6-ccc2.4.0/library/imports/4a/4a85de1b-6b3a-433c-aa42-c9b82f89069b.png",
+            "x": 0,
+            "y": 0,
+            "rotatedWidth": 566,
+            "rotatedHeight": 618
+          },
+          {
+            "name": "logo2",
+            "uuid": "5cafc9b2-0a54-44c2-9f22-0dda91894b05",
+            "textureUuid": "9f2d8078-b79d-41df-984d-0ea77712c6aa",
+            "path": "D:\\cocosDemo\\砖块打的6-ccc2.4.0\\temp\\trimImages\\spritesheet_js_1658113652873_image_11.png",
+            "trim": {
+              "x": 3,
+              "y": 621,
+              "width": 800,
+              "height": 381,
+              "rotatedWidth": 800,
+              "rotatedHeight": 381
+            },
+            "rawWidth": 800,
+            "rawHeight": 382,
+            "width": 806,
+            "height": 387,
+            "originalPath": "D:/cocosDemo/砖块打的6-ccc2.4.0/library/imports/9f/9f2d8078-b79d-41df-984d-0ea77712c6aa.png",
+            "x": 0,
+            "y": 618,
+            "rotatedWidth": 806,
+            "rotatedHeight": 387
+          },
+          {
+            "name": "prop bg 3",
+            "uuid": "3bd9d922-fea5-4927-b4bc-e0af27581c52",
+            "textureUuid": "7acc17c3-77af-48a3-9b1c-494eda23dead",
+            "path": "D:\\cocosDemo\\砖块打的6-ccc2.4.0\\temp\\trimImages\\spritesheet_js_1658113652872_image_6.png",
+            "trim": {
+              "x": 809,
+              "y": 3,
+              "width": 475,
+              "height": 125,
+              "rotatedWidth": 125,
+              "rotatedHeight": 475
+            },
+            "rawWidth": 475,
+            "rawHeight": 125,
+            "width": 481,
+            "height": 131,
+            "originalPath": "D:/cocosDemo/砖块打的6-ccc2.4.0/library/imports/7a/7acc17c3-77af-48a3-9b1c-494eda23dead.png",
+            "x": 806,
+            "y": 0,
+            "rotated": true,
+            "rotatedWidth": 131,
+            "rotatedHeight": 481
+          },
+          {
+            "name": "btn start",
+            "uuid": "b12f671b-f494-4f5b-b1dd-22ecc6d52456",
+            "textureUuid": "c03b2c9e-7bf1-4be4-a33e-83cb34e232a3",
+            "path": "D:\\cocosDemo\\砖块打的6-ccc2.4.0\\temp\\trimImages\\spritesheet_js_1658113652873_image_17.png",
+            "trim": {
+              "x": 569,
+              "y": 484,
+              "width": 406,
+              "height": 129,
+              "rotatedWidth": 406,
+              "rotatedHeight": 129
+            },
+            "rawWidth": 406,
+            "rawHeight": 129,
+            "width": 412,
+            "height": 135,
+            "originalPath": "D:/cocosDemo/砖块打的6-ccc2.4.0/library/imports/c0/c03b2c9e-7bf1-4be4-a33e-83cb34e232a3.png",
+            "x": 566,
+            "y": 481,
+            "rotatedWidth": 412,
+            "rotatedHeight": 135
+          },
+          {
+            "name": "prop title",
+            "uuid": "b6b7a08b-d55a-4af4-add4-4b23daf15231",
+            "textureUuid": "835eb0f2-56b6-4bc9-99d1-bf292ddcf737",
+            "path": "D:\\cocosDemo\\砖块打的6-ccc2.4.0\\temp\\trimImages\\spritesheet_js_1658113652873_image_18.png",
+            "trim": {
+              "x": 940,
+              "y": 3,
+              "width": 424,
+              "height": 76,
+              "rotatedWidth": 76,
+              "rotatedHeight": 424
+            },
+            "rawWidth": 424,
+            "rawHeight": 76,
+            "width": 430,
+            "height": 82,
+            "originalPath": "D:/cocosDemo/砖块打的6-ccc2.4.0/library/imports/83/835eb0f2-56b6-4bc9-99d1-bf292ddcf737.png",
+            "x": 937,
+            "y": 0,
+            "rotated": true,
+            "rotatedWidth": 82,
+            "rotatedHeight": 430
+          },
+          {
+            "name": "top ui text 2",
+            "uuid": "e570160b-a183-4dfb-b06d-1f2d03b92a4f",
+            "textureUuid": "7d8e8712-d84a-452a-9b3b-8ec2dec50731",
+            "path": "D:\\cocosDemo\\砖块打的6-ccc2.4.0\\temp\\trimImages\\spritesheet_js_1658113652874_image_21.png",
+            "trim": {
+              "x": 940,
+              "y": 433,
+              "width": 45,
+              "height": 21,
+              "rotatedWidth": 21,
+              "rotatedHeight": 45
+            },
+            "rawWidth": 45,
+            "rawHeight": 21,
+            "width": 51,
+            "height": 27,
+            "originalPath": "D:/cocosDemo/砖块打的6-ccc2.4.0/library/imports/7d/7d8e8712-d84a-452a-9b3b-8ec2dec50731.png",
+            "x": 937,
+            "y": 430,
+            "rotated": true,
+            "rotatedWidth": 27,
+            "rotatedHeight": 51
+          },
+          {
+            "name": "panel tips 1",
+            "uuid": "2dbe3634-1b3f-4958-9c81-1cb886ae34bb",
+            "textureUuid": "8a9e960c-b29f-4742-bbc1-e606d8a32254",
+            "path": "D:\\cocosDemo\\砖块打的6-ccc2.4.0\\temp\\trimImages\\spritesheet_js_1658113652872_image_4.png",
+            "trim": {
+              "x": 981,
+              "y": 433,
+              "width": 400,
+              "height": 24,
+              "rotatedWidth": 24,
+              "rotatedHeight": 400
+            },
+            "rawWidth": 400,
+            "rawHeight": 24,
+            "width": 406,
+            "height": 30,
+            "originalPath": "D:/cocosDemo/砖块打的6-ccc2.4.0/library/imports/8a/8a9e960c-b29f-4742-bbc1-e606d8a32254.png",
+            "x": 978,
+            "y": 430,
+            "rotated": true,
+            "rotatedWidth": 30,
+            "rotatedHeight": 406
+          },
+          {
+            "name": "btn_service",
+            "uuid": "a62e8221-9202-4a70-b34d-25cf94b8e2b8",
+            "textureUuid": "24e49db4-1d96-472b-ace7-ca2cf87d11d4",
+            "path": "D:\\cocosDemo\\砖块打的6-ccc2.4.0\\temp\\trimImages\\spritesheet_js_1658113652873_image_15.png",
+            "trim": {
+              "x": 809,
+              "y": 839,
+              "width": 140,
+              "height": 141,
+              "rotatedWidth": 140,
+              "rotatedHeight": 141
+            },
+            "rawWidth": 140,
+            "rawHeight": 141,
+            "width": 146,
+            "height": 147,
+            "originalPath": "D:/cocosDemo/砖块打的6-ccc2.4.0/library/imports/24/24e49db4-1d96-472b-ace7-ca2cf87d11d4.png",
+            "x": 806,
+            "y": 836,
+            "rotatedWidth": 146,
+            "rotatedHeight": 147
+          },
+          {
+            "name": "prop text 1",
+            "uuid": "8ff580d7-1b10-4c7f-bb1a-5cd24e5e851e",
+            "textureUuid": "fd63093d-a63f-4190-b441-93ad88a3039e",
+            "path": "D:\\cocosDemo\\砖块打的6-ccc2.4.0\\temp\\trimImages\\spritesheet_js_1658113652873_image_14.png",
+            "trim": {
+              "x": 809,
+              "y": 986,
+              "width": 112,
+              "height": 31,
+              "rotatedWidth": 112,
+              "rotatedHeight": 31
+            },
+            "rawWidth": 112,
+            "rawHeight": 31,
+            "width": 118,
+            "height": 37,
+            "originalPath": "D:/cocosDemo/砖块打的6-ccc2.4.0/library/imports/fd/fd63093d-a63f-4190-b441-93ad88a3039e.png",
+            "x": 806,
+            "y": 983,
+            "rotatedWidth": 118,
+            "rotatedHeight": 37
+          },
+          {
+            "name": "top ui text 1",
+            "uuid": "01631340-4f15-4ee6-8bcf-dcd60d6d2c3a",
+            "textureUuid": "b21387f5-d9a4-4fe1-be46-4c8f01911f21",
+            "path": "D:\\cocosDemo\\砖块打的6-ccc2.4.0\\temp\\trimImages\\spritesheet_js_1658113652871_image_0.png",
+            "trim": {
+              "x": 927,
+              "y": 986,
+              "width": 89,
+              "height": 21,
+              "rotatedWidth": 89,
+              "rotatedHeight": 21
+            },
+            "rawWidth": 89,
+            "rawHeight": 21,
+            "width": 95,
+            "height": 27,
+            "originalPath": "D:/cocosDemo/砖块打的6-ccc2.4.0/library/imports/b2/b21387f5-d9a4-4fe1-be46-4c8f01911f21.png",
+            "x": 924,
+            "y": 983,
+            "rotatedWidth": 95,
+            "rotatedHeight": 27
+          },
+          {
+            "name": "prop text 3",
+            "uuid": "5295852e-1504-4ec0-a872-5cca1806dfb4",
+            "textureUuid": "8a8afc7c-70d3-4ee0-a4db-3490d8b63bff",
+            "path": "D:\\cocosDemo\\砖块打的6-ccc2.4.0\\temp\\trimImages\\spritesheet_js_1658113652873_image_9.png",
+            "trim": {
+              "x": 955,
+              "y": 839,
+              "width": 112,
+              "height": 30,
+              "rotatedWidth": 30,
+              "rotatedHeight": 112
+            },
+            "rawWidth": 112,
+            "rawHeight": 30,
+            "width": 118,
+            "height": 36,
+            "originalPath": "D:/cocosDemo/砖块打的6-ccc2.4.0/library/imports/8a/8a8afc7c-70d3-4ee0-a4db-3490d8b63bff.png",
+            "x": 952,
+            "y": 836,
+            "rotated": true,
+            "rotatedWidth": 36,
+            "rotatedHeight": 118
+          },
+          {
+            "name": "prop text 2",
+            "uuid": "64805067-3864-4883-a3fc-e8901942b158",
+            "textureUuid": "0a287e3b-a1c2-44e1-83d7-6f63070fe153",
+            "path": "D:\\cocosDemo\\砖块打的6-ccc2.4.0\\temp\\trimImages\\spritesheet_js_1658113652873_image_12.png",
+            "trim": {
+              "x": 991,
+              "y": 839,
+              "width": 112,
+              "height": 30,
+              "rotatedWidth": 30,
+              "rotatedHeight": 112
+            },
+            "rawWidth": 112,
+            "rawHeight": 30,
+            "width": 118,
+            "height": 36,
+            "originalPath": "D:/cocosDemo/砖块打的6-ccc2.4.0/library/imports/0a/0a287e3b-a1c2-44e1-83d7-6f63070fe153.png",
+            "x": 988,
+            "y": 836,
+            "rotated": true,
+            "rotatedWidth": 36,
+            "rotatedHeight": 118
+          },
+          {
+            "name": "prop iocn 2",
+            "uuid": "52202ab5-a0bf-47fc-8f90-cd21674c67a4",
+            "textureUuid": "33bec8fe-224f-4fde-88db-8d78605111e5",
+            "path": "D:\\cocosDemo\\砖块打的6-ccc2.4.0\\temp\\trimImages\\spritesheet_js_1658113652872_image_8.png",
+            "trim": {
+              "x": 809,
+              "y": 619,
+              "width": 99,
+              "height": 99,
+              "rotatedWidth": 99,
+              "rotatedHeight": 99
+            },
+            "rawWidth": 99,
+            "rawHeight": 99,
+            "width": 105,
+            "height": 105,
+            "originalPath": "D:/cocosDemo/砖块打的6-ccc2.4.0/library/imports/33/33bec8fe-224f-4fde-88db-8d78605111e5.png",
+            "x": 806,
+            "y": 616,
+            "rotatedWidth": 105,
+            "rotatedHeight": 105
+          },
+          {
+            "name": "prop iocn 1",
+            "uuid": "77e13a6c-143a-47f6-b32d-7bdbfbcdab80",
+            "textureUuid": "d97a9985-9231-46bc-a42e-0c227276e329",
+            "path": "D:\\cocosDemo\\砖块打的6-ccc2.4.0\\temp\\trimImages\\spritesheet_js_1658113652873_image_13.png",
+            "trim": {
+              "x": 809,
+              "y": 724,
+              "width": 93,
+              "height": 92,
+              "rotatedWidth": 92,
+              "rotatedHeight": 93
+            },
+            "rawWidth": 93,
+            "rawHeight": 92,
+            "width": 99,
+            "height": 98,
+            "originalPath": "D:/cocosDemo/砖块打的6-ccc2.4.0/library/imports/d9/d97a9985-9231-46bc-a42e-0c227276e329.png",
+            "x": 806,
+            "y": 721,
+            "rotated": true,
+            "rotatedWidth": 98,
+            "rotatedHeight": 99
+          },
+          {
+            "name": "prop bg 1",
+            "uuid": "3d0b20a3-da97-400d-8950-1920baf2b965",
+            "textureUuid": "45fa3f42-b37d-4336-bb9d-87df9200c339",
+            "path": "D:\\cocosDemo\\砖块打的6-ccc2.4.0\\temp\\trimImages\\spritesheet_js_1658113652872_image_7.png",
+            "trim": {
+              "x": 569,
+              "y": 3,
+              "width": 475,
+              "height": 125,
+              "rotatedWidth": 125,
+              "rotatedHeight": 475
+            },
+            "rawWidth": 475,
+            "rawHeight": 125,
+            "width": 481,
+            "height": 131,
+            "originalPath": "D:/cocosDemo/砖块打的6-ccc2.4.0/library/imports/45/45fa3f42-b37d-4336-bb9d-87df9200c339.png",
+            "x": 566,
+            "y": 0,
+            "rotated": true,
+            "rotatedWidth": 131,
+            "rotatedHeight": 481
+          },
+          {
+            "name": "top ui bg",
+            "uuid": "c6eff789-ec12-4f22-b2cc-06d9652a7a2a",
+            "textureUuid": "25ba4c64-d47d-4e2c-848e-767b02b6102a",
+            "path": "D:\\cocosDemo\\砖块打的6-ccc2.4.0\\temp\\trimImages\\spritesheet_js_1658113652873_image_19.png",
+            "trim": {
+              "x": 700,
+              "y": 3,
+              "width": 369,
+              "height": 66,
+              "rotatedWidth": 66,
+              "rotatedHeight": 369
+            },
+            "rawWidth": 369,
+            "rawHeight": 66,
+            "width": 375,
+            "height": 72,
+            "originalPath": "D:/cocosDemo/砖块打的6-ccc2.4.0/library/imports/25/25ba4c64-d47d-4e2c-848e-767b02b6102a.png",
+            "x": 697,
+            "y": 0,
+            "rotated": true,
+            "rotatedWidth": 72,
+            "rotatedHeight": 375
+          },
+          {
+            "name": "prop iocn 3",
+            "uuid": "3b1533eb-f6d6-4cbe-89bc-83dac727bb79",
+            "textureUuid": "256bdd9d-c4cf-437b-9689-0dc0224137e5",
+            "path": "D:\\cocosDemo\\砖块打的6-ccc2.4.0\\temp\\trimImages\\spritesheet_js_1658113652872_image_5.png",
+            "trim": {
+              "x": 700,
+              "y": 378,
+              "width": 72,
+              "height": 100,
+              "rotatedWidth": 72,
+              "rotatedHeight": 100
+            },
+            "rawWidth": 72,
+            "rawHeight": 100,
+            "width": 78,
+            "height": 106,
+            "originalPath": "D:/cocosDemo/砖块打的6-ccc2.4.0/library/imports/25/256bdd9d-c4cf-437b-9689-0dc0224137e5.png",
+            "x": 697,
+            "y": 375,
+            "rotatedWidth": 78,
+            "rotatedHeight": 106
+          }
+        ],
+        "width": 1024,
+        "height": 1020,
+        "name": "AutoAtlas-1",
+        "imagePath": "D:\\cocosDemo\\砖块打的6-ccc2.4.0\\temp\\TexturePacker\\build\\native\\resources\\start\\AutoAtlas.pac\\AutoAtlas-1.png",
+        "compressd": {
+          "suffix": [
+            ".png"
+          ],
+          "imagePathNoExt": "D:\\cocosDemo\\砖块打的6-ccc2.4.0\\temp\\TexturePacker\\build\\native\\resources\\start\\AutoAtlas.pac\\compressed\\AutoAtlas-1"
+        }
+      },
+      {
+        "files": [
+          {
+            "name": "prop bg 2",
+            "uuid": "051d0dd8-29ad-4239-8319-9711fd269116",
+            "textureUuid": "69753459-85b4-4498-bfbe-f121fad18263",
+            "path": "D:\\cocosDemo\\砖块打的6-ccc2.4.0\\temp\\trimImages\\spritesheet_js_1658113652872_image_2.png",
+            "trim": {
+              "x": 3,
+              "y": 3,
+              "width": 475,
+              "height": 124,
+              "rotatedWidth": 124,
+              "rotatedHeight": 475
+            },
+            "rawWidth": 475,
+            "rawHeight": 124,
+            "width": 481,
+            "height": 130,
+            "originalPath": "D:/cocosDemo/砖块打的6-ccc2.4.0/library/imports/69/69753459-85b4-4498-bfbe-f121fad18263.png",
+            "x": 0,
+            "y": 0,
+            "rotated": true,
+            "rotatedWidth": 130,
+            "rotatedHeight": 481
+          },
+          {
+            "name": "btn rank",
+            "uuid": "033d9c6b-66f7-41fd-8a0b-9739886057ee",
+            "textureUuid": "f13504b3-865e-426b-b75d-bea5d9dd3837",
+            "path": "D:\\cocosDemo\\砖块打的6-ccc2.4.0\\temp\\trimImages\\spritesheet_js_1658113652872_image_1.png",
+            "trim": {
+              "x": 133,
+              "y": 3,
+              "width": 78,
+              "height": 80,
+              "rotatedWidth": 78,
+              "rotatedHeight": 80
+            },
+            "rawWidth": 78,
+            "rawHeight": 80,
+            "width": 84,
+            "height": 86,
+            "originalPath": "D:/cocosDemo/砖块打的6-ccc2.4.0/library/imports/f1/f13504b3-865e-426b-b75d-bea5d9dd3837.png",
+            "x": 130,
+            "y": 0,
+            "rotatedWidth": 84,
+            "rotatedHeight": 86
+          },
+          {
+            "name": "btn soundClose",
+            "uuid": "12c1b2b9-b572-449a-a831-5bfe5c6c6c0b",
+            "textureUuid": "31302d7b-b7bb-43a6-ba27-dd7f56e178ac",
+            "path": "D:\\cocosDemo\\砖块打的6-ccc2.4.0\\temp\\trimImages\\spritesheet_js_1658113652872_image_3.png",
+            "trim": {
+              "x": 133,
+              "y": 89,
+              "width": 78,
+              "height": 80,
+              "rotatedWidth": 78,
+              "rotatedHeight": 80
+            },
+            "rawWidth": 78,
+            "rawHeight": 80,
+            "width": 84,
+            "height": 86,
+            "originalPath": "D:/cocosDemo/砖块打的6-ccc2.4.0/library/imports/31/31302d7b-b7bb-43a6-ba27-dd7f56e178ac.png",
+            "x": 130,
+            "y": 86,
+            "rotatedWidth": 84,
+            "rotatedHeight": 86
+          },
+          {
+            "name": "btn sound",
+            "uuid": "a973f029-2d09-4c39-973b-f63f39587935",
+            "textureUuid": "357a9c5a-e97c-4fbd-99d9-d8158d4c736e",
+            "path": "D:\\cocosDemo\\砖块打的6-ccc2.4.0\\temp\\trimImages\\spritesheet_js_1658113652873_image_16.png",
+            "trim": {
+              "x": 133,
+              "y": 175,
+              "width": 78,
+              "height": 80,
+              "rotatedWidth": 78,
+              "rotatedHeight": 80
+            },
+            "rawWidth": 78,
+            "rawHeight": 80,
+            "width": 84,
+            "height": 86,
+            "originalPath": "D:/cocosDemo/砖块打的6-ccc2.4.0/library/imports/35/357a9c5a-e97c-4fbd-99d9-d8158d4c736e.png",
+            "x": 130,
+            "y": 172,
+            "rotatedWidth": 84,
+            "rotatedHeight": 86
+          },
+          {
+            "name": "btn wx",
+            "uuid": "e2fb2b36-a481-4ccc-98b6-8106285e964e",
+            "textureUuid": "aece6a4a-b1ee-4f4f-ba22-65d6290de522",
+            "path": "D:\\cocosDemo\\砖块打的6-ccc2.4.0\\temp\\trimImages\\spritesheet_js_1658113652874_image_20.png",
+            "trim": {
+              "x": 133,
+              "y": 261,
+              "width": 78,
+              "height": 80,
+              "rotatedWidth": 78,
+              "rotatedHeight": 80
+            },
+            "rawWidth": 78,
+            "rawHeight": 80,
+            "width": 84,
+            "height": 86,
+            "originalPath": "D:/cocosDemo/砖块打的6-ccc2.4.0/library/imports/ae/aece6a4a-b1ee-4f4f-ba22-65d6290de522.png",
+            "x": 130,
+            "y": 258,
+            "rotatedWidth": 84,
+            "rotatedHeight": 86
+          }
+        ],
+        "width": 214,
+        "height": 481,
+        "name": "AutoAtlas-2",
+        "imagePath": "D:\\cocosDemo\\砖块打的6-ccc2.4.0\\temp\\TexturePacker\\build\\native\\resources\\start\\AutoAtlas.pac\\AutoAtlas-2.png",
+        "compressd": {
+          "suffix": [
+            ".png"
+          ],
+          "imagePathNoExt": "D:\\cocosDemo\\砖块打的6-ccc2.4.0\\temp\\TexturePacker\\build\\native\\resources\\start\\AutoAtlas.pac\\compressed\\AutoAtlas-2"
+        }
+      }
+    ],
+    "unpackedTextures": []
+  }
+}

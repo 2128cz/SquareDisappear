@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "top ui text 2",
+    "texture": "7d8e8712-d84a-452a-9b3b-8ec2dec50731",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      45,
+      21
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      45,
+      21
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

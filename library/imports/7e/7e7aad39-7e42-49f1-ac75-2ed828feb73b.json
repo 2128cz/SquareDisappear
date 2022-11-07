@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "xiaochu_tex",
+    "texture": "86a08f6f-9e6d-4740-b25e-19587f55c0c1",
+    "atlas": "",
+    "rect": [
+      1,
+      2,
+      891,
+      437
+    ],
+    "offset": [
+      -65.5,
+      35.5
+    ],
+    "originalSize": [
+      1024,
+      512
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}
