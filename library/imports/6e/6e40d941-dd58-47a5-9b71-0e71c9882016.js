@@ -1,6 +1,6 @@
 "use strict";
-cc._RF.push(module, '39d4fYAyCZEeID+WJLUyKeU', 'Loading');
-// load/Loading.ts
+cc._RF.push(module, '6e40dlB3VhHpZtxDnHJiCAW', 'DiologClass');
+// scripts/base/class/DiologClass.ts
 
 "use strict";
 var __extends = (this && this.__extends) || (function () {
@@ -24,38 +24,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
-var Loading = /** @class */ (function (_super) {
-    __extends(Loading, _super);
-    function Loading() {
+var NewClass = /** @class */ (function (_super) {
+    __extends(NewClass, _super);
+    function NewClass() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.logoNode = null;
+        _this.label = null;
+        _this.text = 'hello';
         return _this;
-        // update(dt) {
-        // }
+        // update (dt) {}
     }
-    Loading.prototype.onLoad = function () {
-        this.playLogoAnima();
-    };
-    Loading.prototype.start = function () {
-    };
-    Loading.prototype.playLogoAnima = function () {
-        cc.tween(this.logoNode)
-            .delay(0.5)
-            .to(1, { opacity: 255 })
-            .delay(1)
-            .call(function () {
-            cc.director.loadScene("Game");
-        })
-            .start();
+    // LIFE-CYCLE CALLBACKS:
+    // onLoad () {}
+    NewClass.prototype.start = function () {
     };
     __decorate([
-        property(cc.Node)
-    ], Loading.prototype, "logoNode", void 0);
-    Loading = __decorate([
+        property(cc.Label)
+    ], NewClass.prototype, "label", void 0);
+    __decorate([
+        property
+    ], NewClass.prototype, "text", void 0);
+    NewClass = __decorate([
         ccclass
-    ], Loading);
-    return Loading;
+    ], NewClass);
+    return NewClass;
 }(cc.Component));
-exports.default = Loading;
+exports.default = NewClass;
 
 cc._RF.pop();

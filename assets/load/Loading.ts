@@ -21,7 +21,7 @@ export default class Loading extends cc.Component {
             .to(1, { opacity: 255 })
             .delay(1)
             .call(() => {
-                cc.director.loadScene("Main");
+                cc.director.loadScene("Game");
             })
             .start()
     }

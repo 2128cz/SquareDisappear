@@ -44,7 +44,7 @@ var Loading = /** @class */ (function (_super) {
             .to(1, { opacity: 255 })
             .delay(1)
             .call(function () {
-            cc.director.loadScene("Main");
+            cc.director.loadScene("Game");
         })
             .start();
     };
