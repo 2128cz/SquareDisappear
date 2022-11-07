@@ -17,3 +17,5 @@ require('./assets/scripts/SoundConctrollerSc');
 require('./assets/scripts/SplinteringConctrollerSc');
 require('./assets/scripts/StartSc');
 require('./assets/scripts/WXManager');
+require('./assets/scripts/base/DevelopersToolClass');
+require('./assets/scripts/base/DynaminPanelClass');

@@ -25,6 +25,7 @@ export default class GameSc extends cc.Component {
     // LIFE-CYCLE CALLBACKS:
     private points: number[] = [];
     private begin_y: number = 694;
+    
     onLoad() {
         this.quanjiEffect.node.active = false;
         Msger.on(Msger.on_game_begin, this.on_game_begin, this);
@@ -57,6 +58,7 @@ export default class GameSc extends cc.Component {
     isPaused = true;
     private movespeed = 150;
     g_movespeed_sc = 1;
+
     update(dt) {
         if (this.isPaused) {
             return;
