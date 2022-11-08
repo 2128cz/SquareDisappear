@@ -5,17 +5,10 @@
       "main": true,
       "url": "app://editor/index.html",
       "windowType": "dockable",
-<<<<<<< HEAD
-      "x": 1923,
-      "y": 14,
-      "width": 1396,
-      "height": 1040,
-=======
-      "x": 0,
-      "y": 18,
-      "width": 1440,
-      "height": 824,
->>>>>>> db2b8a7ddf217d18bb4f5789a18927dfb7aaa562
+      "x": 2260,
+      "y": 99,
+      "width": 1256,
+      "height": 905,
       "layout": {
         "children": [
           {
@@ -25,15 +18,9 @@
                 "children": [
                   "hierarchy"
                 ],
-<<<<<<< HEAD
                 "height": 486.875,
                 "type": "panel",
                 "width": 277.203125
-=======
-                "height": 276.984375,
-                "type": "panel",
-                "width": 302
->>>>>>> db2b8a7ddf217d18bb4f5789a18927dfb7aaa562
               },
               {
                 "active": 0,
@@ -43,20 +30,12 @@
                 ],
                 "height": 432.109375,
                 "type": "panel",
-<<<<<<< HEAD
                 "width": 277.203125
-=======
-                "width": 302
->>>>>>> db2b8a7ddf217d18bb4f5789a18927dfb7aaa562
               }
             ],
             "height": 922,
             "type": "dock-v",
-<<<<<<< HEAD
             "width": 277.203125
-=======
-            "width": 302
->>>>>>> db2b8a7ddf217d18bb4f5789a18927dfb7aaa562
           },
           {
             "children": [
@@ -67,11 +46,7 @@
                 ],
                 "height": 649.1875,
                 "type": "panel",
-<<<<<<< HEAD
                 "width": 685.65625
-=======
-                "width": 636
->>>>>>> db2b8a7ddf217d18bb4f5789a18927dfb7aaa562
               },
               {
                 "active": 0,
@@ -82,20 +57,12 @@
                 ],
                 "height": 269.8125,
                 "type": "panel",
-<<<<<<< HEAD
                 "width": 685.65625
-=======
-                "width": 636
->>>>>>> db2b8a7ddf217d18bb4f5789a18927dfb7aaa562
               }
             ],
             "height": 922,
             "type": "dock-v",
-<<<<<<< HEAD
             "width": 685.65625
-=======
-            "width": 636
->>>>>>> db2b8a7ddf217d18bb4f5789a18927dfb7aaa562
           },
           {
             "active": 0,
@@ -105,26 +72,12 @@
             ],
             "height": 922,
             "type": "panel",
-<<<<<<< HEAD
             "width": 411.125
-=======
-            "width": 480
->>>>>>> db2b8a7ddf217d18bb4f5789a18927dfb7aaa562
           }
         ],
         "type": "dock-h"
       },
-      "panels": [
-        "hierarchy",
-        "assets",
-        "cloud-function",
-        "scene",
-        "console",
-        "timeline",
-        "game-window",
-        "inspector",
-        "cocos-services"
-      ]
+      "panels": []
     }
   },
   "panels": {

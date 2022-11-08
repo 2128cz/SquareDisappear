@@ -2,7 +2,7 @@
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class DevelopersToolClass extends cc.Component {
     
     /**
      * 构造函数

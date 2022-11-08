@@ -103,6 +103,8 @@ export default class Loading extends cc.Component {
         // "atlas": { type: cc.SpriteAtlas, url: "atlas" },
         //加载单个精灵资源
         "frames": { type: cc.SpriteFrame, url: "frames" },
+        //加载分享图
+        "share": { type: cc.SpriteFrame, url: "share" },
     }
 
     /**
