@@ -1,6 +1,11 @@
 "use strict";
+<<<<<<<< HEAD:temp/quick-scripts/src/assets/scripts/base/class/ActorClass.js
 cc._RF.push(module, '46888KZgPNL8aOrt2Q2jTGq', 'ActorClass');
 // scripts/base/class/ActorClass.ts
+========
+cc._RF.push(module, '6e40dlB3VhHpZtxDnHJiCAW', 'DiologClass');
+// scripts/base/class/DiologClass.ts
+>>>>>>>> db2b8a7ddf217d18bb4f5789a18927dfb7aaa562:temp/quick-scripts/src/assets/scripts/base/class/DiologClass.js
 
 "use strict";
 var __extends = (this && this.__extends) || (function () {
@@ -23,7 +28,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+<<<<<<<< HEAD:temp/quick-scripts/src/assets/scripts/base/class/ActorClass.js
 // SIGNPOST 自定义对象类 
+========
+// SIGNPOST 特指对话框类 
+>>>>>>>> db2b8a7ddf217d18bb4f5789a18927dfb7aaa562:temp/quick-scripts/src/assets/scripts/base/class/DiologClass.js
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
 var NewClass = /** @class */ (function (_super) {
     __extends(NewClass, _super);

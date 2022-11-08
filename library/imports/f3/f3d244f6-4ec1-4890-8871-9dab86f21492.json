@@ -713,9 +713,13 @@
     "progressRandomChangeTime": 0.2,
     "progressWaitForLoad": 0.85,
     "readyToShow": null,
+<<<<<<< HEAD
     "readyToGoSence": {
       "__uuid__": "8f7c9b35-a818-4a02-8ddb-e7e024348aa6"
     },
+=======
+    "readyToGoSence": null,
+>>>>>>> db2b8a7ddf217d18bb4f5789a18927dfb7aaa562
     "_id": "16xyvR7ftI6oiQOaRl+DSs"
   }
 ]

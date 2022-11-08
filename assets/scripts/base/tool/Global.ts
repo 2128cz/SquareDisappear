@@ -8,13 +8,6 @@ interface IGlobal {
 }
 cc['vv'] = cc['vv'] || {};
 
-// import { } from "./Global";
-
-// declare global {
-//     interface cc {
-//         vv: any;
-//     }
-// }
 
 
 

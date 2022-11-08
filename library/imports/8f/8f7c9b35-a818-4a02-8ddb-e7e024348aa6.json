@@ -85,10 +85,23 @@
     "_active": true,
     "_components": [
       {
+<<<<<<< HEAD
         "__id__": 63
       },
       {
         "__id__": 64
+=======
+        "__id__": 64
+      },
+      {
+        "__id__": 65
+      },
+      {
+        "__id__": 66
+      },
+      {
+        "__id__": 67
+>>>>>>> db2b8a7ddf217d18bb4f5789a18927dfb7aaa562
       }
     ],
     "_prefab": null,
@@ -1310,9 +1323,19 @@
       }
     ],
     "_active": true,
+<<<<<<< HEAD
     "_components": [],
     "_prefab": {
       "__id__": 62
+=======
+    "_components": [
+      {
+        "__id__": 62
+      }
+    ],
+    "_prefab": {
+      "__id__": 63
+>>>>>>> db2b8a7ddf217d18bb4f5789a18927dfb7aaa562
     },
     "_opacity": 255,
     "_color": {
@@ -2385,6 +2408,18 @@
     "sync": false
   },
   {
+<<<<<<< HEAD
+=======
+    "_name": "",
+    "_objFlags": 1,
+    "node": {
+      "__id__": 28
+    },
+    "_enabled": true,
+    "_id": "66qm1UubNBBYXxKUSsLWJJ"
+  },
+  {
+>>>>>>> db2b8a7ddf217d18bb4f5789a18927dfb7aaa562
     "__type__": "cc.PrefabInfo",
     "root": {
       "__id__": 28
@@ -2413,6 +2448,35 @@
     "_id": "eaeIEkEiVK/7VhgfGvBwIx"
   },
   {
+<<<<<<< HEAD
+=======
+    "_name": "",
+    "_objFlags": 1,
+    "node": {
+      "__id__": 2
+    },
+    "_enabled": true,
+    "StartUI": null,
+    "GameUI": null,
+    "_id": "76PpXgF/dPU4I3/L/Jz+Ce"
+  },
+  {
+    "_name": "",
+    "_objFlags": 1,
+    "node": {
+      "__id__": 2
+    },
+    "_enabled": true,
+    "label": {
+      "__id__": 24
+    },
+    "MessageBox": {
+      "__id__": 8
+    },
+    "_id": "35claxGzBP55gRMRUCnL0R"
+  },
+  {
+>>>>>>> db2b8a7ddf217d18bb4f5789a18927dfb7aaa562
     "__type__": "cc.Widget",
     "_name": "",
     "_objFlags": 0,

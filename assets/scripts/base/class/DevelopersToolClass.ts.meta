@@ -1,6 +1,10 @@
 {
   "ver": "1.0.8",
+<<<<<<<< HEAD:assets/scripts/base/class/DevelopersToolClass.ts.meta
   "uuid": "ee72a687-2e1d-4ecb-a3fb-912046961c14",
+========
+  "uuid": "6e40d941-dd58-47a5-9b71-0e71c9882016",
+>>>>>>>> db2b8a7ddf217d18bb4f5789a18927dfb7aaa562:assets/scripts/base/class/DiologClass.ts.meta
   "isPlugin": false,
   "loadPluginInWeb": true,
   "loadPluginInNative": true,
