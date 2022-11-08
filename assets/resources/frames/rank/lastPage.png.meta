@@ -1,6 +1,6 @@
 {
   "ver": "2.3.5",
-  "uuid": "14af4c0b-e4ac-4d29-9a76-ede5dd6b7bd1",
+  "uuid": "777446e8-0105-4ca8-a816-a69e3b1b4dbc",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -11,10 +11,10 @@
   "height": 66,
   "platformSettings": {},
   "subMetas": {
-    "上一页": {
+    "lastPage": {
       "ver": "1.0.4",
-      "uuid": "912876d6-6b11-479d-9660-fcf8e0aecc03",
-      "rawTextureUuid": "14af4c0b-e4ac-4d29-9a76-ede5dd6b7bd1",
+      "uuid": "914b2e8e-0b11-4575-9786-2f473056e6dd",
+      "rawTextureUuid": "777446e8-0105-4ca8-a816-a69e3b1b4dbc",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,

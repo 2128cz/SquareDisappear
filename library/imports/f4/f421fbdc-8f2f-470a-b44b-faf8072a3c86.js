@@ -1,6 +1,6 @@
 "use strict";
-cc._RF.push(module, 'fe3d6sWzhhNbrb4V2ujPwDi', 'DevelopersToolClass');
-// scripts/base/class/DevelopersToolClass.ts
+cc._RF.push(module, 'f421fvcjy9HCrRL+vgHKjyG', 'DynamicPanelClass');
+// scripts/base/class/DynamicPanelClass.ts
 
 "use strict";
 var __extends = (this && this.__extends) || (function () {
@@ -23,27 +23,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// SIGNPOST 开发工具类 
+// SIGNPOST 动态窗口类 
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
-var DevelopersToolClass = /** @class */ (function (_super) {
-    __extends(DevelopersToolClass, _super);
-    function DevelopersToolClass() {
+var DevelopersToolClass_1 = require("./DevelopersToolClass");
+var DynamicPanelClass = /** @class */ (function (_super) {
+    __extends(DynamicPanelClass, _super);
+    function DynamicPanelClass() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    /**
-     * 构造函数
-     */
-    DevelopersToolClass.prototype.ctor = function () {
-    };
     // LIFE-CYCLE CALLBACKS:
     // onLoad () {}
-    DevelopersToolClass.prototype.start = function () {
+    DynamicPanelClass.prototype.start = function () {
     };
-    DevelopersToolClass = __decorate([
+    DynamicPanelClass = __decorate([
         ccclass
-    ], DevelopersToolClass);
-    return DevelopersToolClass;
-}(cc.Component));
-exports.default = DevelopersToolClass;
+    ], DynamicPanelClass);
+    return DynamicPanelClass;
+}(DevelopersToolClass_1.default));
+exports.default = DynamicPanelClass;
 
 cc._RF.pop();

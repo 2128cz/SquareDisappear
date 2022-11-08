@@ -5,7 +5,7 @@
       "main": true,
       "url": "app://editor/index.html",
       "windowType": "dockable",
-      "x": 2260,
+      "x": 2316,
       "y": 99,
       "width": 1256,
       "height": 905,
@@ -18,9 +18,9 @@
                 "children": [
                   "hierarchy"
                 ],
-                "height": 486.875,
+                "height": 355.5,
                 "type": "panel",
-                "width": 277.203125
+                "width": 248.765625
               },
               {
                 "active": 0,
@@ -28,14 +28,14 @@
                   "assets",
                   "cloud-function"
                 ],
-                "height": 432.109375,
+                "height": 426,
                 "type": "panel",
-                "width": 277.203125
+                "width": 248.765625
               }
             ],
-            "height": 922,
+            "height": 784.5,
             "type": "dock-v",
-            "width": 277.203125
+            "width": 248.765625
           },
           {
             "children": [
@@ -44,9 +44,9 @@
                 "children": [
                   "scene"
                 ],
-                "height": 649.1875,
+                "height": 515.5,
                 "type": "panel",
-                "width": 685.65625
+                "width": 616.09375
               },
               {
                 "active": 0,
@@ -55,14 +55,14 @@
                   "timeline",
                   "game-window"
                 ],
-                "height": 269.8125,
+                "height": 266,
                 "type": "panel",
-                "width": 685.65625
+                "width": 616.09375
               }
             ],
-            "height": 922,
+            "height": 784.5,
             "type": "dock-v",
-            "width": 685.65625
+            "width": 616.09375
           },
           {
             "active": 0,
@@ -70,14 +70,24 @@
               "inspector",
               "cocos-services"
             ],
-            "height": 922,
+            "height": 784.5,
             "type": "panel",
-            "width": 411.125
+            "width": 369.125
           }
         ],
         "type": "dock-h"
       },
-      "panels": []
+      "panels": [
+        "hierarchy",
+        "assets",
+        "cloud-function",
+        "scene",
+        "console",
+        "timeline",
+        "game-window",
+        "inspector",
+        "cocos-services"
+      ]
     }
   },
   "panels": {

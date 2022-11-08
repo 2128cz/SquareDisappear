@@ -1,10 +1,6 @@
 {
   "ver": "1.0.8",
-<<<<<<<< HEAD:assets/scripts/base/class/ActorClass.ts.meta
-  "uuid": "46888299-80f3-4bf1-a3ab-b764368d31aa",
-========
-  "uuid": "ee72a687-2e1d-4ecb-a3fb-912046961c14",
->>>>>>>> db2b8a7ddf217d18bb4f5789a18927dfb7aaa562:assets/scripts/base/class/DevelopersToolClass.ts.meta
+  "uuid": "4efca22f-a841-48e9-bfe8-48190b2714ed",
   "isPlugin": false,
   "loadPluginInWeb": true,
   "loadPluginInNative": true,

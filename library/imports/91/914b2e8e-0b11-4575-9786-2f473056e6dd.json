@@ -1,8 +1,8 @@
 {
   "__type__": "cc.SpriteFrame",
   "content": {
-    "name": "上一页",
-    "texture": "14af4c0b-e4ac-4d29-9a76-ede5dd6b7bd1",
+    "name": "lastPage",
+    "texture": "777446e8-0105-4ca8-a816-a69e3b1b4dbc",
     "atlas": "",
     "rect": [
       0,

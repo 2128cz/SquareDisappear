@@ -1,7 +1,7 @@
 {
   "36876e4a-1921-42e0-b845-a529c9980108": {
-    "asset": 1667821276066,
-    "meta": 1667868438637,
+    "asset": 1667872316634,
+    "meta": 1667878936329,
     "relativePath": "resources"
   },
   "79315729-5964-42d7-88a8-f4aba8f3a9d6": {
@@ -265,24 +265,14 @@
     "relativePath": "resources\\frames\\over\\tips.png"
   },
   "01710412-53e4-4937-aef3-fbe4dd783ca8": {
-    "asset": 1658106790143,
-    "meta": 1658106899548,
+    "asset": 1667878936053,
+    "meta": 1667878936341,
     "relativePath": "resources\\frames\\rank"
   },
   "19ef3419-8276-4b9a-807e-d9bafdd81e4d": {
     "asset": 1583565892000,
     "meta": 1658106899548,
     "relativePath": "resources\\frames\\over\\re_text.png"
-  },
-  "14af4c0b-e4ac-4d29-9a76-ede5dd6b7bd1": {
-    "asset": 1583565892000,
-    "meta": 1658106899558,
-    "relativePath": "resources\\frames\\rank\\上一页.png"
-  },
-  "938740a8-51f6-461b-a3ee-c5c78fcbc3c9": {
-    "asset": 1583565892000,
-    "meta": 1658106899558,
-    "relativePath": "resources\\frames\\rank\\下一页.png"
   },
   "22165cf3-f5b0-4fde-a8f3-36347cb83acc": {
     "asset": 1583565892000,
@@ -475,8 +465,8 @@
     "relativePath": "resources\\frames\\start\\top ui text 2.png"
   },
   "3147a555-77a4-4b8d-8e40-79afb0389f89": {
-    "asset": 1667812301115,
-    "meta": 1667868438641,
+    "asset": 1667873917716,
+    "meta": 1667878936379,
     "relativePath": "scenes"
   },
   "b21387f5-d9a4-4fe1-be46-4c8f01911f21": {
@@ -515,8 +505,8 @@
     "relativePath": "resources\\frames\\start\\btn soundClose.png"
   },
   "8111464b-7c9e-4c6b-96b0-8b94328c5715": {
-    "asset": 1658114503720,
-    "meta": 1667470204528,
+    "asset": 1667873917715,
+    "meta": 1667878936151,
     "relativePath": "load"
   },
   "6c3cc578-535a-4dab-b8c8-d11d23d5ddd2": {
@@ -1080,13 +1070,13 @@
     "relativePath": "scripts\\effect"
   },
   "1be47874-d4c1-4756-ada9-dd681661fe3c": {
-    "asset": 1667809580247,
-    "meta": 1667868438644,
+    "asset": 1667878936073,
+    "meta": 1667878936382,
     "relativePath": "scripts\\base\\class"
   },
   "af283305-0fa8-4799-8bbb-7a1011598491": {
-    "asset": 1667813032510,
-    "meta": 1667868438644,
+    "asset": 1667873917718,
+    "meta": 1667878936429,
     "relativePath": "scripts\\base\\tool"
   },
   "168fc524-531f-42ec-83df-2fa087edf308": {
@@ -1094,9 +1084,59 @@
     "meta": 1667868438639,
     "relativePath": "resources\\frames"
   },
+  "39d4f600-c826-4478-80fe-5892d4c8a794": {
+    "asset": 1667876307082,
+    "meta": 1667878936328,
+    "relativePath": "load\\Loading.ts"
+  },
+  "777446e8-0105-4ca8-a816-a69e3b1b4dbc": {
+    "asset": 1583565892000,
+    "meta": 1667878936378,
+    "relativePath": "resources\\frames\\rank\\lastPage.png"
+  },
+  "6623195d-aceb-4fdb-9ed6-b491af9653fc": {
+    "asset": 1583565892000,
+    "meta": 1667878936381,
+    "relativePath": "resources\\frames\\rank\\nextPage.png"
+  },
+  "4efca22f-a841-48e9-bfe8-48190b2714ed": {
+    "asset": 1667876735198,
+    "meta": 1667878936398,
+    "relativePath": "scripts\\base\\class\\ActorClass.ts"
+  },
+  "fe3d6b16-ce18-4d6e-b6f8-576ba33f00e2": {
+    "asset": 1667876361271,
+    "meta": 1667878936406,
+    "relativePath": "scripts\\base\\class\\DevelopersToolClass.ts"
+  },
+  "a8d9ec8f-d836-4b70-a969-696475780cc9": {
+    "asset": 1667876530596,
+    "meta": 1667878936415,
+    "relativePath": "scripts\\base\\class\\DiologClass.ts"
+  },
+  "f421fbdc-8f2f-470a-b44b-faf8072a3c86": {
+    "asset": 1667876651830,
+    "meta": 1667878936422,
+    "relativePath": "scripts\\base\\class\\DynamicPanelClass.ts"
+  },
+  "647f5e4e-5d98-4174-b696-ee0377eb4ddb": {
+    "asset": 1667874433521,
+    "meta": 1667878936435,
+    "relativePath": "scripts\\base\\tool\\Global.ts"
+  },
+  "f3d244f6-4ec1-4890-8871-9dab86f21492": {
+    "asset": 1667879131046,
+    "meta": 1667879131052,
+    "relativePath": "load\\load.fire"
+  },
   "dc67f48e-58aa-4a99-9fa6-43521a07c304": {
-    "asset": 1667869145512,
-    "meta": 1667869193820,
+    "asset": 1667879094896,
+    "meta": 1667879097502,
     "relativePath": "scripts\\base\\class\\PawnClass.ts"
+  },
+  "8462802e-0923-41bd-b271-7408ac8f4889": {
+    "asset": 1667879118505,
+    "meta": 1667879129722,
+    "relativePath": "scenes\\Game.fire"
   }
 }
