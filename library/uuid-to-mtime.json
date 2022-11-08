@@ -302,7 +302,7 @@
   "a1e65fd1-f8bb-4dbd-801c-d65dc93042e3": {
     "asset": 1658106790190,
     "meta": 1658106899590,
-    "relativePath": "resources\\sound"
+    "relativePath": "resources\\sounds"
   },
   "4ad89192-7941-4f83-9309-fd4adcff0700": {
     "asset": 1583565892000,
@@ -312,52 +312,52 @@
   "b2b88fd7-7936-469d-9494-ef0b5cafd029": {
     "asset": 1583565892000,
     "meta": 1658106900094,
-    "relativePath": "resources\\sound\\button_yes.mp3"
+    "relativePath": "resources\\sounds\\button_yes.mp3"
   },
   "13ba1613-274e-4614-84f0-ea1a2049397e": {
     "asset": 1608947684000,
     "meta": 1658106900096,
-    "relativePath": "resources\\sound\\bgm.mp3"
+    "relativePath": "resources\\sounds\\bgm.mp3"
   },
   "6d06ba55-f459-445a-b2ff-86d90ad51f42": {
     "asset": 1583565892000,
     "meta": 1658106900100,
-    "relativePath": "resources\\sound\\button.mp3"
+    "relativePath": "resources\\sounds\\button.mp3"
   },
   "7f3546cf-f9a4-46c2-8afb-9727b2ac8b01": {
     "asset": 1583565892000,
     "meta": 1658106900103,
-    "relativePath": "resources\\sound\\lose.mp3"
+    "relativePath": "resources\\sounds\\lose.mp3"
   },
   "629e0b40-b347-4ea6-92b8-a98231a45e58": {
     "asset": 1583565892000,
     "meta": 1658106900110,
-    "relativePath": "resources\\sound\\prop_bomb.mp3"
+    "relativePath": "resources\\sounds\\prop_bomb.mp3"
   },
   "8579e55f-9cfd-47dd-8113-55c3308a34ec": {
     "asset": 1583565892000,
     "meta": 1658106900113,
-    "relativePath": "resources\\sound\\prop_hit.mp3"
+    "relativePath": "resources\\sounds\\prop_hit.mp3"
   },
   "ec53662e-831b-480e-9430-0cffb4490d61": {
     "asset": 1583565892000,
     "meta": 1658106900119,
-    "relativePath": "resources\\sound\\prop_ice.mp3"
+    "relativePath": "resources\\sounds\\prop_ice.mp3"
   },
   "b0dd3a10-b71d-42b3-ae82-b24b6c13d0e4": {
     "asset": 1583565892000,
     "meta": 1658106900121,
-    "relativePath": "resources\\sound\\shot.mp3"
+    "relativePath": "resources\\sounds\\shot.mp3"
   },
   "fcf635ed-1724-4f28-9e7b-0d5264f630d4": {
     "asset": 1583565892000,
     "meta": 1658106900127,
-    "relativePath": "resources\\sound\\xiaochu1.mp3"
+    "relativePath": "resources\\sounds\\xiaochu1.mp3"
   },
   "3e1bcea6-70d8-4c74-8631-a034d4e564c9": {
     "asset": 1583565892000,
     "meta": 1658106900131,
-    "relativePath": "resources\\sound\\xiaochu2.mp3"
+    "relativePath": "resources\\sounds\\xiaochu2.mp3"
   },
   "d1989bdf-86ef-4b94-b512-5df44b2e96a1": {
     "asset": 1667470541235,
@@ -377,7 +377,7 @@
   "18c202f7-8c27-492b-bf9d-9f5cce601588": {
     "asset": 1583565892000,
     "meta": 1658106900142,
-    "relativePath": "resources\\sound\\xiaochu3.mp3"
+    "relativePath": "resources\\sounds\\xiaochu3.mp3"
   },
   "f13504b3-865e-426b-b75d-bea5d9dd3837": {
     "asset": 1583565892000,
@@ -520,8 +520,8 @@
     "relativePath": "load"
   },
   "f3d244f6-4ec1-4890-8871-9dab86f21492": {
-    "asset": 1667821977338,
-    "meta": 1667821977347,
+    "asset": 1667871987137,
+    "meta": 1667871987143,
     "relativePath": "load\\load.fire"
   },
   "6c3cc578-535a-4dab-b8c8-d11d23d5ddd2": {
@@ -670,8 +670,8 @@
     "relativePath": "resources\\prefabs\\ui"
   },
   "8f7c9b35-a818-4a02-8ddb-e7e024348aa6": {
-    "asset": 1667809618367,
-    "meta": 1667812301119,
+    "asset": 1667872317636,
+    "meta": 1667872317642,
     "relativePath": "scenes\\Game.fire"
   },
   "6b9bb8f3-7494-4740-b365-b113d651da98": {
@@ -1104,11 +1104,6 @@
     "meta": 1667812527245,
     "relativePath": "scripts\\base\\class\\DevelopersToolClass.ts"
   },
-  "6e40d941-dd58-47a5-9b71-0e71c9882016": {
-    "asset": 1667812472185,
-    "meta": 1667812527254,
-    "relativePath": "scripts\\base\\class\\DiologClass.ts"
-  },
   "3e934dc5-867e-49ac-8af4-149370ad7097": {
     "asset": 1667813799666,
     "meta": 1667813930102,
@@ -1119,24 +1114,29 @@
     "meta": 1667868438639,
     "relativePath": "resources\\frames"
   },
-  "39d4f600-c826-4478-80fe-5892d4c8a794": {
-    "asset": 1667821975965,
-    "meta": 1667821977191,
-    "relativePath": "load\\Loading.ts"
-  },
-  "647f5e4e-5d98-4174-b696-ee0377eb4ddb": {
-    "asset": 1667822036910,
-    "meta": 1667822048932,
-    "relativePath": "scripts\\base\\tool\\Global.ts"
-  },
   "46888299-80f3-4bf1-a3ab-b764368d31aa": {
-    "asset": 1667868616212,
-    "meta": 1667868623074,
+    "asset": 1667869158263,
+    "meta": 1667869193800,
     "relativePath": "scripts\\base\\class\\ActorClass.ts"
   },
+  "6e40d941-dd58-47a5-9b71-0e71c9882016": {
+    "asset": 1667869147669,
+    "meta": 1667869193810,
+    "relativePath": "scripts\\base\\class\\DiologClass.ts"
+  },
   "dc67f48e-58aa-4a99-9fa6-43521a07c304": {
-    "asset": 1667868639809,
-    "meta": 1667868643830,
+    "asset": 1667869145512,
+    "meta": 1667869193820,
     "relativePath": "scripts\\base\\class\\PawnClass.ts"
+  },
+  "647f5e4e-5d98-4174-b696-ee0377eb4ddb": {
+    "asset": 1667869166198,
+    "meta": 1667869193831,
+    "relativePath": "scripts\\base\\tool\\Global.ts"
+  },
+  "39d4f600-c826-4478-80fe-5892d4c8a794": {
+    "asset": 1667872610846,
+    "meta": 1667872614970,
+    "relativePath": "load\\Loading.ts"
   }
 }

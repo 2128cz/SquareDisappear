@@ -713,7 +713,9 @@
     "progressRandomChangeTime": 0.2,
     "progressWaitForLoad": 0.85,
     "readyToShow": null,
-    "readyToGoSence": null,
+    "readyToGoSence": {
+      "__uuid__": "8f7c9b35-a818-4a02-8ddb-e7e024348aa6"
+    },
     "_id": "16xyvR7ftI6oiQOaRl+DSs"
   }
 ]

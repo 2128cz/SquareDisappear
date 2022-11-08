@@ -25,6 +25,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 // SIGNPOST 加载页面，但不属于开发类
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
+cc['vv'] = cc['vv'] || {};
 var Loading = /** @class */ (function (_super) {
     __extends(Loading, _super);
     function Loading() {
@@ -36,13 +37,9 @@ var Loading = /** @class */ (function (_super) {
         _this.progressRandomChangeTime = .2;
         _this.progressWaitForLoad = .85;
         _this.readyToShow = null;
+        // SIGNPOST 目标场景部分
         _this.readyToGoSence = null;
         // TAG 自定义数值                                                                                         
-        /**
-         * 进度条数值
-         * 数值应该在0-100
-         */
-        _this.ProgressValue = 0;
         /**
          * 加载资源目录
          */
@@ -53,10 +50,21 @@ var Loading = /** @class */ (function (_super) {
             //加载预制件资源
             "prefabs": { type: cc.Prefab, url: "prefabs" },
             //加载图集资源
-            "atlas": { type: cc.SpriteAtlas, url: "atlas" },
+            // "atlas": { type: cc.SpriteAtlas, url: "atlas" },
             //加载单个精灵资源
             "frames": { type: cc.SpriteFrame, url: "frames" },
         };
+        /**
+         * 进度条数值
+         * 数值应该在0-100
+         */
+        _this.ProgressValue = 0;
+        /**
+         * 加载进度，以资源载入完成+1
+         * 当载入计数等于资源数时，完成加载
+         */
+        _this.loadProgressCount = 0;
+        _this.loadPorgressCountMax = Object.keys(_this.loadResourcescatalog).length;
         return _this;
     }
     // TAG LIFE-CYCLE callbacks                                                                              
@@ -65,12 +73,19 @@ var Loading = /** @class */ (function (_super) {
         this.playLogoAnimation();
         //检查游戏更新
         this.checkGameNewVersion();
-        // 资源加载初始化
-        this.ProgressValue = 0;
     };
     Loading.prototype.start = function () {
+        // 开始加载所有资源
+        this.loadAllResources();
     };
     Loading.prototype.update = function (dt) {
+        // 如果有定义其他组件（比如按钮）来完成场景载入触发时，等待组件响应
+        if (this.readyToShow != null)
+            return;
+        // 否则加载完成后直接进入场景
+        if (this.loadProgressCount >= this.loadPorgressCountMax) {
+            this.onLoadScene();
+        }
     };
     // TAG USER FUNCTION:                                                                                    
     // tag 用户方法 
@@ -82,10 +97,33 @@ var Loading = /** @class */ (function (_super) {
             .delay(0.5)
             .to(1, { opacity: 255 })
             .delay(1)
-            .call(function () {
-            cc.director.loadScene("Game");
-        })
+            .call(function () { })
             .start();
+    };
+    /**
+     * 如果此场景内有其他按钮等组件触发时
+     * 可以通过这里进行中转
+     * 要求格式为 on + todo
+     */
+    Loading.prototype.onButtonClick = function (event, customDate) {
+        if (customDate.indexOf("on") <= 0)
+            this[customDate]();
+        else
+            this.onLoadScene();
+    };
+    /**
+     * 加载场景
+     * @param sceneTarget 可选场景目标
+     */
+    Loading.prototype.onLoadScene = function (sceneTarget) {
+        var _this = this;
+        cc.director.loadScene((function () {
+            return sceneTarget ?
+                sceneTarget instanceof String ?
+                    sceneTarget :
+                    sceneTarget.name :
+                _this.readyToGoSence.name;
+        })());
     };
     // tag 客户端方法 
     /**
@@ -93,9 +131,12 @@ var Loading = /** @class */ (function (_super) {
      */
     Loading.prototype.loadAllResources = function () {
         var _this = this;
+        cc['vv']['warehouse'] = cc['vv']['warehouse'] || {};
         var resKeys = Object.keys(this.loadResourcescatalog);
         resKeys.forEach(function (url) {
-            _this.loadResources(url, _this.loadResourcescatalog['type'], _this.loadResourcescatalog['url']);
+            var resLog = _this.loadResourcescatalog[url];
+            cc['vv']['warehouse'][resLog.url] = cc['vv']['warehouse'][resLog.url] || {};
+            _this.loadResources(url, resLog.type, resLog.url);
         });
     };
     /**
@@ -107,9 +148,9 @@ var Loading = /** @class */ (function (_super) {
     Loading.prototype.loadResources = function (url, type, saveUrl) {
         var self = this;
         cc.resources.loadDir(url, type, function (completedCount, totalCount, item) {
-            cc.log("正在加载:" + item.url);
+            // cc.log("正在加载:" + item.url);
             self.ProgressValue = completedCount / totalCount;
-            cc.log("\u52A0\u8F7D\u8FDB\u5EA6: " + self.ProgressValue * 100 + "%");
+            // cc.log(`加载进度: ${self.ProgressValue * 100}%`);
         }, function (err, data) {
             if (err) {
                 cc.log("\u52A0\u8F7D" + type + "\u65F6\u53D1\u751F\u9519\u8BEF");
@@ -118,31 +159,33 @@ var Loading = /** @class */ (function (_super) {
                 for (var i in data) {
                     var name = (data[i] instanceof cc.SpriteAtlas) ? data[i].name.slice(0, -6) : data[i].name;
                     if (data[i] instanceof cc.JsonAsset) {
-                        cc['vv'].warehouse[saveUrl][name] = data[i]['json'];
+                        cc['vv']['warehouse'][saveUrl][name] = data[i]['json'];
                     }
                     else {
-                        cc['vv'].warehouse[saveUrl][name] = data[i];
+                        cc['vv']['warehouse'][saveUrl][name] = data[i];
                     }
                 }
             }
+            self.loadProgressCount++;
         });
     };
+    // tag 微信平台更新 
     /**
      * 检查游戏新版本
      */
     Loading.prototype.checkGameNewVersion = function () {
         // 仅关注微信平台
         if (!(cc.sys.platform == cc.sys.WECHAT_GAME))
-            return;
+            return false;
         // 尝试获取微信更新管理器
         var updateManager;
         try {
             updateManager = wx.getUpdateManager();
             if (!updateManager)
-                return;
+                return false;
         }
         catch (_a) {
-            return;
+            return false;
         }
         // 获取全局唯一的版本更新管理器，用于管理小程序更新
         updateManager.onCheckForUpdate(function (res) {
@@ -176,6 +219,7 @@ var Loading = /** @class */ (function (_super) {
                 });
             }
         });
+        return true;
     };
     //微信分包
     Loading.prototype.wxSubpackage = function () {
@@ -198,7 +242,7 @@ var Loading = /** @class */ (function (_super) {
     __decorate([
         property({
             type: cc.Node,
-            displayName: "进度条目标",
+            displayName: "进度条目标(可选)",
             tooltip: "进度条目标设定后可以指定动画",
         })
     ], Loading.prototype, "progressBar", void 0);
@@ -208,9 +252,7 @@ var Loading = /** @class */ (function (_super) {
             range: [0, 2, 0.01],
             slide: true,
             displayName: "进度条动画速率",
-            visible: function () {
-                return this.progressBar != null;
-            },
+            visible: function () { return this.progressBar != null; },
         })
     ], Loading.prototype, "progressUpdateRate", void 0);
     __decorate([
@@ -220,9 +262,7 @@ var Loading = /** @class */ (function (_super) {
             slide: true,
             displayName: "进度条动画随机变化间隔",
             tooltip: "进度条动画随机变化间隔",
-            visible: function () {
-                return this.progressBar != null;
-            },
+            visible: function () { return this.progressBar != null; },
         })
     ], Loading.prototype, "progressRandomChangeTime", void 0);
     __decorate([
@@ -232,9 +272,7 @@ var Loading = /** @class */ (function (_super) {
             slide: true,
             displayName: "进度条动画等待加载完成位置",
             tooltip: "进度条动画等待加载完成位置",
-            visible: function () {
-                return this.progressBar != null;
-            },
+            visible: function () { return this.progressBar != null; },
         })
     ], Loading.prototype, "progressWaitForLoad", void 0);
     __decorate([
@@ -242,9 +280,7 @@ var Loading = /** @class */ (function (_super) {
             type: cc.Node,
             displayName: "完成后显示",
             tooltip: "当加载完成时，被启用的节点",
-            visible: function () {
-                return this.progressBar != null;
-            },
+            visible: function () { return this.progressBar != null; },
         })
     ], Loading.prototype, "readyToShow", void 0);
     __decorate([
@@ -252,9 +288,6 @@ var Loading = /** @class */ (function (_super) {
             type: cc.SceneAsset,
             displayName: "完成后加载目标",
             tooltip: "当加载完成时，加载的场景，如果有启用节点，则等待节点触发",
-            visible: function () {
-                return this.progressBar != null;
-            },
         })
     ], Loading.prototype, "readyToGoSence", void 0);
     Loading = __decorate([
