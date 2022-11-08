@@ -35,6 +35,8 @@ var PawnClass = /** @class */ (function (_super) {
     // onLoad () {}
     PawnClass.prototype.start = function () {
     };
+    PawnClass.prototype.update = function (dt) {
+    };
     PawnClass = __decorate([
         ccclass
     ], PawnClass);

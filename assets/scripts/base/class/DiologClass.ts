@@ -1,5 +1,6 @@
 // SIGNPOST 特指对话框类 
 const {ccclass, property} = cc._decorator;
+import { DevelopersToolGlobal as ccvv } from './DevelopersToolGlobal';
 import DynamicPanelClass from './DynamicPanelClass';
 @ccclass
 export default class DiologClass extends DynamicPanelClass {

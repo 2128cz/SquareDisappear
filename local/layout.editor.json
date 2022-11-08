@@ -5,10 +5,10 @@
       "main": true,
       "url": "app://editor/index.html",
       "windowType": "dockable",
-      "x": 2316,
-      "y": 99,
-      "width": 1256,
-      "height": 905,
+      "x": 477,
+      "y": 22,
+      "width": 1180,
+      "height": 1011,
       "layout": {
         "children": [
           {
@@ -18,9 +18,9 @@
                 "children": [
                   "hierarchy"
                 ],
-                "height": 355.5,
+                "height": 344.8125,
                 "type": "panel",
-                "width": 248.765625
+                "width": 255
               },
               {
                 "active": 0,
@@ -28,14 +28,14 @@
                   "assets",
                   "cloud-function"
                 ],
-                "height": 426,
+                "height": 542.6875,
                 "type": "panel",
-                "width": 248.765625
+                "width": 255
               }
             ],
-            "height": 784.5,
+            "height": 890.5,
             "type": "dock-v",
-            "width": 248.765625
+            "width": 255
           },
           {
             "children": [
@@ -44,9 +44,9 @@
                 "children": [
                   "scene"
                 ],
-                "height": 515.5,
+                "height": 549.6875,
                 "type": "panel",
-                "width": 616.09375
+                "width": 557
               },
               {
                 "active": 0,
@@ -55,14 +55,14 @@
                   "timeline",
                   "game-window"
                 ],
-                "height": 266,
+                "height": 337.8125,
                 "type": "panel",
-                "width": 616.09375
+                "width": 557
               }
             ],
-            "height": 784.5,
+            "height": 890.5,
             "type": "dock-v",
-            "width": 616.09375
+            "width": 557
           },
           {
             "active": 0,
@@ -70,9 +70,9 @@
               "inspector",
               "cocos-services"
             ],
-            "height": 784.5,
+            "height": 890.5,
             "type": "panel",
-            "width": 369.125
+            "width": 346
           }
         ],
         "type": "dock-h"

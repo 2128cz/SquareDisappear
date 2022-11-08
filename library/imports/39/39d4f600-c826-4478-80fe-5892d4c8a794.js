@@ -25,7 +25,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 // SIGNPOST 加载页面，但不属于开发类
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
-cc['vv'] = cc['vv'] || {};
+var DevelopersToolGlobal_1 = require("../scripts/base/class/DevelopersToolGlobal");
 var Loading = /** @class */ (function (_super) {
     __extends(Loading, _super);
     function Loading() {
@@ -67,6 +67,11 @@ var Loading = /** @class */ (function (_super) {
          */
         _this.loadProgressCount = 0;
         _this.loadPorgressCountMax = Object.keys(_this.loadResourcescatalog).length;
+        /**
+         * 动画播放完毕标记
+         * 数值应该在0-100
+         */
+        _this.animationOver = false;
         return _this;
     }
     // TAG LIFE-CYCLE callbacks                                                                              
@@ -81,6 +86,9 @@ var Loading = /** @class */ (function (_super) {
         this.loadAllResources();
     };
     Loading.prototype.update = function (dt) {
+        // 等待动画播放完毕
+        if (!this.animationOver)
+            return;
         // 如果有定义其他组件（比如按钮）来完成场景载入触发时，等待组件响应
         if (this.readyToShow != null)
             return;
@@ -95,11 +103,14 @@ var Loading = /** @class */ (function (_super) {
      * 播放开始动画
      */
     Loading.prototype.playLogoAnimation = function () {
+        var _this = this;
         cc.tween(this.logoNode)
             .delay(0.5)
             .to(1, { opacity: 255 })
             .delay(1)
-            .call(function () { })
+            .call(function () {
+            _this.animationOver = true;
+        })
             .start();
     };
     /**
@@ -133,11 +144,10 @@ var Loading = /** @class */ (function (_super) {
      */
     Loading.prototype.loadAllResources = function () {
         var _this = this;
-        cc['vv']['warehouse'] = cc['vv']['warehouse'] || {};
         var resKeys = Object.keys(this.loadResourcescatalog);
         resKeys.forEach(function (url) {
             var resLog = _this.loadResourcescatalog[url];
-            cc['vv']['warehouse'][resLog.url] = cc['vv']['warehouse'][resLog.url] || {};
+            DevelopersToolGlobal_1.DevelopersToolGlobal.warehouse[resLog.url] = DevelopersToolGlobal_1.DevelopersToolGlobal.warehouse[resLog.url] || {};
             _this.loadResources(url, resLog.type, resLog.url);
         });
     };
@@ -161,10 +171,10 @@ var Loading = /** @class */ (function (_super) {
                 for (var i in data) {
                     var name = (data[i] instanceof cc.SpriteAtlas) ? data[i].name.slice(0, -6) : data[i].name;
                     if (data[i] instanceof cc.JsonAsset) {
-                        cc['vv']['warehouse'][saveUrl][name] = data[i]['json'];
+                        DevelopersToolGlobal_1.DevelopersToolGlobal.warehouse[saveUrl][name] = data[i]['json'];
                     }
                     else {
-                        cc['vv']['warehouse'][saveUrl][name] = data[i];
+                        DevelopersToolGlobal_1.DevelopersToolGlobal.warehouse[saveUrl][name] = data[i];
                     }
                 }
             }

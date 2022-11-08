@@ -1,0 +1,1 @@
+{"version":3,"sources":["assets\\scripts\\base\\class\\PawnMovement.ts"],"names":[],"mappings":";;;;;;AAEA;IACI;IAEA,CAAC;IACL,mBAAC;AAAD,CAJA,AAIC,IAAA","file":"","sourceRoot":"/","sourcesContent":["\r\n\r\nexport default class PawnMovement {\r\n    constructor() {\r\n        \r\n    }\r\n}\r\n"]}

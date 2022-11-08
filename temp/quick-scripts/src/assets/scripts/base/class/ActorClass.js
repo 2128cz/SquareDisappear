@@ -29,22 +29,12 @@ var DevelopersToolClass_1 = require("./DevelopersToolClass");
 var ActorClass = /** @class */ (function (_super) {
     __extends(ActorClass, _super);
     function ActorClass() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.label = null;
-        _this.text = 'hello';
-        return _this;
-        // update (dt) {}
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     // LIFE-CYCLE CALLBACKS:
     // onLoad () {}
     ActorClass.prototype.start = function () {
     };
-    __decorate([
-        property(cc.Label)
-    ], ActorClass.prototype, "label", void 0);
-    __decorate([
-        property
-    ], ActorClass.prototype, "text", void 0);
     ActorClass = __decorate([
         ccclass
     ], ActorClass);

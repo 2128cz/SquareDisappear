@@ -465,8 +465,8 @@
     "relativePath": "resources\\frames\\start\\top ui text 2.png"
   },
   "3147a555-77a4-4b8d-8e40-79afb0389f89": {
-    "asset": 1667873917716,
-    "meta": 1667878936379,
+    "asset": 1667879228864,
+    "meta": 1667879300355,
     "relativePath": "scenes"
   },
   "b21387f5-d9a4-4fe1-be46-4c8f01911f21": {
@@ -640,9 +640,9 @@
     "relativePath": "resources\\prefabs\\iceNode.prefab"
   },
   "4ecdd7a0-6980-44de-b4e6-e0341b3b0de6": {
-    "asset": 1667801093749,
-    "meta": 1667801093750,
-    "relativePath": "resources\\prefabs\\ui\\rank ui.prefab"
+    "asset": 1667904479961,
+    "meta": 1667904479962,
+    "relativePath": "resources\\prefabs\\ui\\ui_rank.prefab"
   },
   "dd17a024-167e-40fb-b88b-2f230f14b79c": {
     "asset": 1667801093752,
@@ -655,9 +655,9 @@
     "relativePath": "resources\\prefabs\\ui"
   },
   "6b9bb8f3-7494-4740-b365-b113d651da98": {
-    "asset": 1667801124711,
-    "meta": 1667801124712,
-    "relativePath": "resources\\prefabs\\ui\\over ui.prefab"
+    "asset": 1667904532776,
+    "meta": 1667904532777,
+    "relativePath": "resources\\prefabs\\ui\\ui_over.prefab"
   },
   "69d4d6eb-0ce9-443b-a06a-420ff9cf0d70": {
     "asset": 1667809616967,
@@ -670,9 +670,9 @@
     "relativePath": "scripts\\base"
   },
   "8ed440de-7be5-457f-b105-5953b92b311e": {
-    "asset": 1667801093803,
-    "meta": 1667801093804,
-    "relativePath": "resources\\prefabs\\ui\\start ui.prefab"
+    "asset": 1667904475097,
+    "meta": 1667904475098,
+    "relativePath": "resources\\prefabs\\ui\\ui_start.prefab"
   },
   "9836134e-b892-4283-b6b2-78b5acf3ed45": {
     "asset": 1664154961550,
@@ -1067,7 +1067,7 @@
   "7eb4c12e-1eaf-495a-bfbd-ec13ecb84b97": {
     "asset": 1667808547413,
     "meta": 1667808547420,
-    "relativePath": "scripts\\effect"
+    "relativePath": "scripts\\game\\effect"
   },
   "1be47874-d4c1-4756-ada9-dd681661fe3c": {
     "asset": 1667878936073,
@@ -1084,11 +1084,6 @@
     "meta": 1667868438639,
     "relativePath": "resources\\frames"
   },
-  "39d4f600-c826-4478-80fe-5892d4c8a794": {
-    "asset": 1667876307082,
-    "meta": 1667878936328,
-    "relativePath": "load\\Loading.ts"
-  },
   "777446e8-0105-4ca8-a816-a69e3b1b4dbc": {
     "asset": 1583565892000,
     "meta": 1667878936378,
@@ -1099,44 +1094,84 @@
     "meta": 1667878936381,
     "relativePath": "resources\\frames\\rank\\nextPage.png"
   },
-  "4efca22f-a841-48e9-bfe8-48190b2714ed": {
-    "asset": 1667876735198,
-    "meta": 1667878936398,
-    "relativePath": "scripts\\base\\class\\ActorClass.ts"
+  "f3d244f6-4ec1-4890-8871-9dab86f21492": {
+    "asset": 1667907743242,
+    "meta": 1667907743249,
+    "relativePath": "load\\load.fire"
   },
-  "fe3d6b16-ce18-4d6e-b6f8-576ba33f00e2": {
-    "asset": 1667876361271,
-    "meta": 1667878936406,
-    "relativePath": "scripts\\base\\class\\DevelopersToolClass.ts"
+  "72a752d6-75bc-4462-a0ae-51bb2edbd895": {
+    "asset": 1667909500397,
+    "meta": 1667909500406,
+    "relativePath": "scenes\\Game.fire"
   },
   "a8d9ec8f-d836-4b70-a969-696475780cc9": {
-    "asset": 1667876530596,
-    "meta": 1667878936415,
+    "asset": 1667884538973,
+    "meta": 1667884565648,
     "relativePath": "scripts\\base\\class\\DiologClass.ts"
   },
   "f421fbdc-8f2f-470a-b44b-faf8072a3c86": {
-    "asset": 1667876651830,
-    "meta": 1667878936422,
+    "asset": 1667884510207,
+    "meta": 1667884565659,
     "relativePath": "scripts\\base\\class\\DynamicPanelClass.ts"
   },
-  "647f5e4e-5d98-4174-b696-ee0377eb4ddb": {
-    "asset": 1667874433521,
-    "meta": 1667878936435,
-    "relativePath": "scripts\\base\\tool\\Global.ts"
+  "39d4f600-c826-4478-80fe-5892d4c8a794": {
+    "asset": 1667885347663,
+    "meta": 1667885848893,
+    "relativePath": "load\\Loading.ts"
   },
-  "f3d244f6-4ec1-4890-8871-9dab86f21492": {
-    "asset": 1667879131046,
-    "meta": 1667879131052,
-    "relativePath": "load\\load.fire"
+  "fe3d6b16-ce18-4d6e-b6f8-576ba33f00e2": {
+    "asset": 1667885839075,
+    "meta": 1667885848901,
+    "relativePath": "scripts\\base\\class\\DevelopersToolClass.ts"
+  },
+  "38569b42-567a-4d12-a4a3-e34d2f1e5a9d": {
+    "asset": 1667885871372,
+    "meta": 1667885871373,
+    "relativePath": "scripts\\game"
+  },
+  "4efca22f-a841-48e9-bfe8-48190b2714ed": {
+    "asset": 1667888159620,
+    "meta": 1667888658869,
+    "relativePath": "scripts\\base\\class\\ActorClass.ts"
   },
   "dc67f48e-58aa-4a99-9fa6-43521a07c304": {
-    "asset": 1667879094896,
-    "meta": 1667879097502,
+    "asset": 1667888612195,
+    "meta": 1667888658877,
     "relativePath": "scripts\\base\\class\\PawnClass.ts"
   },
-  "72a752d6-75bc-4462-a0ae-51bb2edbd895": {
-    "asset": 1667879217481,
-    "meta": 1667879228866,
-    "relativePath": "scenes\\Game.fire"
+  "32087012-92df-4205-b170-267a37201c14": {
+    "asset": 1667888993682,
+    "meta": 1667890346723,
+    "relativePath": "scripts\\base\\class\\PawnMovement.ts"
+  },
+  "f6bc616b-4515-4f6e-907d-2363bc8db993": {
+    "asset": 1667899573003,
+    "meta": 1667899574529,
+    "relativePath": "scripts\\game\\block.ts"
+  },
+  "173f5503-bc33-4e87-b05a-0d4be325ba95": {
+    "asset": 1667902277973,
+    "meta": 1667903150924,
+    "relativePath": "scripts\\base\\class\\RigorousLibrary.ts"
+  },
+  "30349a3e-dba6-4058-b145-a879e94edf79": {
+    "asset": 1667903887671,
+    "meta": 1667904002299,
+    "relativePath": "scripts\\base\\tool\\NoRootTree.ts"
+  },
+  "21993d50-a688-4c5d-af40-11163ff3602f": {
+    "asset": 1667908010423,
+    "meta": 1667908011736,
+    "relativePath": "scripts\\game\\Game.ts"
+  },
+  "3364aaaa-3a01-48ab-8082-02597275c7fa": {
+    "asset": 1667909280082,
+    "meta": 1667909281075,
+    "relativePath": "scripts\\base\\class\\DevelopersToolGlobal.ts"
+  },
+  "64efef69-a22c-42c7-a805-318c503a57a2": {
+    "asset": 1667909471789,
+    "meta": 1667909472789,
+    "relativePath": "scripts\\base\\class\\PanelTool.ts"
   }
 }

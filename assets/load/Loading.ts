@@ -1,7 +1,6 @@
 // SIGNPOST 加载页面，但不属于开发类
 const { ccclass, property } = cc._decorator;
-
-cc['vv'] = cc['vv'] || {};
+import { DevelopersToolGlobal as ccvv } from '../scripts/base/class/DevelopersToolGlobal';
 
 // 让编译器忽略平台API报错
 declare var wx: any;
@@ -80,6 +79,8 @@ export default class Loading extends cc.Component {
     }
 
     update(dt) {
+        // 等待动画播放完毕
+        if (!this.animationOver) return;
         // 如果有定义其他组件（比如按钮）来完成场景载入触发时，等待组件响应
         if (this.readyToShow != null) return;
         // 否则加载完成后直接进入场景
@@ -120,6 +121,12 @@ export default class Loading extends cc.Component {
     loadProgressCount: number = 0;
     loadPorgressCountMax: number = Object.keys(this.loadResourcescatalog).length;
 
+    /**
+     * 动画播放完毕标记
+     * 数值应该在0-100
+     */
+    animationOver: Boolean = false;
+
     // TAG USER FUNCTION:                                                                                    
 
     // tag 用户方法 
@@ -132,7 +139,9 @@ export default class Loading extends cc.Component {
             .delay(0.5)
             .to(1, { opacity: 255 })
             .delay(1)
-            .call(() => { })
+            .call(() => {
+                this.animationOver = true;
+            })
             .start()
     }
 
@@ -168,12 +177,10 @@ export default class Loading extends cc.Component {
      * 加载全部资源包
      */
     private loadAllResources(): void {
-        cc['vv']['warehouse'] = cc['vv']['warehouse'] || {};
-
         let resKeys = Object.keys(this.loadResourcescatalog);
         resKeys.forEach(url => {
             let resLog = this.loadResourcescatalog[url];
-            cc['vv']['warehouse'][resLog.url] = cc['vv']['warehouse'][resLog.url] || {};
+            ccvv.warehouse[resLog.url] = ccvv.warehouse[resLog.url] || {};
             this.loadResources(url, resLog.type, resLog.url);
         });
     }
@@ -201,9 +208,9 @@ export default class Loading extends cc.Component {
                     for (let i in data) {
                         let name = (data[i] instanceof cc.SpriteAtlas) ? data[i].name.slice(0, -6) : data[i].name;
                         if (data[i] instanceof cc.JsonAsset) {
-                            cc['vv']['warehouse'][saveUrl][name] = data[i]['json'];
+                            ccvv.warehouse[saveUrl][name] = data[i]['json'];
                         } else {
-                            cc['vv']['warehouse'][saveUrl][name] = data[i];
+                            ccvv.warehouse[saveUrl][name] = data[i];
                         }
                     }
                 }

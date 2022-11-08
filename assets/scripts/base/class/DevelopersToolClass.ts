@@ -1,6 +1,6 @@
 // SIGNPOST 开发工具类 
 const {ccclass, property} = cc._decorator;
-
+import { DevelopersToolGlobal as ccvv } from './DevelopersToolGlobal';
 @ccclass
 export default class DevelopersToolClass extends cc.Component {
     

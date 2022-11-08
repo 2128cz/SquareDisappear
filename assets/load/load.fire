@@ -183,7 +183,7 @@
       "array": [
         0,
         0,
-        407.8979651824706,
+        462.45756562089025,
         0,
         0,
         0,
@@ -712,7 +712,9 @@
     "progressRandomChangeTime": 0.2,
     "progressWaitForLoad": 0.85,
     "readyToShow": null,
-    "readyToGoSence": null,
+    "readyToGoSence": {
+      "__uuid__": "72a752d6-75bc-4462-a0ae-51bb2edbd895"
+    },
     "_id": "16xyvR7ftI6oiQOaRl+DSs"
   }
 ]

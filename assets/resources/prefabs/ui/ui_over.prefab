@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "over ui",
+    "_name": "ui_over",
     "_objFlags": 0,
     "_parent": null,
     "_children": [
