@@ -11,9 +11,11 @@
                     function __define (exports, require, module) {
                         if (!nodeEnv) {__quick_compile_project__.registerModule(__filename, module);}
 require('./assets/load/Loading');
+require('./assets/scripts/base/class/ActorClass');
 require('./assets/scripts/base/class/DevelopersToolClass');
 require('./assets/scripts/base/class/DiologClass');
 require('./assets/scripts/base/class/DynaminPanelClass');
+require('./assets/scripts/base/class/PawnClass');
 require('./assets/scripts/base/tool/Global');
 
                     }

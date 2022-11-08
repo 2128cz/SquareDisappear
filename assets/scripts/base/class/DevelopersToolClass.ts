@@ -1,14 +1,9 @@
+// SIGNPOST 开发工具类 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class NewClass extends cc.Component {
-
-    @property(cc.Label)
-    label: cc.Label = null;
-
-    @property
-    text: string = 'hello';
-
+    
     /**
      * 构造函数
      */

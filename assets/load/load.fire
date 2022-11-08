@@ -183,7 +183,7 @@
       "array": [
         0,
         0,
-        275.4678005095052,
+        522.2133184820166,
         0,
         0,
         0,
@@ -707,6 +707,12 @@
     "logoNode": {
       "__id__": 8
     },
+    "progressBar": null,
+    "progressUpdateRate": 1,
+    "progressRandomChangeTime": 0.2,
+    "progressWaitForLoad": 0.85,
+    "readyToShow": null,
+    "readyToGoSence": null,
     "_id": "16xyvR7ftI6oiQOaRl+DSs"
   }
 ]
