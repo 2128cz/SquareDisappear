@@ -1,4 +1,4 @@
-// kismit
+// 苛刻库
 enum SysBaseType {
     number, string, boolean, object, undefined
 }
@@ -35,25 +35,27 @@ export class RigorousMatrix3 extends RigorousMatrix4 {
 export class RigorousMatrix2 extends RigorousMatrix4 {
 
 }
-export class RigorousHash extends RigorousValueType {
+import { Ihash } from './RigorousType';
+export class RigorousHash extends RigorousValueType implements Ihash {
     /**
      * @param length 定义哈希表的使用场景最大长度
      */
-    constructor(length: number) {
+    constructor(length?: number) {
         super();
-        this.HashCodeGate = length > 50;
+        this.HashCodeGate = length ? length > 50 : true;
+        this._HashList = {};
     }
 
     /**
      * 哈希表
      */
-    protected _HashList = {};
+    protected declare _HashList: any[number];
 
     /**
      * 获取一个字符的哈希值
      * @param code 
      */
-    protected ToHashCode(code: number | string): number {
+    protected ToHashCode_ShortWay(code: number | string): number {
         let hash: number = 0;
         if (typeof (code) == 'number') {
             hash = code as number;
@@ -67,7 +69,7 @@ export class RigorousHash extends RigorousValueType {
         return hash;
     }
 
-    protected ToHashCode2(code: number | string): number {
+    protected ToHashCode_LongWay(code: number | string): number {
         let hash: number = 5381;
         if (typeof (code) == 'number') {
             hash = code as number;
@@ -85,33 +87,59 @@ export class RigorousHash extends RigorousValueType {
     /**
      * 获取哈希值的选择器
      */
-    protected ToHashCodeGate(key: number | string): number {
+    protected ToHashCode(key: number | string): number {
         if (this.HashCodeGate)
-            return this.ToHashCode(key);
+            return this.ToHashCode_ShortWay(key);
         else
-            return this.ToHashCode2(key);
+            return this.ToHashCode_LongWay(key);
     }
-
-    // tag 交互层 
 
     /**
      * 按键获取元素
      * @param key 键
      */
-    public get(key: number | string): any {
-        let hash = this.ToHashCodeGate(key);
-        this._HashList[hash]
+    public get(key) {
+        let hash = this.ToHashCode(key);
+        return this._HashList[hash];
     }
 
     /**
      * 按键设置元素
      * @param key 键
      */
-    public set(value: any): number {
-        let key: number | string = null;
+    public set(key, value) {
+        let hash = this.ToHashCode(key);
+        this._HashList[hash] = value;
+    }
+
+    /**
+     * 按键删除元素
+     * @param key 键
+     */
+    public remove(key) {
+        let hash = this.ToHashCode(key);
+        if (this._HashList[hash]) {
+            this._HashList[hash].destroy();
+            return true;
+        }
+        return false;
+    }
+    /**
+     * 清除
+     */
+    public clean() {
+        this._HashList = [];
+    }
+}
+export class RigorousSet extends RigorousHash {
+
+}
+export class RigorousMap extends RigorousHash {
+    public set(key: any, value: any): number {
+        let objectTagName: string | number;
         switch (SysBaseType[typeof (value)]) {
             case SysBaseType.object:
-                let objectTagName = Object.prototype.toString.call(value);
+                objectTagName = Object.prototype.toString.call(value);
                 if (value instanceof cc.Component)
                     objectTagName += value['_id'];
                 else {
@@ -138,31 +166,146 @@ export class RigorousHash extends RigorousValueType {
                 key = 0;
                 break;
         }
-        let hash = this.ToHashCodeGate(key);
+        let hash = this.ToHashCode(key);
         this._HashList[hash] = value;
         return hash;
     }
-
+}
+import { Iarray } from './RigorousType';
+export class RigorousArray extends RigorousValueType implements Iarray {
     /**
-     * 按键删除元素
-     * @param key 键
+     * 数组类并非Array，不要直接使用此类存储参数
      */
-    public remove(key: number | string): void {
-        let hash = this.ToHashCodeGate(key);
+    constructor() {
+        super();
+        this._HashList = [];
+    }
+    /**
+     * 数组
+     */
+    protected declare _HashList: any[number];
+    /**
+     * 按键移除
+     */
+    public remove<T extends number>(key: T): void {
+        this._HashList[key] = null;
+    }
+    /**
+     * 清除
+     */
+    public clean() {
+        this._HashList = [];
     }
 }
-export class RigorousArray extends RigorousHash {
+import { IringBuffer } from './RigorousType';
+export class RigorousRingBuffer extends RigorousArray implements IringBuffer {
+    /**
+     * 初始化栈 
+     * @warn 通用起见没有使用严谨模式，请不要在任何地方使用小数
+     */
+    constructor(size: number) {
+        super();
+        this._StackGetPointer = 0;
+        this._StackPutPointer = 0;
+        this._StackSize = size
+    }
+    /**
+     * 出栈指针 
+     */
+    private declare _StackGetPointer: number;
+    private get _$get(): number {
+        return this._StackGetPointer;
+    }
+    private set _$get(value: number) {
+        this._StackGetPointer += value;
+        this._StackGetPointer %= this._StackSize;
+    }
+    protected get $get(): number {
+        return this._StackGetPointer;
+    }
+    protected set $get(value: number) {
+        if (value > 0) this._StackIsFull = false;
+        if (value > this.length) this.clean();
+        let getPointer = (this._StackGetPointer + value) % this._StackSize;
+        this._StackGetPointer = getPointer;
+    }
+    /**
+     * 进栈指针 
+     */
+    private declare _StackPutPointer: number;
+    private get _$put(): number {
+        return this._StackPutPointer;
+    }
+    private set _$put(value: number) {
+        this._StackPutPointer += value;
+        this._StackPutPointer %= this._StackSize;
+    }
+    protected get $put(): number {
+        return this._StackPutPointer;
+    }
+    /**
+     * 栈深度
+     */
+    protected declare _StackSize: number;
+    /**
+     * 栈满标记
+     */
+    protected declare _StackIsFull: boolean;
 
-}
-export class RigorousRingBuffer extends RigorousArray {
+    /**
+     * 获取栈有效长度
+     */
+    public get length(): number {
+        let len = this._$put - this._$get;
+        if (this._StackIsFull) return this._StackSize - len;
+        return len < 0 ? this._StackSize + len : len;
+    }
+    /**
+     * 直接获取索引项目 
+     * 这不会触发栈指针变化
+     */
+    public getBuffer(index: number): any {
+        return this._HashList[index];
+    }
+    /**
+     * 进栈
+     * @param object 
+     */
+    public push<T>(object: T): number {
+        this._HashList[this._StackPutPointer] = object;
+        this._$put = 1;
+        if (this._StackIsFull) this._$get = 1;
+        if (this._$put == this._$get) this._StackIsFull = true;
+        return this._$put;
+    }
+    /**
+     * 出栈
+     * @param length 
+     * @return obj[]: obj3, obj4...
+     * @return index[]: 3, 4...
+     */
+    public pull<T extends number>(length: T) {
+        this._StackIsFull = false;
+        let out = { obj: [], index: [] };
+        for (let index = 0; index < Math.min(length, this.length); index++) {
+            let outIndex = (index + this._$get) % this._StackSize;
+            out.obj.push(this._HashList[outIndex]);
+            out.index.push(outIndex);
+        }
+        this._$get = length;
+        return out;
+    }
 
+    /**
+     * 清空栈
+     */
+    public clean(): void {
+        this._HashList = [];
+        this._StackGetPointer = 0;
+        this._StackPutPointer = 0;
+    }
 }
-export class RigorousSet extends RigorousHash {
 
-}
-export class RigorousMap extends RigorousHash {
-
-}
 
 // 测试
 // interface kismitFloat {
