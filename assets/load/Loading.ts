@@ -92,23 +92,6 @@ export default class Loading extends cc.Component {
     // TAG 自定义数值                                                                                         
 
     /**
-     * 加载资源目录
-     */
-    loadResourcescatalog = {
-        // "url": { type: res type, url: "save url" },
-        //加载音乐音效资源
-        "sounds": { type: cc.AudioClip, url: "sounds" },
-        //加载预制件资源
-        "prefabs": { type: cc.Prefab, url: "prefabs" },
-        //加载图集资源
-        // "atlas": { type: cc.SpriteAtlas, url: "atlas" },
-        //加载单个精灵资源
-        "frames": { type: cc.SpriteFrame, url: "frames" },
-        //加载分享图
-        "share": { type: cc.SpriteFrame, url: "share" },
-    }
-
-    /**
      * 进度条数值
      * 数值应该在0-100
      */
@@ -119,7 +102,7 @@ export default class Loading extends cc.Component {
      * 当载入计数等于资源数时，完成加载
      */
     loadProgressCount: number = 0;
-    loadPorgressCountMax: number = Object.keys(this.loadResourcescatalog).length;
+    loadPorgressCountMax: number = Object.keys(ccvv.loadResourcescatalog).length;
 
     /**
      * 动画播放完毕标记
@@ -177,9 +160,9 @@ export default class Loading extends cc.Component {
      * 加载全部资源包
      */
     private loadAllResources(): void {
-        let resKeys = Object.keys(this.loadResourcescatalog);
+        let resKeys = Object.keys(ccvv.loadResourcescatalog);
         resKeys.forEach(url => {
-            let resLog = this.loadResourcescatalog[url];
+            let resLog = ccvv.loadResourcescatalog[url];
             ccvv.warehouse[resLog.url] = ccvv.warehouse[resLog.url] || {};
             this.loadResources(url, resLog.type, resLog.url);
         });

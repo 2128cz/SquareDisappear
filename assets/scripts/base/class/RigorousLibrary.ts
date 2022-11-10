@@ -1,4 +1,3 @@
-// 苛刻库
 enum SysBaseType {
     number, string, boolean, object, undefined
 }
@@ -174,7 +173,7 @@ export class RigorousMap extends RigorousHash {
 import { Iarray } from './RigorousType';
 export class RigorousArray extends RigorousValueType implements Iarray {
     /**
-     * 数组类并非Array，不要直接使用此类存储参数
+     * 数组类并非用作Array，不要直接使用此类存储参数
      */
     constructor() {
         super();
@@ -201,7 +200,7 @@ import { IringBuffer } from './RigorousType';
 export class RigorousRingBuffer extends RigorousArray implements IringBuffer {
     /**
      * 初始化栈 
-     * @warn 通用起见没有使用严谨模式，请不要在任何地方使用小数
+     * @warn 通用起见没有使用苛刻模式，请不要在任何地方使用非正整数
      */
     constructor(size: number) {
         super();

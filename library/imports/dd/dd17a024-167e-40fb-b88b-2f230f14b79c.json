@@ -1,7 +1,7 @@
 [
   {
     "__type__": "cc.Prefab",
-    "_name": "sound node",
+    "_name": "soundNode",
     "_objFlags": 0,
     "_native": "",
     "data": {
@@ -52,13 +52,9 @@
       }
     ],
     "_active": true,
-    "_components": [
-      {
-        "__id__": 35
-      }
-    ],
+    "_components": [],
     "_prefab": {
-      "__id__": 36
+      "__id__": 35
     },
     "_opacity": 255,
     "_color": {
@@ -1129,16 +1125,6 @@
     },
     "fileId": "b2x5/ggrhEe5yIudOHAcWT",
     "sync": false
-  },
-  {
-    "__type__": "e1cfaRJGtlIQLWFFIvWbruH",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",

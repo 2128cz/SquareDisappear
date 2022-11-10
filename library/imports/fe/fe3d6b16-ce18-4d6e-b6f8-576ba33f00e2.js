@@ -23,22 +23,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// SIGNPOST 开发工具类 
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
 var DevelopersToolClass = /** @class */ (function (_super) {
     __extends(DevelopersToolClass, _super);
     function DevelopersToolClass() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    /**
-     * 构造函数
-     */
-    DevelopersToolClass.prototype.ctor = function () {
-    };
-    // LIFE-CYCLE CALLBACKS:
-    // onLoad () {}
-    DevelopersToolClass.prototype.start = function () {
-    };
     DevelopersToolClass = __decorate([
         ccclass
     ], DevelopersToolClass);

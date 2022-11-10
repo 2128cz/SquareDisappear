@@ -1,4 +1,8 @@
 import { RigorousRingBuffer } from '../class/RigorousLibrary';
+/**
+ * 无根树 
+ * @tip 根据当前游戏的定义，入栈为根，出栈为叶
+ */
 export default class noRootTree extends RigorousRingBuffer {
     /**
      * 树实例
@@ -21,13 +25,18 @@ export default class noRootTree extends RigorousRingBuffer {
         return this.push(object);
     }
     /**
-     * 按索引获取项目
-     * @param key 
+     * 获取根节点
      * @returns 
      */
-    public get(key: number): any {
-
-        return
+    public get root(): any {
+        return this.getBuffer(this.$put);
+    }
+    /**
+     * 获取最末子节点
+     * @returns 
+     */
+    public get leaf(): any {
+        return this.getBuffer(this.$get);
     }
     /**
      * 从给定索引处截断，并返回截断部分
@@ -39,7 +48,7 @@ export default class noRootTree extends RigorousRingBuffer {
         return this.pull(len < 0 ? this._StackSize + len : len);
     }
     /**
-     * 删除项目
+     * 删除指定长度的项目
      * @param length 删除的长度
      */
     public del(length?: number) {
@@ -48,3 +57,5 @@ export default class noRootTree extends RigorousRingBuffer {
         this.$get = length;
     }
 }
+
+// import NTR from "../base/tool/NoRootTree"; // (〃´-ω･) 诶嘿~

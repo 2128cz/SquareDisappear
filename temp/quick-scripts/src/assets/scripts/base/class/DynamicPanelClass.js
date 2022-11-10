@@ -23,9 +23,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// SIGNPOST 动态窗口类 
-var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
 var DevelopersToolClass_1 = require("./DevelopersToolClass");
+var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
 var DynamicPanelClass = /** @class */ (function (_super) {
     __extends(DynamicPanelClass, _super);
     function DynamicPanelClass() {

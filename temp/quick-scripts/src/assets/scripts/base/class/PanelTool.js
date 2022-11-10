@@ -3,12 +3,6 @@ cc._RF.push(module, '64efe9poixCx6gFMYxQOlei', 'PanelTool');
 // scripts/base/class/PanelTool.ts
 
 "use strict";
-// Learn TypeScript:
-//  - https://docs.cocos.com/creator/manual/en/scripting/typescript.html
-// Learn Attribute:
-//  - https://docs.cocos.com/creator/manual/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -29,21 +23,43 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var DevelopersToolGlobal_1 = require("./DevelopersToolGlobal");
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
 var PanelTool = /** @class */ (function (_super) {
     __extends(PanelTool, _super);
     function PanelTool() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this._generalLayer = ['BackgroundLayer', 'EternalityUILayer', 'DynamicUILayer'];
+        return _this;
     }
-    // @property
-    // text: string = 'hello';
-    PanelTool.prototype.ctor = function () {
-        cc.log("构造");
-    };
     // LIFE-CYCLE CALLBACKS:
-    // onLoad () {}
-    PanelTool.prototype.start = function () {
+    PanelTool.prototype.onLoad = function () {
+        var layers = this.node.children;
+        /**
+         * 可用的剩余层
+         */
+        var residueLayersName = this._generalLayer;
+        for (var layerIndex = 0; layerIndex < layers.length; layerIndex++) {
+            var layer = layers[layerIndex];
+            if (layer.getComponent(cc.Camera))
+                continue;
+            for (var nameIndex = 0; nameIndex < residueLayersName.length; nameIndex++) {
+                if (layer.name == residueLayersName[nameIndex]) {
+                    residueLayersName[nameIndex] = null;
+                    DevelopersToolGlobal_1.DevelopersToolGlobal.layer = layers[layerIndex];
+                    break;
+                }
+            }
+        }
     };
+    __decorate([
+        property({
+            type: cc.String,
+            displayName: '通用层名单',
+            tooltip: '层按放置顺序设定优先级，与名称顺序无关',
+            visible: true,
+        })
+    ], PanelTool.prototype, "_generalLayer", void 0);
     PanelTool = __decorate([
         ccclass
     ], PanelTool);

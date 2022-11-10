@@ -23,9 +23,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// SIGNPOST 可控制类 
-var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
 var ActorClass_1 = require("./ActorClass");
+var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
 var PawnClass = /** @class */ (function (_super) {
     __extends(PawnClass, _super);
     function PawnClass() {

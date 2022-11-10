@@ -1,6 +1,6 @@
 "use strict";
-cc._RF.push(module, 'f6bc6FrRRVPbpB9I2O8jbmT', 'block');
-// scripts/game/block.ts
+cc._RF.push(module, 'f6bc6FrRRVPbpB9I2O8jbmT', 'Block');
+// scripts/game/Block.ts
 
 "use strict";
 var __extends = (this && this.__extends) || (function () {
@@ -23,8 +23,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
 var PawnClass_1 = require("../base/class/PawnClass");
+var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
 var block = /** @class */ (function (_super) {
     __extends(block, _super);
     function block() {

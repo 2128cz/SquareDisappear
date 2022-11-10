@@ -23,28 +23,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// SIGNPOST 特指对话框类 
-var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
 var DynamicPanelClass_1 = require("./DynamicPanelClass");
+var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
 var DiologClass = /** @class */ (function (_super) {
     __extends(DiologClass, _super);
     function DiologClass() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.label = null;
-        _this.text = 'hello';
-        return _this;
-        // update (dt) {}
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     // LIFE-CYCLE CALLBACKS:
     // onLoad () {}
     DiologClass.prototype.start = function () {
     };
-    __decorate([
-        property(cc.Label)
-    ], DiologClass.prototype, "label", void 0);
-    __decorate([
-        property
-    ], DiologClass.prototype, "text", void 0);
     DiologClass = __decorate([
         ccclass
     ], DiologClass);

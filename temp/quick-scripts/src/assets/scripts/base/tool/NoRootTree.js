@@ -16,28 +16,82 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
-var NewClass = /** @class */ (function (_super) {
-    __extends(NewClass, _super);
-    function NewClass() {
+var RigorousLibrary_1 = require("../class/RigorousLibrary");
+/**
+ * 无根树
+ * @tip 根据当前游戏的定义，入栈为根，出栈为叶
+ */
+var noRootTree = /** @class */ (function (_super) {
+    __extends(noRootTree, _super);
+    function noRootTree() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    // LIFE-CYCLE CALLBACKS:
-    // onLoad () {}
-    NewClass.prototype.start = function () {
+    Object.defineProperty(noRootTree, "tree", {
+        get: function () {
+            this._NoRootTree = this._NoRootTree || new noRootTree(30);
+            return this._NoRootTree;
+        },
+        set: function (value) {
+            this._NoRootTree = value;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    /**
+     * 添加子项
+     * @param object
+     * @returns 返回这个子项的索引
+     */
+    noRootTree.prototype.add = function (object) {
+        return this.push(object);
     };
-    NewClass = __decorate([
-        ccclass
-    ], NewClass);
-    return NewClass;
-}(cc.Component));
-exports.default = NewClass;
+    Object.defineProperty(noRootTree.prototype, "root", {
+        /**
+         * 获取根节点
+         * @returns
+         */
+        get: function () {
+            return this.getBuffer(this.$put);
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(noRootTree.prototype, "leaf", {
+        /**
+         * 获取最末子节点
+         * @returns
+         */
+        get: function () {
+            return this.getBuffer(this.$get);
+        },
+        enumerable: false,
+        configurable: true
+    });
+    /**
+     * 从给定索引处截断，并返回截断部分
+     * @param key
+     */
+    noRootTree.prototype.cut = function (key) {
+        var len = (key % this._StackSize) - this.$get;
+        if (this._StackIsFull)
+            return this._StackSize - len;
+        return this.pull(len < 0 ? this._StackSize + len : len);
+    };
+    /**
+     * 删除指定长度的项目
+     * @param length 删除的长度
+     */
+    noRootTree.prototype.del = function (length) {
+        if (!length || length == 0)
+            length = 1;
+        if (length < 0)
+            return this.clean();
+        this.$get = length;
+    };
+    return noRootTree;
+}(RigorousLibrary_1.RigorousRingBuffer));
+exports.default = noRootTree;
+// import NTR from "../base/tool/NoRootTree"; // (〃´-ω･) 诶嘿~
 
 cc._RF.pop();

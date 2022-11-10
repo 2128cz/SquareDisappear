@@ -18,7 +18,6 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RigorousRingBuffer = exports.RigorousArray = exports.RigorousMap = exports.RigorousSet = exports.RigorousHash = exports.RigorousMatrix2 = exports.RigorousMatrix3 = exports.RigorousMatrix4 = exports.RigorousSize = exports.RigorousVector2 = exports.RigorousScale = exports.RigorousRotation = exports.RigorousPostion = exports.RigorousVector3 = exports.RigorousVector4 = exports.RigorousValueType = void 0;
-// 苛刻库
 var SysBaseType;
 (function (SysBaseType) {
     SysBaseType[SysBaseType["number"] = 0] = "number";
@@ -259,37 +258,13 @@ exports.RigorousMap = RigorousMap;
 var RigorousArray = /** @class */ (function (_super) {
     __extends(RigorousArray, _super);
     /**
-     *
+     * 数组类并非用作Array，不要直接使用此类存储参数
      */
     function RigorousArray() {
         var _this = _super.call(this) || this;
         _this._HashList = [];
         return _this;
     }
-    /**
-     *
-     * @param key
-     * @returns
-     */
-    RigorousArray.prototype.get = function (key) {
-        return this._HashList[key];
-    };
-    /**
-     *
-     * @param key
-     * @param value
-     */
-    RigorousArray.prototype.set = function (key, value) {
-        this._HashList[key] = value;
-    };
-    /**
-     * 添加一个项目到末尾
-     * @param value
-     * @returns
-     */
-    RigorousArray.prototype.add = function (value) {
-        return this._HashList.push(value);
-    };
     /**
      * 按键移除
      */
@@ -309,7 +284,7 @@ var RigorousRingBuffer = /** @class */ (function (_super) {
     __extends(RigorousRingBuffer, _super);
     /**
      * 初始化栈
-     * 注意：只是为了简单模仿，原理不完全一样
+     * @warn 通用起见没有使用苛刻模式，请不要在任何地方使用非正整数
      */
     function RigorousRingBuffer(size) {
         var _this = _super.call(this) || this;
@@ -318,52 +293,107 @@ var RigorousRingBuffer = /** @class */ (function (_super) {
         _this._StackSize = size;
         return _this;
     }
+    Object.defineProperty(RigorousRingBuffer.prototype, "_$get", {
+        get: function () {
+            return this._StackGetPointer;
+        },
+        set: function (value) {
+            this._StackGetPointer += value;
+            this._StackGetPointer %= this._StackSize;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(RigorousRingBuffer.prototype, "$get", {
+        get: function () {
+            return this._StackGetPointer;
+        },
+        set: function (value) {
+            if (value > 0)
+                this._StackIsFull = false;
+            if (value > this.length)
+                this.clean();
+            var getPointer = (this._StackGetPointer + value) % this._StackSize;
+            this._StackGetPointer = getPointer;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(RigorousRingBuffer.prototype, "_$put", {
+        get: function () {
+            return this._StackPutPointer;
+        },
+        set: function (value) {
+            this._StackPutPointer += value;
+            this._StackPutPointer %= this._StackSize;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(RigorousRingBuffer.prototype, "$put", {
+        get: function () {
+            return this._StackPutPointer;
+        },
+        enumerable: false,
+        configurable: true
+    });
     Object.defineProperty(RigorousRingBuffer.prototype, "length", {
         /**
          * 获取栈有效长度
          */
         get: function () {
-            return;
+            var len = this._$put - this._$get;
+            if (this._StackIsFull)
+                return this._StackSize - len;
+            return len < 0 ? this._StackSize + len : len;
         },
         enumerable: false,
         configurable: true
     });
-    Object.defineProperty(RigorousRingBuffer.prototype, "buffer", {
-        /**
-         * 直接获取索引项目
-         * 这不会触发栈指针变化
-         */
-        get: function () {
-            return;
-        },
-        enumerable: false,
-        configurable: true
-    });
+    /**
+     * 直接获取索引项目
+     * 这不会触发栈指针变化
+     */
+    RigorousRingBuffer.prototype.getBuffer = function (index) {
+        return this._HashList[index];
+    };
     /**
      * 进栈
      * @param object
      */
     RigorousRingBuffer.prototype.push = function (object) {
-        this._StackPutPointer = ++this._StackPutPointer % this._StackSize;
-        if (this._StackPutPointer == this._StackGetPointer)
-            this._StackGetPointer++;
         this._HashList[this._StackPutPointer] = object;
-        return this._StackPutPointer;
+        this._$put = 1;
+        if (this._StackIsFull)
+            this._$get = 1;
+        if (this._$put == this._$get)
+            this._StackIsFull = true;
+        return this._$put;
     };
     /**
      * 出栈
      * @param length
+     * @return obj[]: obj3, obj4...
+     * @return index[]: 3, 4...
      */
     RigorousRingBuffer.prototype.pull = function (length) {
-        var out = [];
-        for (var index = 0; index < length; index++) {
-            out.push(this._HashList[index]);
+        this._StackIsFull = false;
+        var out = { obj: [], index: [] };
+        for (var index = 0; index < Math.min(length, this.length); index++) {
+            var outIndex = (index + this._$get) % this._StackSize;
+            out.obj.push(this._HashList[outIndex]);
+            out.index.push(outIndex);
         }
+        this._$get = length;
+        return out;
     };
     /**
      * 清空栈
      */
     RigorousRingBuffer.prototype.clean = function () {
+        this._HashList = [];
+        this._StackGetPointer = 0;
+        this._StackPutPointer = 0;
     };
     return RigorousRingBuffer;
 }(RigorousArray));

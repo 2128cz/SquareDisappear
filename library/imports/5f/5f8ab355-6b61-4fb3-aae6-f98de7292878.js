@@ -1,6 +1,6 @@
 "use strict";
-cc._RF.push(module, '219931QpohMXa9AERY/82Av', 'Game');
-// scripts/game/Game.ts
+cc._RF.push(module, '5f8abNVa2FPs6rm+Y3nKSh4', 'GameUI');
+// scripts/game/GameUI.ts
 
 "use strict";
 var __extends = (this && this.__extends) || (function () {
@@ -23,51 +23,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var DevelopersToolGlobal_1 = require("../base/class/DevelopersToolGlobal");
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
 var NewClass = /** @class */ (function (_super) {
     __extends(NewClass, _super);
     function NewClass() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.label = null;
-        _this.text = 'hello';
-        return _this;
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     // LIFE-CYCLE CALLBACKS:
-    // onLoad () {}
+    NewClass.prototype.onLoad = function () {
+        // cc.find("Canvas").getComponent("Game").addTimeCount();
+    };
     NewClass.prototype.start = function () {
+        DevelopersToolGlobal_1.DevelopersToolGlobal.fristScript;
     };
-    // update (dt) {}
-    // TAG USER FUNCTION:                                                                                    
-    /**
-     * 游戏流程
-     */
-    NewClass.prototype.gameProcess_SpawnLine = function () {
-    };
-    // TAG Prefabricated function                                                                            
-    // SIGNPOST instantiation and destory Actor                                                              
-    /**
-     * creat instantiate
-     * @param {cc.Prefab} actor 实例化的目标
-     * @param {cc.Node} parent 实例化的对象将要附加的目标，如果留空则为自身
-     * @returns
-     */
-    NewClass.prototype.creatActor = function (actor, parent) {
-        var actorInst = cc.instantiate(actor);
-        if (parent) {
-            parent.addChild(actorInst);
-        }
-        else {
-            this.node.addChild(actorInst);
-            cc.log(actorInst);
-        }
-        return actorInst;
-    };
-    __decorate([
-        property(cc.Label)
-    ], NewClass.prototype, "label", void 0);
-    __decorate([
-        property
-    ], NewClass.prototype, "text", void 0);
     NewClass = __decorate([
         ccclass
     ], NewClass);

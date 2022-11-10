@@ -41,22 +41,6 @@ var Loading = /** @class */ (function (_super) {
         _this.readyToGoSence = null;
         // TAG 自定义数值                                                                                         
         /**
-         * 加载资源目录
-         */
-        _this.loadResourcescatalog = {
-            // "url": { type: res type, url: "save url" },
-            //加载音乐音效资源
-            "sounds": { type: cc.AudioClip, url: "sounds" },
-            //加载预制件资源
-            "prefabs": { type: cc.Prefab, url: "prefabs" },
-            //加载图集资源
-            // "atlas": { type: cc.SpriteAtlas, url: "atlas" },
-            //加载单个精灵资源
-            "frames": { type: cc.SpriteFrame, url: "frames" },
-            //加载分享图
-            "share": { type: cc.SpriteFrame, url: "share" },
-        };
-        /**
          * 进度条数值
          * 数值应该在0-100
          */
@@ -66,7 +50,7 @@ var Loading = /** @class */ (function (_super) {
          * 当载入计数等于资源数时，完成加载
          */
         _this.loadProgressCount = 0;
-        _this.loadPorgressCountMax = Object.keys(_this.loadResourcescatalog).length;
+        _this.loadPorgressCountMax = Object.keys(DevelopersToolGlobal_1.DevelopersToolGlobal.loadResourcescatalog).length;
         /**
          * 动画播放完毕标记
          * 数值应该在0-100
@@ -144,9 +128,9 @@ var Loading = /** @class */ (function (_super) {
      */
     Loading.prototype.loadAllResources = function () {
         var _this = this;
-        var resKeys = Object.keys(this.loadResourcescatalog);
+        var resKeys = Object.keys(DevelopersToolGlobal_1.DevelopersToolGlobal.loadResourcescatalog);
         resKeys.forEach(function (url) {
-            var resLog = _this.loadResourcescatalog[url];
+            var resLog = DevelopersToolGlobal_1.DevelopersToolGlobal.loadResourcescatalog[url];
             DevelopersToolGlobal_1.DevelopersToolGlobal.warehouse[resLog.url] = DevelopersToolGlobal_1.DevelopersToolGlobal.warehouse[resLog.url] || {};
             _this.loadResources(url, resLog.type, resLog.url);
         });

@@ -1,15 +1,10 @@
 // SIGNPOST 特指对话框类 
-const {ccclass, property} = cc._decorator;
 import { DevelopersToolGlobal as ccvv } from './DevelopersToolGlobal';
 import DynamicPanelClass from './DynamicPanelClass';
+
+const {ccclass, property} = cc._decorator;
 @ccclass
 export default class DiologClass extends DynamicPanelClass {
-
-    @property(cc.Label)
-    label: cc.Label = null;
-
-    @property
-    text: string = 'hello';
 
     // LIFE-CYCLE CALLBACKS:
 
