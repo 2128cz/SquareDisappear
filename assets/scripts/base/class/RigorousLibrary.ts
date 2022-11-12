@@ -226,7 +226,7 @@ export class RigorousRingBuffer extends RigorousArray implements IringBuffer {
     protected set $get(value: number) {
         if (value > 0) this._StackIsFull = false;
         if (value > this.length) this.clean();
-        let getPointer = mm.PMod(value,this._StackSize);
+        let getPointer = mm.PMod(value, this._StackSize);
         this._StackGetPointer = getPointer;
     }
     /**
@@ -244,9 +244,10 @@ export class RigorousRingBuffer extends RigorousArray implements IringBuffer {
      * 获取有效的进栈位
      */
     protected get $put(): number {
-        let put = this._StackPutPointer - 1;
-        put = put < 0 ? this._StackSize - 1 : put;
-        return put;
+        // let put = this._StackPutPointer - 1;
+        // put = put < 0 ? this._StackSize - 1 : put;
+        // return put;
+        return this._StackPutPointer;
     }
     /**
      * 栈深度
@@ -278,10 +279,11 @@ export class RigorousRingBuffer extends RigorousArray implements IringBuffer {
      */
     public push<T>(object: T): number {
         this._HashList[this._StackPutPointer] = object;
+        let lastPut = this._$put;
         this._$put = 1;
         if (this._StackIsFull) this._$get = 1;
         if (this._$put == this._$get) this._StackIsFull = true;
-        return this._$put - 1;
+        return lastPut;
     }
     /**
      * 出栈

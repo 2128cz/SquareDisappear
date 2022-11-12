@@ -19,7 +19,8 @@ export default class block extends PawnClass {
         if (!this.conflict && this.enabledCollision)
             this.node['playerMovement'].updateByVelocity(dt);
         else {
-            
+            let gridPos = GridAbsorb.grid.getGridPositionByIndex(new cc.Vec2(0, this.treeIndex));
+            this.node.setPosition(this.node.x, gridPos.y);
         }
     }
 
@@ -34,8 +35,9 @@ export default class block extends PawnClass {
             this.node.group = 'player'
             this.enabledCollision = true;
         }
-        else
+        else {
             this.treeIndex = Index;
+        }
     }
 
     /**
@@ -66,18 +68,19 @@ export default class block extends PawnClass {
                     // 临时加入到此组中
                     treeGroup[this['_id']] = this.node;
                 }
+                this.treeIndex = selfTreeIndex;
             }
             // 如果组不在树中，说明在最外边
             else {
-                NTR.tree.addFromFront({ [this['_id']]: this.node });
-                
+                this.treeIndex = NTR.tree.addFromFront({ [this['_id']]: this.node });
             }
-            this.treeIndex = selfTreeIndex;
+
         }
         // 如果还未存在冲突
         if (!this.conflict) {
             // 对齐,避免发生重复对齐
             this.AlignPos = otherBlock.AlignPos;
+            cc.log(this.treeIndex, NTR.tree.put, NTR.tree.get, NTR.tree.buffer);
         }
 
         // 标记为冲突
@@ -92,7 +95,7 @@ export default class block extends PawnClass {
     onCollisionStay(other, self) {
         if (!this.enabledCollision) return;
         // if (ccvv.getInstanceByName())
-        if (this.waitForConflict)
+        if (!this.waitForConflict)
             cc.log("碰撞中");
 
     }
@@ -105,7 +108,9 @@ export default class block extends PawnClass {
         if (!this.enabledCollision) return;
         if (!this.node.isValid) return;
         cc.log("碰撞结束");
-        this.conflict = true;
+        if (this.waitForConflict)
+            this.conflict = false;
+
     }
 
     // SIGNPOST function                                                                                     
@@ -163,6 +168,7 @@ export default class block extends PawnClass {
     protected _TreeIndex: number = null;
     public get treeIndex() { return this._TreeIndex }
     public set treeIndex(value) { this._TreeIndex = value; }
+
     /**
      * 获取其他方块node上的block组件
      * @param block 
@@ -203,32 +209,36 @@ export default class block extends PawnClass {
     /**
      * 剩余等待计数
      */
-    private _WaitForConflict: number = 1;
+    private _WaitForConflict: number = 3;
     /**
      * 是否等待冲突
      */
     protected get waitForConflict(): boolean {
-        return this._WaitForConflict-- <= 0;
+        return this._WaitForConflict-- > 0;
     }
 
     /**
      * 获取对齐坐标
      */
     public get AlignPos() {
-        if (!this.enabledCollision) {
-            let treeIndexObject = NTR.tree.getBuffer(NTR.tree.getNextIndex(this.treeIndex, -1));
-            if (treeIndexObject) {
-                let AlignTarget = treeIndexObject[Object.keys(treeIndexObject)[0]];
-                return new cc.Vec2(this.node.x, AlignTarget.y)
-            }
-        }
-        return new cc.Vec2(this.node.x, this.node.y - ccvv.fristScript.cubeHeight)
+        // 使用无根树方式获取对齐坐标
+        // if (!this.enabledCollision) {
+        //     let treeIndexObject = NTR.tree.getBuffer(NTR.tree.getNextIndex(this.treeIndex, -1));
+        //     if (treeIndexObject) {
+        //         let AlignTarget = treeIndexObject[Object.keys(treeIndexObject)[0]];
+        //         return new cc.Vec2(this.node.x, AlignTarget.y)
+        //     }
+        // }
+        // return new cc.Vec2(this.node.x, this.node.y - ccvv.fristScript.cubeHeight)
+
+        // 使用对齐网格获取对齐坐标
+        return GridAbsorb.grid.getGridPositionByIndex(new cc.Vec2(0, this.treeIndex - 1));
     }
     /**
      * 设置对齐坐标
      */
     public set AlignPos(value: cc.Vec2) {
-        this.node.setPosition(value);
+        this.node.setPosition(this.node.x, value.y);
     }
 }
 

@@ -12,7 +12,7 @@ var GridAbsorb = /** @class */ (function () {
     function GridAbsorb(axisNum, cellSize) {
         this._CellSize = new cc.Vec3(100);
         this._GridOffset = new cc.Vec3(0);
-        this._GridSize = new cc.Vec3(0);
+        this._GridSize = null;
         this._GridAxisCellNum = new cc.Vec3(100);
         // + -
         this._GridEdgeAnchor_X = new cc.Vec2(.5, .5);
@@ -20,8 +20,10 @@ var GridAbsorb = /** @class */ (function () {
         this._GridEdgeAnchor_Z = new cc.Vec2(.5, .5);
         if (axisNum) {
             this.cellNum = axisNum;
-            if (cellSize)
+            if (cellSize) {
                 this.cellSize = cellSize;
+                this.gridSize = new cc.Vec3(axisNum.x * cellSize.x, axisNum.y * cellSize.y, axisNum.z * cellSize.z);
+            }
         }
         if (!GridAbsorb._ExclusiveGrid) {
             GridAbsorb._ExclusiveGrid = this;
@@ -71,9 +73,10 @@ var GridAbsorb = /** @class */ (function () {
          * 设置网格偏移量
          */
         set: function (offset) {
+            var self = this;
             var newOffset = this._GridOffset.add(offset);
             function vecMod(axis) {
-                return newOffset[axis] % this.gridSize[axis];
+                return newOffset[axis] % self.gridSize[axis];
             }
             this._GridOffset = new cc.Vec3(vecMod('x'), vecMod('y'), vecMod('z'));
         },
@@ -82,16 +85,16 @@ var GridAbsorb = /** @class */ (function () {
     });
     Object.defineProperty(GridAbsorb.prototype, "gridSize", {
         /**
-         * 获取网格偏移量
+         * 获取网格尺寸
          */
         get: function () {
-            return this._GridOffset;
+            return this._GridSize;
         },
         /**
-         * 设置网格偏移量
+         * 设置网格尺寸
          */
-        set: function (offset) {
-            this._GridOffset = offset;
+        set: function (size) {
+            this._GridSize = size;
         },
         enumerable: false,
         configurable: true
@@ -150,9 +153,10 @@ var GridAbsorb = /** @class */ (function () {
      * @return {int}
      */
     GridAbsorb.prototype.getGridPositionByIndex = function (index) {
+        var self = this;
         function getPos(axis) {
-            return (Math.floor(index[axis]) % this.cellNum[axis]) // 唯一不稳定因素
-                * this.cellSize[axis] + this.offset[axis];
+            return (Math.floor(index[axis]) % self.cellNum[axis])
+                * self.cellSize[axis] + self.offset[axis];
         }
         var x = getPos('x');
         var y = getPos('y');

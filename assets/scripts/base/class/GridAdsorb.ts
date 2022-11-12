@@ -1,3 +1,4 @@
+import { mathMacro as mm } from '../class/DevelopersToolGlobal';
 export default class GridAbsorb {
 
     protected static _ExclusiveGrid: GridAbsorb = null;
@@ -22,8 +23,14 @@ export default class GridAbsorb {
     constructor(axisNum?: cc.Vec3, cellSize?: cc.Vec3) {
         if (axisNum) {
             this.cellNum = axisNum;
-            if (cellSize)
+            if (cellSize) {
                 this.cellSize = cellSize;
+                this.gridSize = new cc.Vec3(
+                    axisNum.x * cellSize.x,
+                    axisNum.y * cellSize.y,
+                    axisNum.z * cellSize.z
+                );
+            }
         }
         if (!GridAbsorb._ExclusiveGrid) {
             GridAbsorb._ExclusiveGrid = this;
@@ -55,25 +62,26 @@ export default class GridAbsorb {
      * 设置网格偏移量  
      */
     public set offset(offset: cc.Vec3) {
+        let self = this;
         let newOffset = this._GridOffset.add(offset);
         function vecMod(axis: string): number {
-            return newOffset[axis] % this.gridSize[axis];
+            return newOffset[axis] % self.gridSize[axis];
         }
         this._GridOffset = new cc.Vec3(vecMod('x'), vecMod('y'), vecMod('z'))
     }
 
-    protected _GridSize: cc.Vec3 = new cc.Vec3(0);
+    protected _GridSize: cc.Vec3 = null;
     /**
-     * 获取网格偏移量
+     * 获取网格尺寸
      */
     public get gridSize(): cc.Vec3 {
-        return this._GridOffset;
+        return this._GridSize;
     }
     /**
-     * 设置网格偏移量
+     * 设置网格尺寸
      */
-    public set gridSize(offset: cc.Vec3) {
-        this._GridOffset = offset;
+    public set gridSize(size: cc.Vec3) {
+        this._GridSize = size;
     }
 
     protected _GridAxisCellNum: cc.Vec3 = new cc.Vec3(100);
@@ -126,16 +134,17 @@ export default class GridAbsorb {
     // SIGNPOST 网格查找                                                                                
 
     /** 
-     * 从各轴索引获得网格坐标
-     * cocos和unity都是y轴向上，xz为平面
+     * 从各轴索引获得网格坐标  
+     * cocos和unity都是y轴向上，xz为平面  
      * 为了适配平面坐标，z为深度轴
      * @param {intVec3} index
      * @return {int}
      */
     public getGridPositionByIndex<T extends cc.Vec3 | cc.Vec2>(index: T): T {
-        function getPos(axis) {
-            return (Math.floor(index[axis]) % this.cellNum[axis]) // 唯一不稳定因素
-                * this.cellSize[axis] + this.offset[axis];
+        let self = this;
+        function getPos(axis: string): number {
+            return (Math.floor(index[axis]) % self.cellNum[axis])
+                * self.cellSize[axis] + self.offset[axis];
         }
         let x = getPos('x');
         let y = getPos('y');

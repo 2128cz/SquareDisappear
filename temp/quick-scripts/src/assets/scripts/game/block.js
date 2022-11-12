@@ -25,6 +25,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var DevelopersToolGlobal_1 = require("../base/class/DevelopersToolGlobal");
 var PawnClass_1 = require("../base/class/PawnClass");
+var GridAdsorb_1 = require("../base/class/GridAdsorb");
 var NoRootTree_1 = require("../base/tool/NoRootTree");
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
 var block = /** @class */ (function (_super) {
@@ -51,7 +52,7 @@ var block = /** @class */ (function (_super) {
         /**
          * 剩余等待计数
          */
-        _this._WaitForConflict = 1;
+        _this._WaitForConflict = 3;
         return _this;
     }
     // onLoad () {}
@@ -60,8 +61,10 @@ var block = /** @class */ (function (_super) {
     block.prototype.update = function (dt) {
         if (!this.conflict && this.enabledCollision)
             this.node['playerMovement'].updateByVelocity(dt);
-        else
-            this.node['otherMovement'].updateByVelocity(dt);
+        else {
+            var gridPos = GridAdsorb_1.default.grid.getGridPositionByIndex(new cc.Vec2(0, this.treeIndex));
+            this.node.setPosition(this.node.x, gridPos.y);
+        }
     };
     // TAG USER FUNCTION:                                                                                    
     /**
@@ -74,8 +77,9 @@ var block = /** @class */ (function (_super) {
             this.node.group = 'player';
             this.enabledCollision = true;
         }
-        else
+        else {
             this.treeIndex = Index;
+        }
     };
     /**
      * 当碰撞产生的时候调用
@@ -106,17 +110,18 @@ var block = /** @class */ (function (_super) {
                     // 临时加入到此组中
                     treeGroup[this['_id']] = this.node;
                 }
+                this.treeIndex = selfTreeIndex;
             }
             // 如果组不在树中，说明在最外边
             else {
-                NoRootTree_1.default.tree.addFromFront((_a = {}, _a[this['_id']] = this.node, _a));
+                this.treeIndex = NoRootTree_1.default.tree.addFromFront((_a = {}, _a[this['_id']] = this.node, _a));
             }
-            this.treeIndex = selfTreeIndex;
         }
         // 如果还未存在冲突
         if (!this.conflict) {
             // 对齐,避免发生重复对齐
             this.AlignPos = otherBlock.AlignPos;
+            cc.log(this.treeIndex, NoRootTree_1.default.tree.put, NoRootTree_1.default.tree.get, NoRootTree_1.default.tree.buffer);
         }
         // 标记为冲突
         this.markConflictAndCopyMotion();
@@ -130,7 +135,7 @@ var block = /** @class */ (function (_super) {
         if (!this.enabledCollision)
             return;
         // if (ccvv.getInstanceByName())
-        if (this.waitForConflict)
+        if (!this.waitForConflict)
             cc.log("碰撞中");
     };
     /**
@@ -144,7 +149,8 @@ var block = /** @class */ (function (_super) {
         if (!this.node.isValid)
             return;
         cc.log("碰撞结束");
-        this.conflict = true;
+        if (this.waitForConflict)
+            this.conflict = false;
     };
     // SIGNPOST function                                                                                     
     /**
@@ -226,7 +232,7 @@ var block = /** @class */ (function (_super) {
          * 是否等待冲突
          */
         get: function () {
-            return this._WaitForConflict-- <= 0;
+            return this._WaitForConflict-- > 0;
         },
         enumerable: false,
         configurable: true
@@ -236,20 +242,23 @@ var block = /** @class */ (function (_super) {
          * 获取对齐坐标
          */
         get: function () {
-            if (!this.enabledCollision) {
-                var treeIndexObject = NoRootTree_1.default.tree.getBuffer(NoRootTree_1.default.tree.getNextIndex(this.treeIndex, -1));
-                if (treeIndexObject) {
-                    var AlignTarget = treeIndexObject[Object.keys(treeIndexObject)[0]];
-                    return new cc.Vec2(this.node.x, AlignTarget.y);
-                }
-            }
-            return new cc.Vec2(this.node.x, this.node.y - DevelopersToolGlobal_1.DevelopersToolGlobal.fristScript.cubeHeight);
+            // 使用无根树方式获取对齐坐标
+            // if (!this.enabledCollision) {
+            //     let treeIndexObject = NTR.tree.getBuffer(NTR.tree.getNextIndex(this.treeIndex, -1));
+            //     if (treeIndexObject) {
+            //         let AlignTarget = treeIndexObject[Object.keys(treeIndexObject)[0]];
+            //         return new cc.Vec2(this.node.x, AlignTarget.y)
+            //     }
+            // }
+            // return new cc.Vec2(this.node.x, this.node.y - ccvv.fristScript.cubeHeight)
+            // 使用对齐网格获取对齐坐标
+            return GridAdsorb_1.default.grid.getGridPositionByIndex(new cc.Vec2(0, this.treeIndex - 1));
         },
         /**
          * 设置对齐坐标
          */
         set: function (value) {
-            this.node.setPosition(value);
+            this.node.setPosition(this.node.x, value.y);
         },
         enumerable: false,
         configurable: true

@@ -61,7 +61,6 @@ var noRootTree = /** @class */ (function (_super) {
      * @param object
      */
     noRootTree.prototype.addFromFront = function (object) {
-        // let point = this.indexAtStack(this.$get - 1);
         this.$get = this.$get - 1;
         this._HashList[this.$get] = object;
         return this.$get;
@@ -72,8 +71,15 @@ var noRootTree = /** @class */ (function (_super) {
          * @returns
          */
         get: function () {
-            return this.getBuffer(this.$put);
+            var put = this.$put - 1;
+            put = put < 0 ? this._StackSize - 1 : put;
+            return this.getBuffer(put);
         },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(noRootTree.prototype, "put", {
+        get: function () { return this.$put; },
         enumerable: false,
         configurable: true
     });
@@ -85,6 +91,11 @@ var noRootTree = /** @class */ (function (_super) {
         get: function () {
             return this.getBuffer(this.$get);
         },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(noRootTree.prototype, "get", {
+        get: function () { return this.$get; },
         enumerable: false,
         configurable: true
     });

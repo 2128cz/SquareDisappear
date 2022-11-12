@@ -489,8 +489,10 @@ var mathMacro = /** @class */ (function () {
      * 模取正
      */
     mathMacro.PMod = function (a, b) {
-        var c = Math.abs(b);
-        return a < 0 ? (1 - Math.abs(a % c) / c) * c % c : a % c;
+        var bb = Math.abs(b);
+        var aa = a % bb;
+        var out = a < 0 ? (1 - Math.abs(aa) / bb) * bb % bb : aa;
+        return isNaN(out) ? 0 : out;
     };
     /**
      * 快捷定义

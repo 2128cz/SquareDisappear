@@ -29,6 +29,7 @@ var GridAdsorb_1 = require("../base/class/GridAdsorb");
 var NoRootTree_1 = require("../base/tool/NoRootTree");
 /**
  * 牛头人 NTR 继承自ringbuffer继承自RigorousArray
+ * 驱动网格 GridAbsorb 用来驱动其他方块的对齐与运动
  * 移动组件 PawnMovement 简单的运动解算器，仅保留了速度解算和抵达解算，没事可以换着玩
  * 数学宏库 mm 效率低，没事别用
  * 全局仓库 ccvv.warehouse 用来保存动态加载内容
@@ -72,16 +73,18 @@ var Game = /** @class */ (function (_super) {
     };
     Game.prototype.start = function () {
         this.touchRegister();
+        // this.creat_lineCube();
     };
     Game.prototype.update = function (dt) {
         this.gameProcess_SpawnCube();
         // 更新所有方块的位置
-        GridAdsorb_1.default;
+        GridAdsorb_1.default.grid.offset = new cc.Vec3(0, -dt * this.globalSpeed, 0);
     };
     // TAG USER FUNCTION:                                                                                    
     // SIGNPOST 网格生成                                                                                     
     Game.prototype.creatGrid = function () {
         new GridAdsorb_1.default(new cc.Vec3(this.column, this.treeSize, 0), new cc.Vec3(this.cubeWidget, this.cubeHeight, 0));
+        GridAdsorb_1.default.grid.offset = new cc.Vec3(0, cc.winSize.height / 2 + this.cubeHeight, 0);
     };
     // SIGNPOST 诞生方式                                                                                     
     /**
@@ -90,7 +93,7 @@ var Game = /** @class */ (function (_super) {
     Game.prototype.gameProcess_SpawnCube = function () {
         if (this.cheackRoot()) {
             this.creat_lineCube();
-            cc.log(NoRootTree_1.default.tree.buffer);
+            // cc.log(NTR.tree.buffer);
         }
     };
     /**
@@ -113,8 +116,8 @@ var Game = /** @class */ (function (_super) {
             return true;
         var size = cc.v2(cc.winSize.width, cc.winSize.height);
         var size2 = size.div(2);
-        var isinbox = new DevelopersToolGlobal_1.mathMacro(root.convertToWorldSpaceAR(cc.Vec2.ZERO))
-            .isInBox2(size2, size2.add(cc.v2(0, this.cubeHeight / 2)));
+        var rootPos = root.convertToWorldSpaceAR(cc.Vec2.ZERO);
+        var isinbox = new DevelopersToolGlobal_1.mathMacro(rootPos).isInBox2(size2, size2.add(cc.v2(0, this.cubeHeight / 2)));
         return isinbox;
     };
     /**
@@ -194,7 +197,7 @@ var Game = /** @class */ (function (_super) {
      * 创建一行方块
      * 随机方式我想应该大概也许是独立随机事件
      * 每行绝对会留一个空
-     * @param chance 生成机会，机会越大越容易成功，但肯定会留给玩家一个空，推荐在3-5
+     * @param chance 生成机会，机会越大越容易成功，但肯定会留给玩家一个空，推荐在 3 ~ 5
      */
     Game.prototype.creat_lineCube = function (chance) {
         if (chance === void 0) { chance = 4; }
@@ -206,7 +209,7 @@ var Game = /** @class */ (function (_super) {
             var curcol = this.randomInColumn;
             if (perch.indexOf(curcol) < 0) {
                 perch.push(curcol);
-                var inst = this.creat_ProductionCube(childIndex);
+                var inst = this.creat_ProductionCube(childIndex, curcol);
                 inst.setPosition(this.spawnOrigin.add(cc.v2(curcol * (this.cubeWidget + this.cubeInteraval), 0)));
                 child[curcol] = inst;
             }
@@ -218,7 +221,7 @@ var Game = /** @class */ (function (_super) {
      * 创建一个方块在堆叠层
      * 并完成基本构造行为
      */
-    Game.prototype.creat_ProductionCube = function (treeIndex) {
+    Game.prototype.creat_ProductionCube = function (treeIndex, columnIndex) {
         var inst = this.creatActor(this.cube, DevelopersToolGlobal_1.DevelopersToolGlobal.layers[1]);
         try {
             inst.getComponent('Block').init(treeIndex);

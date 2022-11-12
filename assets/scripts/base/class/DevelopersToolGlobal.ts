@@ -495,8 +495,10 @@ export class mathMacro {
      * 模取正
      */
     public static PMod(a: number, b: number): number {
-        let c = Math.abs(b);
-        return a < 0 ? (1 - Math.abs(a % c) / c) * c % c : a % c;
+        let bb = Math.abs(b);
+        let aa = a % bb;
+        let out = a < 0 ? (1 - Math.abs(aa) / bb) * bb % bb : aa
+        return isNaN(out) ? 0 : out;
     }
 
     /**

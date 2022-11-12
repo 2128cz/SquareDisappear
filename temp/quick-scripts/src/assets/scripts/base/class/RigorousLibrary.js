@@ -336,9 +336,10 @@ var RigorousRingBuffer = /** @class */ (function (_super) {
          * 获取有效的进栈位
          */
         get: function () {
-            var put = this._StackPutPointer - 1;
-            put = put < 0 ? this._StackSize - 1 : put;
-            return put;
+            // let put = this._StackPutPointer - 1;
+            // put = put < 0 ? this._StackSize - 1 : put;
+            // return put;
+            return this._StackPutPointer;
         },
         enumerable: false,
         configurable: true
@@ -369,12 +370,13 @@ var RigorousRingBuffer = /** @class */ (function (_super) {
      */
     RigorousRingBuffer.prototype.push = function (object) {
         this._HashList[this._StackPutPointer] = object;
+        var lastPut = this._$put;
         this._$put = 1;
         if (this._StackIsFull)
             this._$get = 1;
         if (this._$put == this._$get)
             this._StackIsFull = true;
-        return this._$put - 1;
+        return lastPut;
     };
     /**
      * 出栈

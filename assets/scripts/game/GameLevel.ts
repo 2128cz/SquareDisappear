@@ -51,6 +51,7 @@ export default class Game extends cc.Component {
 
     start() {
         this.touchRegister();
+        // this.creat_lineCube();
 
     }
 
@@ -69,6 +70,7 @@ export default class Game extends cc.Component {
             new cc.Vec3(this.column, this.treeSize, 0),
             new cc.Vec3(this.cubeWidget, this.cubeHeight, 0)
         );
+        GridAbsorb.grid.offset = new cc.Vec3(0, cc.winSize.height / 2 + this.cubeHeight, 0);
     }
 
     // SIGNPOST 诞生方式                                                                                     
@@ -79,7 +81,7 @@ export default class Game extends cc.Component {
     protected gameProcess_SpawnCube() {
         if (this.cheackRoot()) {
             this.creat_lineCube();
-            cc.log(NTR.tree.buffer);
+            // cc.log(NTR.tree.buffer);
         }
     }
 
@@ -102,8 +104,8 @@ export default class Game extends cc.Component {
         if (!root) return true;
         let size = cc.v2(cc.winSize.width, cc.winSize.height);
         let size2 = size.div(2);
-        let isinbox = new mm(root.convertToWorldSpaceAR(cc.Vec2.ZERO))
-            .isInBox2(size2, size2.add(cc.v2(0, this.cubeHeight / 2)));
+        let rootPos = root.convertToWorldSpaceAR(cc.Vec2.ZERO);
+        let isinbox = new mm(rootPos).isInBox2(size2, size2.add(cc.v2(0, this.cubeHeight / 2)));
         return isinbox;
     }
 
@@ -190,7 +192,7 @@ export default class Game extends cc.Component {
      * 创建一行方块
      * 随机方式我想应该大概也许是独立随机事件
      * 每行绝对会留一个空
-     * @param chance 生成机会，机会越大越容易成功，但肯定会留给玩家一个空，推荐在3-5
+     * @param chance 生成机会，机会越大越容易成功，但肯定会留给玩家一个空，推荐在 3 ~ 5
      */
     public creat_lineCube(chance = 4) {
         let perch = [];
@@ -201,7 +203,7 @@ export default class Game extends cc.Component {
             let curcol = this.randomInColumn;
             if (perch.indexOf(curcol) < 0) {
                 perch.push(curcol)
-                let inst = this.creat_ProductionCube(childIndex);
+                let inst = this.creat_ProductionCube(childIndex, curcol);
                 inst.setPosition(this.spawnOrigin.add(cc.v2(curcol * (this.cubeWidget + this.cubeInteraval), 0)))
                 child[curcol] = inst;
             }
@@ -212,7 +214,7 @@ export default class Game extends cc.Component {
      * 创建一个方块在堆叠层
      * 并完成基本构造行为
      */
-    protected creat_ProductionCube(treeIndex: number): cc.Node {
+    protected creat_ProductionCube(treeIndex: number, columnIndex: number): cc.Node {
         let inst = this.creatActor(this.cube, ccvv.layers[1])
         try { inst.getComponent('Block').init(treeIndex); }
         catch { cc.log("找不到组件: Block"); }

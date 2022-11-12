@@ -39,7 +39,6 @@ export default class noRootTree extends RigorousRingBuffer {
      * @param object 
      */
     public addFromFront(object: any): number {
-        // let point = this.indexAtStack(this.$get - 1);
         this.$get = this.$get - 1;
         this._HashList[this.$get] = object;
         return this.$get;
@@ -49,8 +48,11 @@ export default class noRootTree extends RigorousRingBuffer {
      * @returns 
      */
     public get root(): any {
-        return this.getBuffer(this.$put);
+        let put = this.$put - 1;
+        put = put < 0 ? this._StackSize - 1 : put;
+        return this.getBuffer(put);
     }
+    public get put() { return this.$put }
     /**
      * 获取最末子节点
      * @returns 
@@ -58,6 +60,7 @@ export default class noRootTree extends RigorousRingBuffer {
     public get leaf(): any {
         return this.getBuffer(this.$get);
     }
+    public get get() { return this.$get }
     /**
      * 从给定索引处截断，并返回截断部分
      * @param key 
