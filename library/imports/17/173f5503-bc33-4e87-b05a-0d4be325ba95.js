@@ -18,6 +18,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RigorousRingBuffer = exports.RigorousArray = exports.RigorousMap = exports.RigorousSet = exports.RigorousHash = exports.RigorousMatrix2 = exports.RigorousMatrix3 = exports.RigorousMatrix4 = exports.RigorousSize = exports.RigorousVector2 = exports.RigorousScale = exports.RigorousRotation = exports.RigorousPostion = exports.RigorousVector3 = exports.RigorousVector4 = exports.RigorousValueType = void 0;
+var DevelopersToolGlobal_1 = require("./DevelopersToolGlobal");
 var SysBaseType;
 (function (SysBaseType) {
     SysBaseType[SysBaseType["number"] = 0] = "number";
@@ -313,7 +314,7 @@ var RigorousRingBuffer = /** @class */ (function (_super) {
                 this._StackIsFull = false;
             if (value > this.length)
                 this.clean();
-            var getPointer = (this._StackGetPointer + value) % this._StackSize;
+            var getPointer = DevelopersToolGlobal_1.mathMacro.PMod(value, this._StackSize);
             this._StackGetPointer = getPointer;
         },
         enumerable: false,
@@ -331,8 +332,13 @@ var RigorousRingBuffer = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(RigorousRingBuffer.prototype, "$put", {
+        /**
+         * 获取有效的进栈位
+         */
         get: function () {
-            return this._StackPutPointer;
+            var put = this._StackPutPointer - 1;
+            put = put < 0 ? this._StackSize - 1 : put;
+            return put;
         },
         enumerable: false,
         configurable: true
@@ -355,7 +361,7 @@ var RigorousRingBuffer = /** @class */ (function (_super) {
      * 这不会触发栈指针变化
      */
     RigorousRingBuffer.prototype.getBuffer = function (index) {
-        return this._HashList[index];
+        return this._HashList[DevelopersToolGlobal_1.mathMacro.PMod(index, this._StackSize)];
     };
     /**
      * 进栈
@@ -368,7 +374,7 @@ var RigorousRingBuffer = /** @class */ (function (_super) {
             this._$get = 1;
         if (this._$put == this._$get)
             this._StackIsFull = true;
-        return this._$put;
+        return this._$put - 1;
     };
     /**
      * 出栈
@@ -383,6 +389,7 @@ var RigorousRingBuffer = /** @class */ (function (_super) {
             var outIndex = (index + this._$get) % this._StackSize;
             out.obj.push(this._HashList[outIndex]);
             out.index.push(outIndex);
+            this._HashList[outIndex] = undefined;
         }
         this._$get = length;
         return out;
@@ -394,6 +401,12 @@ var RigorousRingBuffer = /** @class */ (function (_super) {
         this._HashList = [];
         this._StackGetPointer = 0;
         this._StackPutPointer = 0;
+    };
+    /**
+     * 给定一个索引，转为一个在栈内的有效的索引
+     */
+    RigorousRingBuffer.prototype.indexAtStack = function (index) {
+        return DevelopersToolGlobal_1.mathMacro.PMod(index, this._StackSize);
     };
     return RigorousRingBuffer;
 }(RigorousArray));

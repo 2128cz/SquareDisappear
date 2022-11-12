@@ -23,7 +23,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var DevelopersToolGlobal_1 = require("../base/class/DevelopersToolGlobal");
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
 var NewClass = /** @class */ (function (_super) {
     __extends(NewClass, _super);
@@ -35,7 +34,7 @@ var NewClass = /** @class */ (function (_super) {
         // cc.find("Canvas").getComponent("Game").addTimeCount();
     };
     NewClass.prototype.start = function () {
-        DevelopersToolGlobal_1.DevelopersToolGlobal.fristScript;
+        // ccvv.fristScript
     };
     NewClass = __decorate([
         ccclass

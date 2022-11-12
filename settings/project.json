@@ -2,6 +2,11 @@
   "assets-sort-type": "name",
   "collision-matrix": [
     [
+      false,
+      true
+    ],
+    [
+      true,
       true
     ]
   ],
@@ -45,7 +50,8 @@
   "fit-height": true,
   "fit-width": false,
   "group-list": [
-    "default"
+    "default",
+    "player"
   ],
   "last-module-event-record-time": 1658107075428,
   "simulator-orientation": false,

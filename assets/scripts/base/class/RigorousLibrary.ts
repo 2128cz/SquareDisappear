@@ -1,3 +1,4 @@
+import { mathMacro as mm } from './DevelopersToolGlobal';
 enum SysBaseType {
     number, string, boolean, object, undefined
 }
@@ -225,7 +226,7 @@ export class RigorousRingBuffer extends RigorousArray implements IringBuffer {
     protected set $get(value: number) {
         if (value > 0) this._StackIsFull = false;
         if (value > this.length) this.clean();
-        let getPointer = (this._StackGetPointer + value) % this._StackSize;
+        let getPointer = mm.PMod(value,this._StackSize);
         this._StackGetPointer = getPointer;
     }
     /**
@@ -239,8 +240,13 @@ export class RigorousRingBuffer extends RigorousArray implements IringBuffer {
         this._StackPutPointer += value;
         this._StackPutPointer %= this._StackSize;
     }
+    /**
+     * 获取有效的进栈位
+     */
     protected get $put(): number {
-        return this._StackPutPointer;
+        let put = this._StackPutPointer - 1;
+        put = put < 0 ? this._StackSize - 1 : put;
+        return put;
     }
     /**
      * 栈深度
@@ -264,7 +270,7 @@ export class RigorousRingBuffer extends RigorousArray implements IringBuffer {
      * 这不会触发栈指针变化
      */
     public getBuffer(index: number): any {
-        return this._HashList[index];
+        return this._HashList[mm.PMod(index, this._StackSize)];
     }
     /**
      * 进栈
@@ -275,7 +281,7 @@ export class RigorousRingBuffer extends RigorousArray implements IringBuffer {
         this._$put = 1;
         if (this._StackIsFull) this._$get = 1;
         if (this._$put == this._$get) this._StackIsFull = true;
-        return this._$put;
+        return this._$put - 1;
     }
     /**
      * 出栈
@@ -290,6 +296,7 @@ export class RigorousRingBuffer extends RigorousArray implements IringBuffer {
             let outIndex = (index + this._$get) % this._StackSize;
             out.obj.push(this._HashList[outIndex]);
             out.index.push(outIndex);
+            this._HashList[outIndex] = undefined;
         }
         this._$get = length;
         return out;
@@ -302,6 +309,13 @@ export class RigorousRingBuffer extends RigorousArray implements IringBuffer {
         this._HashList = [];
         this._StackGetPointer = 0;
         this._StackPutPointer = 0;
+    }
+
+    /**
+     * 给定一个索引，转为一个在栈内的有效的索引
+     */
+    public indexAtStack(index: number): number {
+        return mm.PMod(index, this._StackSize);
     }
 }
 

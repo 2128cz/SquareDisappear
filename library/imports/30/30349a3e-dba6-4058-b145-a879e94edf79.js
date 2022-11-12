@@ -18,6 +18,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var RigorousLibrary_1 = require("../class/RigorousLibrary");
+var DevelopersToolGlobal_1 = require("../class/DevelopersToolGlobal");
 /**
  * 无根树
  * @tip 根据当前游戏的定义，入栈为根，出栈为叶
@@ -28,10 +29,16 @@ var noRootTree = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     Object.defineProperty(noRootTree, "tree", {
+        /**
+         * 获取树单例
+         */
         get: function () {
             this._NoRootTree = this._NoRootTree || new noRootTree(30);
             return this._NoRootTree;
         },
+        /**
+         * 设置树单例
+         */
         set: function (value) {
             this._NoRootTree = value;
         },
@@ -45,6 +52,19 @@ var noRootTree = /** @class */ (function (_super) {
      */
     noRootTree.prototype.add = function (object) {
         return this.push(object);
+    };
+    /**
+     * 反向添加子项
+     * 警告：这是不符合规则的方法，请确保栈深度允许反推，
+     * 或是不再获取栈有效深度，因为这不会进行有效性检查，
+     * 会破坏数据连续性
+     * @param object
+     */
+    noRootTree.prototype.addFromFront = function (object) {
+        // let point = this.indexAtStack(this.$get - 1);
+        this.$get = this.$get - 1;
+        this._HashList[this.$get] = object;
+        return this.$get;
     };
     Object.defineProperty(noRootTree.prototype, "root", {
         /**
@@ -71,6 +91,8 @@ var noRootTree = /** @class */ (function (_super) {
     /**
      * 从给定索引处截断，并返回截断部分
      * @param key
+     * @return obj[]: obj3, obj4...
+     * @return index[]: 3, 4...
      */
     noRootTree.prototype.cut = function (key) {
         var len = (key % this._StackSize) - this.$get;
@@ -89,6 +111,19 @@ var noRootTree = /** @class */ (function (_super) {
             return this.clean();
         this.$get = length;
     };
+    /**
+     * 在叶子节点附近给定一个索引，并指定偏移量，转为一个有效的索引
+     */
+    noRootTree.prototype.getNextIndex = function (index, offset) {
+        return DevelopersToolGlobal_1.mathMacro.PMod(index + offset, this._StackSize);
+    };
+    Object.defineProperty(noRootTree.prototype, "buffer", {
+        get: function () {
+            return this._HashList;
+        },
+        enumerable: false,
+        configurable: true
+    });
     return noRootTree;
 }(RigorousLibrary_1.RigorousRingBuffer));
 exports.default = noRootTree;

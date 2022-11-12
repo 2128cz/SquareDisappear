@@ -11,7 +11,7 @@ export default class NewClass extends cc.Component {
     }
 
     start() {
-        ccvv.fristScript
+        // ccvv.fristScript
     }
 
     // update (dt) {}

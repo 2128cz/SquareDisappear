@@ -26,6 +26,9 @@ export interface IganeralLayerInterface {
 export interface IopenScriptInterface {
     [key: string]: any;
 }
+export interface IinstanceInterface {
+    [key: number]: cc.Component | cc.Node;
+}
 // import { DevelopersToolGlobal as ccvv } from './DevelopersToolGlobal';
 export class DevelopersToolGlobal {
 
@@ -65,6 +68,8 @@ export class DevelopersToolGlobal {
         cc.error("不允许修改资源目录");
     }
 
+
+
     /**
      * 工具全局实例
      * 可以注入其他工具类
@@ -79,6 +84,8 @@ export class DevelopersToolGlobal {
         this._Global_Tool = value;
     }
 
+
+
     /**
      * 杂项全局实例
      * 可以注入其他项目
@@ -92,6 +99,8 @@ export class DevelopersToolGlobal {
     public static set other(value: IOtherGlobalInterface) {
         this._Global_Other = value;
     }
+
+
 
     /**
      * 游戏基本层全局实例
@@ -125,13 +134,15 @@ export class DevelopersToolGlobal {
         this.layers[key.toString()] = value;
     }
 
+
+
     /**
-     * 游戏基本层全局实例
-     * 只能注入cc.Node
+     * 游戏基本层全局脚本
+     * 只能注入cc.component，不过实际上并没有进行限制
      */
     protected static _Global_OpenScript: IopenScriptInterface = null;
     protected static _OpenScript_FristName: string = null;
-    public static get script() {
+    public static get scripts() {
         this._Global_OpenScript = this._Global_OpenScript || {};
         return this._Global_OpenScript;
     }
@@ -145,7 +156,7 @@ export class DevelopersToolGlobal {
         else {
             key = (Object.keys(this._Global_OpenScript || {}).length).toString();
         }
-        this.script[key] = value;
+        this.scripts[key] = value;
     }
     /**
      * 清空脚本
@@ -166,6 +177,88 @@ export class DevelopersToolGlobal {
      */
     public static get fristScript() {
         return this._Global_OpenScript[this._OpenScript_FristName];
+    }
+
+
+
+    /**
+     * 全局实例
+     */
+    protected static _Global_Instance = <IinstanceInterface>{};
+    protected static getName(inst: cc.Node) {
+        return inst.name + inst['_id'].replace(/\./g, "");
+    }
+    /**
+     * 获取全部实例
+     */
+    public static get instances(): IinstanceInterface {
+        this._Global_Instance = this._Global_Instance || <IinstanceInterface>{};
+        return this._Global_Instance;
+    }
+    /**
+     * 添加实例，用实例的名称与ID作键名
+     */
+    public static set instance(value: cc.Node) {
+        this.instance[this.getName(value)] = value;
+    }
+    /**
+     * 删除实例
+     * 如果未指定有效值则为清除
+     */
+    public static set instance_remove(value) {
+        if (!value) this._Global_Instance = <IinstanceInterface>{};
+        else
+            this.instance[this.getName(value)] = value;
+    }
+    /**
+     * 根据名称获取实例 
+     * 如果没有使用自定义名称，则默认用实例ID作为名称，这可能与任何名称常量不符
+     */
+    public static getInstanceByName(name: string | number) {
+        return this._Global_Instance[name];
+    }
+    /**
+     * 根据名称设置实例
+     */
+    public static setInstanceByName(name: string | number, inst: cc.Component | cc.Node) {
+        this._Global_Instance[name] = inst;
+    }
+
+    /**
+     * 全局元组
+     */
+    public static _Global_Tuple = [];
+    /**
+     * 获取元组
+     */
+    public static get tuple(): any[] {
+        return this._Global_Tuple;
+    }
+    /**
+     * 元组加入一个项目  
+     * 如果加入一个无效的值，比如布尔，undefined，unll，将清空这个元组  
+     * 加入一个空数组或是空对象是有效的，所以会作为元组的一个值加入
+     */
+    public static set tuple(value: object) {
+        if (!value || typeof value == 'boolean') this._Global_Tuple = [];
+        this._Global_Tuple.push(value);
+    }
+    /**
+     * 元组加入独有项目
+     * 返回这个项目是否存在
+     */
+    public static tupleOnly(value: object) {
+        if (this._Global_Tuple.indexOf(value))
+            return true;
+        else
+            this.tuple = value;
+        return false;
+    }
+    /**
+     * 移除元组一个项目
+     */
+    public static set tuple_remove(value) {
+        this._Global_Tuple.filter((element, index, array) => { element != value });
     }
 }
 // import { mathMacro as mm } from '../base/class/DevelopersToolGlobal';
@@ -194,7 +287,10 @@ export class mathMacro {
         let max = (1 - sature) * size + (offset || 0);
         return Math.max(Math.min(num, max), min);
     }
-
+    /**
+     * 0矢量
+     */
+    constructor()
     /**
      * @en Representation of RGBA colors.<br/>
      * Each color component is an integer value with a range from 0 to 255.<br/>
@@ -262,21 +358,121 @@ export class mathMacro {
      */
     // constructor(x?: number, y?: number, z?: number, w?: number)
     /**
-     * @en Oh, my God, this is gonna... Is this supposed to... Define one by one! ? . Oh, don't worry about me. I copied it from an official document ;P
-     * @zh 逐个定义 ;P 
+     * @en this is gonna... Is this supposed to... Define one by one! ? . Oh, don't worry about me. I copied it from an official document ;P
+     * @zh 逐个定义，千万不要这么做，但如果你做了，那就会发生很可怕的事情，比如说...变成矩阵
      */
-    constructor(m00: number, m01?: number, m02?: number, m03?: number, m10?: number, m11?: number, m12?: number, m13?: number, m20?: number, m21?: number, m22?: number, m23?: number, m30?: number, m31?: number, m32?: number, m33?: number,)
+    constructor(m00?: number, m01?: number, m02?: number, m03?: number, m10?: number, m11?: number, m12?: number, m13?: number, m20?: number, m21?: number, m22?: number, m23?: number, m30?: number, m31?: number, m32?: number, m33?: number,)
     constructor(...num) {
         let isNumber = (value) => { return typeof value === 'number' && !isNaN(value); }
-        let out = { lrc: '2128cz' };
-        if (num[0] && typeof num[0] === 'object') { out['m00'] = isNumber(num[0].x) ? num[0].x : num[0].x || (isNumber(num[0][0]) ? num[0][0] : num[0].width || num[0].r || (isNumber(num[0]) ? num[0] : 0)); out['m01'] = isNumber(num[0].y) ? num[0].y : num[0].y || (isNumber(num[0][1]) ? num[0][1] : num[0].height || num[0].g || (isNumber(num[0]) ? num[0] : 0)); out['m02'] = isNumber(num[0].z) ? num[0].z : num[0].z || (isNumber(num[0][2]) ? num[0][2] : num[0].b || (isNumber(num[0]) ? num[0] : 0)); out['m03'] = isNumber(num[0].w) ? num[0].w : num[0].w || (isNumber(num[0][3]) ? num[0][3] : num[0].a || (isNumber(num[0]) ? num[0] : 0)); }
-        else { out['m00'] = num[0]; out['m01'] = num[1]; out['m02'] = num[2]; out['m03'] = num[3]; out['m04'] = num[4]; out['m05'] = num[5]; out['m06'] = num[6]; out['m07'] = num[7]; out['m08'] = num[8]; out['m09'] = num[9]; out['m10'] = num[10]; out['m11'] = num[11]; out['m12'] = num[12]; out['m13'] = num[13]; out['m14'] = num[14]; out['m15'] = num[15]; }
-        this.liruochenKismit = out;
+        if (!num[0]) {
+            this.mnum['x'] = 0;
+            this.mnum['y'] = 0;
+            this.mnum['z'] = 0;
+            this.mnum['w'] = 0;
+        }
+        else if (num[0].x) {
+            this.mnum['x'] = isNumber(num[0].x) ? num[0].x : 0;
+            this.mnum['y'] = isNumber(num[0].y) ? num[0].y : 0;
+            this.mnum['z'] = isNumber(num[0].z) ? num[0].z : 0;
+            this.mnum['w'] = isNumber(num[0].w) ? num[0].w : 0;
+        }
+        else if (num[0][0]) {
+            this.mnum['x'] = isNumber(num[0][0]) ? num[0][0] : 0;
+            this.mnum['y'] = isNumber(num[0][1]) ? num[0][1] : 0;
+            this.mnum['z'] = isNumber(num[0][2]) ? num[0][2] : 0;
+            this.mnum['w'] = isNumber(num[0][3]) ? num[0][3] : 0;
+        }
+        else if (num[0] instanceof cc.Size) {
+            this.mnum['x'] = isNumber(num[0].width) ? num[0].width : 0;
+            this.mnum['y'] = isNumber(num[0].height) ? num[0].height : 0;
+        }
+        else if (num[0] instanceof cc.Color) {
+            this.mnum['x'] = isNumber(num[0].r) ? num[0].r : 0;
+            this.mnum['y'] = isNumber(num[0].g) ? num[0].g : 0;
+            this.mnum['z'] = isNumber(num[0].b) ? num[0].b : 0;
+            this.mnum['w'] = isNumber(num[0].a) ? num[0].a : 0;
+        }
+        else if (num[0] instanceof cc.Mat3) {
+            this._IsMat = true;
+            this.mnum['m00'] = num[0]['m00'];
+            this.mnum['m01'] = num[0]['m01'];
+            this.mnum['m02'] = num[0]['m02'];
+            this.mnum['m03'] = num[0]['m03'];
+            this.mnum['m04'] = num[0]['m04'];
+            this.mnum['m05'] = num[0]['m05'];
+            this.mnum['m06'] = num[0]['m06'];
+            this.mnum['m07'] = num[0]['m07'];
+            this.mnum['m08'] = num[0]['m08'];
+        }
+        else if (num[0] instanceof cc.Mat4) {
+            this._IsMat = true;
+            this.mnum['m00'] = num[0]['m00'];
+            this.mnum['m01'] = num[0]['m01'];
+            this.mnum['m02'] = num[0]['m02'];
+            this.mnum['m03'] = num[0]['m03'];
+            this.mnum['m04'] = num[0]['m04'];
+            this.mnum['m05'] = num[0]['m05'];
+            this.mnum['m06'] = num[0]['m06'];
+            this.mnum['m07'] = num[0]['m07'];
+            this.mnum['m08'] = num[0]['m08'];
+            this.mnum['m09'] = num[0]['m09'];
+            this.mnum['m10'] = num[0]['m10'];
+            this.mnum['m11'] = num[0]['m11'];
+            this.mnum['m12'] = num[0]['m12'];
+            this.mnum['m13'] = num[0]['m13'];
+            this.mnum['m14'] = num[0]['m14'];
+            this.mnum['m15'] = num[0]['m15'];
+        }
+        else if (num.length <= 4) {
+            this.mnum['x'] = num[0];
+            this.mnum['y'] = num[1];
+            this.mnum['z'] = num[2];
+            this.mnum['w'] = num[3];
+        }
+        else if (num.length >= 4) {
+            this._IsMat = true;
+            this.mnum['m00'] = num[0];
+            this.mnum['m01'] = num[1];
+            this.mnum['m02'] = num[2];
+            this.mnum['m03'] = num[3];
+            this.mnum['m04'] = num[4];
+            this.mnum['m05'] = num[5];
+            this.mnum['m06'] = num[6];
+            this.mnum['m07'] = num[7];
+            this.mnum['m08'] = num[8];
+            this.mnum['m09'] = num[9];
+            this.mnum['m10'] = num[10];
+            this.mnum['m11'] = num[11];
+            this.mnum['m12'] = num[12];
+            this.mnum['m13'] = num[13];
+            this.mnum['m14'] = num[14];
+            this.mnum['m15'] = num[15];
+        }
+        // let out = { lrc: '2128cz' };
+        // if (num[0] && typeof num[0] === 'object') { out['m00'] = isNumber(num[0].x) ? num[0].x : num[0].x || (isNumber(num[0][0]) ? num[0][0] : num[0].width || num[0].r || (isNumber(num[0]) ? num[0] : 0)); out['m01'] = isNumber(num[0].y) ? num[0].y : num[0].y || (isNumber(num[0][1]) ? num[0][1] : num[0].height || num[0].g || (isNumber(num[0]) ? num[0] : 0)); out['m02'] = isNumber(num[0].z) ? num[0].z : num[0].z || (isNumber(num[0][2]) ? num[0][2] : num[0].b || (isNumber(num[0]) ? num[0] : 0)); out['m03'] = isNumber(num[0].w) ? num[0].w : num[0].w || (isNumber(num[0][3]) ? num[0][3] : num[0].a || (isNumber(num[0]) ? num[0] : 0)); }
+        // else { out['m00'] = num[0]; out['m01'] = num[1]; out['m02'] = num[2]; out['m03'] = num[3]; out['m04'] = num[4]; out['m05'] = num[5]; out['m06'] = num[6]; out['m07'] = num[7]; out['m08'] = num[8]; out['m09'] = num[9]; out['m10'] = num[10]; out['m11'] = num[11]; out['m12'] = num[12]; out['m13'] = num[13]; out['m14'] = num[14]; out['m15'] = num[15]; }
+        // this.mnum = out;
     }
 
-    public liruochenKismit: object = null;
+    private mnum: object = {};
+    private _IsMat = false;
+    public get isVec() { return !this._IsMat; }
+    public get x(): number { return this.mnum['x'] }
+    public get y(): number { return this.mnum['y'] }
+    public get z(): number { return this.mnum['z'] }
+    public get w(): number { return this.mnum['w'] }
 
-    private static meanwhileAllVectorAtArray = function <FUNC extends Function, T extends object>(func: FUNC, ...object: T[]) { let out = { x: 0, y: 0, z: 0, w: 0 }; Object.keys(out).forEach(element => { let array = []; for (let index = 0; index < object.length; index++) { array.push(object[index][element]); }; out[element] = func(array, object.length); }); return out; }
+    private static meanwhileAll = function <FUNC extends Function, T extends object>(func: FUNC, ...obj: T[]) {
+        let out = {};
+        Object.keys(obj[0]).forEach(element => {
+            let array = [];
+            for (let index = 0; index < obj.length; index++) {
+                array.push(obj[index][element]);
+            };
+            out[element] = func(array, obj.length);
+        });
+        return out;
+    }
 
     /**
      * 判断是否在盒体范围内
@@ -284,15 +480,41 @@ export class mathMacro {
      * @param {*} extent 盒体范围，这是盒体的各轴半径
      * @return 
      */
-    public static isInBox2(origin, extent) { let vec = this.meanwhileAllVectorAtArray((a) => { let b = a[0] - a[1]; return b >= -a[2] && b <= a[2]; }, this, origin, extent); return vec.x && vec.y; }
+    public isInBox2<T extends cc.Vec2>(origin: T, extent: T): boolean {
+        if (this.isVec) {
+            let vec = mathMacro.meanwhileAll((a) => {
+                let b = a[0] - a[1];
+                return b >= -a[2] && b <= a[2];
+            }, this.mnum, origin, extent);
+            return vec['x'] && vec['y'];
+        }
+        return false;
+    }
 
+    /**
+     * 模取正
+     */
+    public static PMod(a: number, b: number): number {
+        let c = Math.abs(b);
+        return a < 0 ? (1 - Math.abs(a % c) / c) * c % c : a % c;
+    }
+
+    /**
+     * 快捷定义 
+     * 但是就不支持逐个定义了
+     * @param num 
+     * @returns 
+     */
+    public static v(num: any): mathMacro {
+        return new mathMacro(num);
+    }
 
 }
 /**
  * 全局枚举
  * 对象可移动性
  */
-enum panelType {
+export enum panelType {
     staitc, stationary, Moveable
 }
 /**

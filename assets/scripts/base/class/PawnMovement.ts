@@ -94,9 +94,9 @@ export default class PawnMovement {
 
     // SIGNPOST 通用移动属性                                                                                         
 
-    protected _lastVelocity = new cc.Vec3(0);
-    public get lastVelocity(): cc.Vec3 { return this._lastVelocity; };
-    public set lastVelocity(velocity: cc.Vec3) { this._lastVelocity = velocity; };
+    protected _LastVelocity = new cc.Vec3(0);
+    public get lastVelocity(): cc.Vec3 { return this._LastVelocity; };
+    public set lastVelocity(velocity: cc.Vec3) { this._LastVelocity = velocity; };
     /**
      * 当前速度
      * 不建议直接调用，而是使用它的方法:
@@ -107,17 +107,17 @@ export default class PawnMovement {
      * force 添加力
      * 计算时需要注意，除非需要将计算值保存在此，否则不可以使用链式运算。
      */
-    protected _velocity = new cc.Vec3(0);
-    public get velocity(): cc.Vec3 { return this._velocity; };
+    protected _Velocity = new cc.Vec3(0);
+    public get velocity(): cc.Vec3 { return this._Velocity; };
     /**
      * 设置速度
      * @param {vec} velocity 
      */
     public set velocity(velocity: cc.Vec3 | cc.Vec2) {
         if (velocity instanceof cc.Vec2)
-            this._velocity = new cc.Vec3(velocity.x, velocity.y, 0);
+            this._Velocity = new cc.Vec3(velocity.x, velocity.y, 0);
         else
-            this._velocity = velocity;
+            this._Velocity = velocity;
     };
     /**
      * 添加速度
@@ -125,81 +125,80 @@ export default class PawnMovement {
      */
     public set addVelocity(velocity) {
         if (velocity instanceof cc.Vec2)
-            this._velocity = this._velocity.add(new cc.Vec3(velocity.x, velocity.y, 0));
+            this._Velocity = this._Velocity.add(new cc.Vec3(velocity.x, velocity.y, 0));
         else
-            this._velocity = this._velocity.add(velocity);
+            this._Velocity = this._Velocity.add(velocity);
     };
 
     /**
      * 加速度限制
      */
-    protected _accelerationLimit: number = 9999;
+    protected _AccelerationLimit: number = 9999;
     /**
      * 获取最大速度
      */
-    public get accelerationLimit(): number { return this._accelerationLimit; };
+    public get accelerationLimit(): number { return this._AccelerationLimit; };
     /**
      * 设置最大速度
      * @param {*} speed 
      */
-    public set accelerationLimit(limit: number) { this._accelerationLimit = limit };
+    public set accelerationLimit(limit: number) { this._AccelerationLimit = limit };
 
     /**
      * 当前模式下最大移动速度
      */
-    protected _maxSpeed: number = 1000;
-
+    protected _MaxSpeed: number = 1000;
     /**
      * 获取最大速度
      */
-    public get maxSpeed(): number { return this._maxSpeed; };
+    public get maxSpeed(): number { return this._MaxSpeed; };
     /**
      * 设置最大速度
      * @param {*} speed 
      */
-    public set maxSpeed(speed) { this.maxSpeed = speed || this.maxSpeed; };
+    public set maxSpeed(speed) { this._MaxSpeed = speed || this._MaxSpeed; };
 
     /**
      * 当前物理力
      */
-    protected _physicforce = new cc.Vec3(0);
+    protected _Physicforce = new cc.Vec3(0);
     /**
      * 获取物理力
      * @returns 
      */
-    public get force(): cc.Vec3 { return this._physicforce };
+    public get force(): cc.Vec3 { return this._Physicforce };
     /**
      * 设置物理力
      */
     public set force(force: cc.Vec3 | cc.Vec2) {
         if (force instanceof cc.Vec2)
-            this._physicforce = new cc.Vec3(force.x, force.y, 0);
+            this._Physicforce = new cc.Vec3(force.x, force.y, 0);
         else
-            this._physicforce = force;
+            this._Physicforce = force;
     };
     /**
      * 添加物理力
      */
     public set addforce(force: cc.Vec3 | cc.Vec2) {
         if (force instanceof cc.Vec2)
-            this._physicforce = this._physicforce.add(new cc.Vec3(force.x, force.y, 0));
+            this._Physicforce = this._Physicforce.add(new cc.Vec3(force.x, force.y, 0));
         else
-            this._physicforce = this._physicforce.add(force);
+            this._Physicforce = this._Physicforce.add(force);
     };
 
     /**
      * 当前物理阻力
      */
-    protected _physicDrag: number = 1;
+    protected _PhysicDrag: number = 1;
     /**
      * 获取物理阻力
      * @returns 
      */
-    public get drag() { return Math.max(this._physicDrag, 0) };
+    public get drag() { return Math.max(this._PhysicDrag, 0) };
     /**
      * 设置物理阻力
      */
-    public set drag(drag: number) { this._physicDrag = Math.max(drag, 0); };
+    public set drag(drag: number) { this._PhysicDrag = Math.max(drag, 0); };
 
     /**
      * 持久力/阻力
@@ -218,7 +217,7 @@ export default class PawnMovement {
      * getPermForce() 获取持久力
      * @param {Vec3} permanentForce
      */
-    protected _permanentForce: cc.Vec3 | undefined = undefined;
+    protected _PermanentForce: cc.Vec3 | undefined = undefined;
     /**
      * 设置持久力
      * @param {Vec3} vec 当不需要持久力时设置为undefined可以直接关闭
@@ -226,57 +225,59 @@ export default class PawnMovement {
     public set permForce(force: cc.Vec3 | cc.Vec2 | undefined) {
         if (force) {
             if (force instanceof cc.Vec2)
-                this._permanentForce = new cc.Vec3(force.x, force.y, 0);
+                this._PermanentForce = new cc.Vec3(force.x, force.y, 0);
             else
-                this._permanentForce = force;
+                this._PermanentForce = force;
         }
         else
-            this._permanentForce = undefined;
+            this._PermanentForce = undefined;
     };
     /**
      * 获取持久力 
      * @returns 
      */
-    public get permForce(): cc.Vec3 { return this._permanentForce };
+    public get permForce(): cc.Vec3 | undefined { return this._PermanentForce };
+    public get validpermForce(): boolean { return this._PermanentForce ? true : false };
 
     /**
      * 持久阻力
      * 如果不需要使用持久阻力，请设置为undefined
      */
-    protected _permanentDrag: number | undefined = undefined;
+    protected _PermanentDrag: number | undefined = undefined;
     /**
      * 设置持久阻力
      * @param {Number} drag 当不需要持久阻力时设置为undefined可以直接关闭
      * @returns 
      */
     public set permDrag(drag: number | undefined) {
-        if (drag) this._permanentDrag = undefined;
-        else this._permanentDrag = Math.max(drag, 0);
+        if (drag <= 0) this._PermanentDrag = undefined;
+        else this._PermanentDrag = Math.max(drag, 0);
     };
     /**
      * 获取持久阻力
      */
-    public get permDrag() { return Math.max(this._permanentDrag, 0) };
+    public get permDrag(): number { return Math.max(this._PermanentDrag || 0, 0) };
+    public get validPermDrag(): boolean { return typeof this._PermanentDrag == 'number' };
 
     /**
      * 质量
      */
-    protected _mass: number = 1;
+    protected _Mass: number = 1;
     /**
      * 获取质量
      * @returns 
      */
-    public get mass() { return Math.max(this.mass, .001) };
+    public get mass() { return Math.max(this._Mass, .001) };
     /**
      * 设置质量
      * @returns 
      */
-    public set mass(value) { this._mass = Math.max(value, .001) };
+    public set mass(value) { this._Mass = Math.max(value, .001) };
 
     /**
      * 重力方向
      */
-    protected _gravity: cc.Vec3 = new cc.Vec3(0, 0, -980);
+    protected _Gravity: cc.Vec3 = new cc.Vec3(0, 0, -980);
     /**
      * 设置重力方向
      * @param {Number} drag 当不需要持久阻力时设置为undefined可以直接关闭
@@ -284,71 +285,71 @@ export default class PawnMovement {
      */
     public set gravity(gravity: cc.Vec3 | cc.Vec2) {
         if (gravity instanceof cc.Vec2)
-            this._gravity = new cc.Vec3(gravity.x, gravity.y, 0);
+            this._Gravity = new cc.Vec3(gravity.x, gravity.y, 0);
         else
-            this._gravity = gravity;
+            this._Gravity = gravity;
     };
     /**
      * 获取重力方向
      */
-    public get gravity(): cc.Vec3 { return this._gravity };
+    public get gravity(): cc.Vec3 { return this._Gravity };
 
     /**
      * 重力标度
      */
-    protected _gravityScale: number = 1;
+    protected _GravityScale: number = 1;
     /**
      * 获取重力标度
      * @returns 
      */
-    public get gravityScale() { return this._gravityScale };
+    public get gravityScale() { return this._GravityScale };
     /**
      * 设置重力标度
      */
-    public set gravityScale(value: number) { this._gravityScale = value };
+    public set gravityScale(value: number) { this._GravityScale = value };
 
 
     /**
      * 制动摩擦力因子
      */
-    protected _brakingFrictionFactor: number = 2;
+    protected _BrakingFrictionFactor: number = 2;
     /**
      * 获取制动摩擦力因子
      * @returns 
      */
-    public get brakingFrictionFactor(): number { return this._brakingFrictionFactor };
+    public get brakingFrictionFactor(): number { return this._BrakingFrictionFactor };
     /**
      * 设置制动摩擦力因子
      */
-    public set brakingFrictionFactor(value: number) { this._brakingFrictionFactor = value };
+    public set brakingFrictionFactor(value: number) { this._BrakingFrictionFactor = value };
 
     /**
      * 制动摩擦力
      */
-    protected _brakingFriction: number = 0;
+    protected _BrakingFriction: number = 0;
     /**
      * 获取制动摩擦力
      * @returns 
      */
-    public get brakingFriction(): number { return this._brakingFriction };
+    public get brakingFriction(): number { return this._BrakingFriction };
     /**
      * 设置制动摩擦力
      */
-    public set brakingFriction(value: number) { this._brakingFrictionFactor = value };
+    public set brakingFriction(value: number) { this._BrakingFrictionFactor = value };
 
     /**
      * 制动降速
      */
-    protected _brakingDeceleration = 2048;
+    protected _BrakingDeceleration = 2048;
     /**
      * 获取制动降速
      * @returns 
      */
-    public get brakingDeceleration(): number { return this._brakingDeceleration };
+    public get brakingDeceleration(): number { return this._BrakingDeceleration };
     /**
      * 设置制动降速
      */
-    public set brakingDeceleration(value: number) { this._brakingDeceleration = value };
+    public set brakingDeceleration(value: number) { this._BrakingDeceleration = value };
 
     // SIGNPOST 用户力输入                                                                                           
 
@@ -359,7 +360,7 @@ export default class PawnMovement {
      */
     public addInput(direction: cc.Vec3 | cc.Vec2, scale?: number) {
         this.force = direction instanceof cc.Vec2 ? new cc.Vec3(direction.x, direction.y, 0) : direction;
-        this.force.mul(this.maxSpeed * (scale || 1));
+        this.force = this.force.mul(this.maxSpeed * (scale || 1));
         return this;
     };
 
@@ -384,7 +385,7 @@ export default class PawnMovement {
     /**
      * 重力加速度
      */
-    accelerationDue = new cc.Vec3(0);
+    public accelerationDue = new cc.Vec3(0);
 
     // SIGNPOST 函数宏库                                                                                           
     // SIGNPOST 解算阶段                                                                                           
@@ -393,12 +394,13 @@ export default class PawnMovement {
      * 这是一个内部方法
      * 将持久力加入到物理力中
      */
-    addPermanentForceToPhysic() {
+    protected addPermanentForceToPhysic() {
         // 添加持久力
-        if (this.permForce != undefined)
-            this.force.add(this.permForce);
-        // 添加持久阻力
-        this.drag = this.permDrag === undefined ? this.drag : this.permDrag + this.drag;
+        if (this.validpermForce) {
+            this.force = this.force.add(this.permForce);
+        }
+        // 添加持久阻力 
+        this.drag = !this.validPermDrag ? this.drag : (this.permDrag + this.drag);
     };
 
     /**
@@ -406,7 +408,7 @@ export default class PawnMovement {
      * 判断当前移动组件是否完全静止
      * @returns 
      */
-    canMove() {
+    protected get canMove() {
         return !(cc.Vec3.equals(this.force, cc.Vec3.ZERO) && cc.Vec3.equals(this.velocity, cc.Vec3.ZERO));
     };
 
@@ -460,9 +462,9 @@ export default class PawnMovement {
      * 移动的同时会将自身角度朝向移动方向
      * 可以通过指定
      */
-    // updateToWardPostion() {
+    updateToWardPostion() {
 
-    // };
+    };
 
 
     // SIGNPOST 移动更新函数 - 基本速度驱动                                                                           
@@ -497,36 +499,29 @@ export default class PawnMovement {
      */
     public updateByVelocity(dt: number): PawnMovement {
         this.addPermanentForceToPhysic();
-        if (this.canMove()) {
+        if (this.canMove) {
             this.lastVelocity = this.velocity.clone();
-            this.force
-                .div(this.mass);
+            // 应用质量
+            this.force = this.force.div(this.mass);
+            // 计算阻力
             let incomingDrag = this.drag * dt + 1;
+            // 重力加速度
             this.accelerationDue = this.velocity.div(incomingDrag);
+            // 应用力到速度
             let outVelocity = this.force.mul(dt);
-            outVelocity
-                .add(this.velocity).div(incomingDrag);
+            outVelocity = outVelocity.add(this.velocity).div(incomingDrag);
+            // 限制
             let outVelocityLength = outVelocity.len();
-            outVelocity = outVelocityLength <= this.maxSpeed ?
-                outVelocity : outVelocity
-                    .mul(this.maxSpeed)
-                    .div(outVelocityLength);
-            outVelocity
-                .sub(this.lastVelocity)
+            outVelocity = outVelocityLength <= this.maxSpeed ? outVelocity : outVelocity.mul(this.maxSpeed).div(outVelocityLength);
+            outVelocity = outVelocity.sub(this.lastVelocity)
             outVelocityLength = outVelocity.len();
-            outVelocity = outVelocityLength <= this.accelerationLimit ?
-                outVelocity : outVelocity
-                    .mul(this.accelerationLimit)
-                    .div(outVelocityLength);
-            outVelocity
-                .add(this.lastVelocity);
+            outVelocity = outVelocityLength <= this.accelerationLimit ? outVelocity : outVelocity.mul(this.accelerationLimit).div(outVelocityLength);
+            outVelocity = outVelocity.add(this.lastVelocity);
+            // 新速度
             this.velocity = new cc.Vec3(outVelocity);
             let newPostion = this.context.getPosition();
-            this.context
-                .setPosition(this.velocity
-                    .mul(dt)
-                    .add(newPostion instanceof cc.Vec2 ? new cc.Vec3(newPostion.x, newPostion.y, 0) : newPostion)
-                );
+            // 设置坐标
+            this.context.setPosition(this.velocity.mul(dt).add(newPostion instanceof cc.Vec2 ? new cc.Vec3(newPostion.x, newPostion.y, 0) : newPostion));
         }
         this.force.set(cc.Vec3.ZERO);
         this.drag = 0;
@@ -544,8 +539,8 @@ export default class PawnMovement {
      * 
      * @param {*} dt deltatime 与当前帧率绑定，必要项目
      */
-    // updateByforce = function (dt) {
-    //     this.addPermanentForceToPhysic();
-    // };
+    updateByforce = function (dt) {
+        this.addPermanentForceToPhysic();
+    };
 
 }

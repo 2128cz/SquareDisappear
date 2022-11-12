@@ -16,6 +16,7 @@ require('./assets/scripts/base/class/DevelopersToolClass');
 require('./assets/scripts/base/class/DevelopersToolGlobal');
 require('./assets/scripts/base/class/DiologClass');
 require('./assets/scripts/base/class/DynamicPanelClass');
+require('./assets/scripts/base/class/GridAdsorb');
 require('./assets/scripts/base/class/PanelTool');
 require('./assets/scripts/base/class/PawnClass');
 require('./assets/scripts/base/class/PawnMovement');
