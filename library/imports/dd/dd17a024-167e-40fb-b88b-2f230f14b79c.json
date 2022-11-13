@@ -1,7 +1,7 @@
 [
   {
     "__type__": "cc.Prefab",
-    "_name": "soundNode",
+    "_name": "soundnode",
     "_objFlags": 0,
     "_native": "",
     "data": {

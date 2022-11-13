@@ -1,6 +1,6 @@
 "use strict";
-cc._RF.push(module, 'f6bc6FrRRVPbpB9I2O8jbmT', 'Block');
-// scripts/game/Block.ts
+cc._RF.push(module, 'f6bc6FrRRVPbpB9I2O8jbmT', 'block');
+// scripts/game/block.ts
 
 "use strict";
 var __extends = (this && this.__extends) || (function () {

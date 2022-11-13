@@ -12,6 +12,6 @@ require('./assets/scripts/base/class/PawnMovement');
 require('./assets/scripts/base/class/RigorousLibrary');
 require('./assets/scripts/base/class/RigorousType');
 require('./assets/scripts/base/tool/NoRootTree');
-require('./assets/scripts/game/Block');
 require('./assets/scripts/game/GameLevel');
 require('./assets/scripts/game/GameUI');
+require('./assets/scripts/game/block');
