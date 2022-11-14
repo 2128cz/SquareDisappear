@@ -58,11 +58,11 @@ var Game = /** @class */ (function (_super) {
     Game.prototype.onLoad = function () {
         // 提升为关卡脚本
         DevelopersToolGlobal_1.DevelopersToolGlobal.script = this;
-        // 开启碰撞
-        var manager = cc.director.getCollisionManager();
-        manager.enabled = true;
-        manager.enabledDebugDraw = true;
-        manager.enabledDrawBoundingBox = true;
+        // 开启碰撞, 当然没这个必要
+        // var manager = cc.director.getCollisionManager();
+        // manager.enabled = true;
+        // manager.enabledDebugDraw = true;
+        // manager.enabledDrawBoundingBox = true;
         // 创建无根树
         NoRootTree_1.default.tree = new NoRootTree_1.default(this.treeSize);
         // 创建网格驱动

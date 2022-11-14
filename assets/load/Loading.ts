@@ -145,12 +145,13 @@ export default class Loading extends cc.Component {
      * @param sceneTarget 可选场景目标
      */
     private onLoadScene(sceneTarget?: string | cc.SceneAsset): void {
+        let self = this;
         cc.director.loadScene((() => {
             return sceneTarget ?
                 sceneTarget instanceof String ?
                     sceneTarget :
                     (sceneTarget as cc.SceneAsset).name :
-                this.readyToGoSence.name;
+                self.readyToGoSence.name;
         })());
     }
 

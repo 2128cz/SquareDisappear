@@ -24,8 +24,9 @@ require('./assets/scripts/base/class/RigorousLibrary');
 require('./assets/scripts/base/class/RigorousType');
 require('./assets/scripts/base/tool/NoRootTree');
 require('./assets/scripts/game/GameLevel');
-require('./assets/scripts/game/GameUI');
 require('./assets/scripts/game/block');
+require('./assets/scripts/widget/Botton_LoadEff');
+require('./assets/scripts/widget/GameUI');
 
                     }
                     if (nodeEnv) {

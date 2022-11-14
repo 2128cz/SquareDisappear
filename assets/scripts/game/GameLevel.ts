@@ -33,11 +33,11 @@ export default class Game extends cc.Component {
         // 提升为关卡脚本
         ccvv.script = this;
 
-        // 开启碰撞
-        var manager = cc.director.getCollisionManager();
-        manager.enabled = true;
-        manager.enabledDebugDraw = true;
-        manager.enabledDrawBoundingBox = true;
+        // 开启碰撞, 当然没这个必要
+        // var manager = cc.director.getCollisionManager();
+        // manager.enabled = true;
+        // manager.enabledDebugDraw = true;
+        // manager.enabledDrawBoundingBox = true;
 
         // 创建无根树
         NTR.tree = new NTR(this.treeSize);

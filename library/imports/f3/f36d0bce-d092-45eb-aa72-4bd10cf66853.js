@@ -1,8 +1,14 @@
 "use strict";
-cc._RF.push(module, '5f8abNVa2FPs6rm+Y3nKSh4', 'GameUI');
-// scripts/game/GameUI.ts
+cc._RF.push(module, 'f36d0vO0JJF66pyS9EM9mhT', 'Botton_LoadEff');
+// scripts/widget/Botton_LoadEff.ts
 
 "use strict";
+// Learn TypeScript:
+//  - https://docs.cocos.com/creator/manual/en/scripting/typescript.html
+// Learn Attribute:
+//  - https://docs.cocos.com/creator/manual/en/scripting/reference/attributes.html
+// Learn life-cycle callbacks:
+//  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -27,15 +33,22 @@ var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
 var NewClass = /** @class */ (function (_super) {
     __extends(NewClass, _super);
     function NewClass() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.label = null;
+        _this.text = 'hello';
+        return _this;
+        // update (dt) {}
     }
     // LIFE-CYCLE CALLBACKS:
-    NewClass.prototype.onLoad = function () {
-        // cc.find("Canvas").getComponent("Game").addTimeCount();
-    };
+    // onLoad () {}
     NewClass.prototype.start = function () {
-        // ccvv.fristScript
     };
+    __decorate([
+        property(cc.Label)
+    ], NewClass.prototype, "label", void 0);
+    __decorate([
+        property
+    ], NewClass.prototype, "text", void 0);
     NewClass = __decorate([
         ccclass
     ], NewClass);

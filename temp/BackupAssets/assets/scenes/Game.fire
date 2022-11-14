@@ -81,22 +81,22 @@
         "__id__": 11
       },
       {
-        "__id__": 15
+        "__id__": 20
       }
     ],
     "_active": true,
     "_components": [
       {
-        "__id__": 16
+        "__id__": 21
       },
       {
-        "__id__": 17
+        "__id__": 22
       },
       {
-        "__id__": 18
+        "__id__": 23
       },
       {
-        "__id__": 19
+        "__id__": 24
       }
     ],
     "_prefab": null,
@@ -186,7 +186,7 @@
       "array": [
         0,
         0,
-        357.1813524733444,
+        449.46718456412367,
         0,
         0,
         0,
@@ -488,7 +488,7 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 14
+        "__id__": 19
       }
     ],
     "_prefab": null,
@@ -541,15 +541,145 @@
   },
   {
     "__type__": "cc.Node",
+    "_name": "gameUI",
     "_objFlags": 0,
     "_parent": {
       "__id__": 11
     },
-    "_id": "1c89wLkT5In5/Pl2BDNv/U",
-    "_prefab": {
-      "__id__": 13
+    "_children": [
+      {
+        "__id__": 13
+      },
+      {
+        "__id__": 14
+      },
+      {
+        "__id__": 16
+      }
+    ],
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 18
+      }
+    ],
+    "_prefab": null,
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
     },
-    "_name": "game_ui",
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 720,
+      "height": 1280
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "_eulerAngles": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_is3DNode": false,
+    "_groupIndex": 0,
+    "groupIndex": 0,
+    "_id": "92Hz7U2PVOV763+Hz1Sf+n"
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "Game arena",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 12
+    },
+    "_children": [],
+    "_active": true,
+    "_components": [],
+    "_prefab": null,
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 0,
+      "height": 0
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "_eulerAngles": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_is3DNode": false,
+    "_groupIndex": 0,
+    "groupIndex": 0,
+    "_id": "a6f9os/z5ON5HfukKvN5Jn"
+  },
+  {
+    "__type__": "cc.Node",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 12
+    },
+    "_id": "2cdoE57VNJ2ag2QrAqb1Ph",
+    "_prefab": {
+      "__id__": 15
+    },
+    "_name": "Game Static ForeGround Node",
     "_active": true,
     "_trs": {
       "__type__": "TypedArray",
@@ -577,13 +707,86 @@
   {
     "__type__": "cc.PrefabInfo",
     "root": {
-      "__id__": 12
+      "__id__": 14
     },
     "asset": {
-      "__uuid__": "69d4d6eb-0ce9-443b-a06a-420ff9cf0d70"
+      "__uuid__": "5a9d70a3-d764-44dc-b889-3bc2f15d0d31"
     },
-    "fileId": "9eXER2PttCwbYC/CuIXqkk",
+    "fileId": "2cdoE57VNJ2ag2QrAqb1Ph",
     "sync": true
+  },
+  {
+    "__type__": "cc.Node",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 12
+    },
+    "_id": "e6MCpBBhBKNbwSSNNpzc8z",
+    "_prefab": {
+      "__id__": 17
+    },
+    "_name": "Game Botton Node",
+    "_active": true,
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "_eulerAngles": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    }
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 16
+    },
+    "asset": {
+      "__uuid__": "330ea8b2-6451-4d99-8057-30870f69d0e0"
+    },
+    "fileId": "e6MCpBBhBKNbwSSNNpzc8z",
+    "sync": true
+  },
+  {
+    "__type__": "cc.Widget",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 12
+    },
+    "_enabled": true,
+    "alignMode": 1,
+    "_target": null,
+    "_alignFlags": 45,
+    "_left": 0,
+    "_right": 0,
+    "_top": 0,
+    "_bottom": 0,
+    "_verticalCenter": 0,
+    "_horizontalCenter": 0,
+    "_isAbsLeft": true,
+    "_isAbsRight": true,
+    "_isAbsTop": true,
+    "_isAbsBottom": true,
+    "_isAbsHorizontalCenter": true,
+    "_isAbsVerticalCenter": true,
+    "_originalWidth": 0,
+    "_originalHeight": 0,
+    "_id": "239KcwvURHe4uTXl14m2PH"
   },
   {
     "__type__": "cc.Widget",

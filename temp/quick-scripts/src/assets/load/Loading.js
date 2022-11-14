@@ -113,13 +113,13 @@ var Loading = /** @class */ (function (_super) {
      * @param sceneTarget 可选场景目标
      */
     Loading.prototype.onLoadScene = function (sceneTarget) {
-        var _this = this;
+        var self = this;
         cc.director.loadScene((function () {
             return sceneTarget ?
                 sceneTarget instanceof String ?
                     sceneTarget :
                     sceneTarget.name :
-                _this.readyToGoSence.name;
+                self.readyToGoSence.name;
         })());
     };
     // tag 客户端方法 
