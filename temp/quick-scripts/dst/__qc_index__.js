@@ -26,6 +26,7 @@ require('./assets/scripts/base/tool/GridAdsorb');
 require('./assets/scripts/base/tool/NoRootTree');
 require('./assets/scripts/base/tool/PanelTool');
 require('./assets/scripts/base/tool/PawnMovement');
+require('./assets/scripts/game/BL');
 require('./assets/scripts/game/Block');
 require('./assets/scripts/game/BlockGroup');
 require('./assets/scripts/game/GL');

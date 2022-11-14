@@ -1020,8 +1020,8 @@
     "relativePath": "resources\\prefabs"
   },
   "48f7d105-dfd2-424b-ab37-be5730867702": {
-    "asset": 1668395550659,
-    "meta": 1668395550660,
+    "asset": 1668411328261,
+    "meta": 1668411328262,
     "relativePath": "resources\\prefabs\\game\\Square.prefab"
   },
   "dd17a024-167e-40fb-b88b-2f230f14b79c": {
@@ -1125,8 +1125,8 @@
     "relativePath": "resources\\sounds\\xiaochu2.mp3"
   },
   "72a752d6-75bc-4462-a0ae-51bb2edbd895": {
-    "asset": 1668401595997,
-    "meta": 1668401596002,
+    "asset": 1668411329854,
+    "meta": 1668411329862,
     "relativePath": "scenes\\Game.fire"
   },
   "18c202f7-8c27-492b-bf9d-9f5cce601588": {
@@ -1165,8 +1165,8 @@
     "relativePath": "resources\\prefabs\\game"
   },
   "157b3ecd-0dc3-45de-86af-5f280d316d57": {
-    "asset": 1668394334199,
-    "meta": 1668394334200,
+    "asset": 1668411318947,
+    "meta": 1668411318948,
     "relativePath": "resources\\prefabs\\game\\Square Node.prefab"
   },
   "af6bb6bc-e94c-416b-876c-268473200cd9": {
@@ -1188,11 +1188,6 @@
     "asset": 1668394905368,
     "meta": 1668394957814,
     "relativePath": "load\\Loading.ts"
-  },
-  "7e219e0c-0803-47b2-af90-cab450f4a9c9": {
-    "asset": 1668395002509,
-    "meta": 1668395095647,
-    "relativePath": "scripts\\game\\BlockGroup.ts"
   },
   "da1b3653-7ef3-4936-bded-de08fc4b2cf9": {
     "asset": 1668399946371,
@@ -1224,11 +1219,6 @@
     "meta": 1668406522960,
     "relativePath": "scripts\\base\\tool\\EventReflect.ts"
   },
-  "3d30dd00-7088-4dfb-844c-647002cfabf6": {
-    "asset": 1668406463147,
-    "meta": 1668406522989,
-    "relativePath": "scripts\\base\\tool\\GridAdsorb.ts"
-  },
   "30349a3e-dba6-4058-b145-a879e94edf79": {
     "asset": 1668401787040,
     "meta": 1668406523012,
@@ -1246,22 +1236,37 @@
   },
   "f6bc616b-4515-4f6e-907d-2363bc8db993": {
     "asset": 1668401799879,
-    "meta": 1668406523157,
-    "relativePath": "scripts\\game\\Block.ts"
+    "meta": 1668411162517,
+    "relativePath": "scripts\\game\\BL.ts"
   },
   "21993d50-a688-4c5d-af40-11163ff3602f": {
     "asset": 1668406094739,
     "meta": 1668406523215,
     "relativePath": "scripts\\game\\GL.ts"
   },
-  "8feab351-f963-4c53-b08e-f83f774844ce": {
-    "asset": 1668407690948,
-    "meta": 1668407699451,
-    "relativePath": "scripts\\game\\GameLevel.ts"
+  "7e219e0c-0803-47b2-af90-cab450f4a9c9": {
+    "asset": 1668410171721,
+    "meta": 1668410173392,
+    "relativePath": "scripts\\game\\BlockGroup.ts"
+  },
+  "aabff7bf-6bb4-48a6-80cb-3829b50ec69a": {
+    "asset": 1668411165883,
+    "meta": 1668411168476,
+    "relativePath": "scripts\\game\\Block.ts"
   },
   "e5b123df-9d71-4bea-bb61-624054123737": {
-    "asset": 1668407698814,
-    "meta": 1668407699462,
+    "asset": 1668411471458,
+    "meta": 1668412795845,
     "relativePath": "scripts\\game\\Setting.ts"
+  },
+  "3d30dd00-7088-4dfb-844c-647002cfabf6": {
+    "asset": 1668413165488,
+    "meta": 1668413172698,
+    "relativePath": "scripts\\base\\tool\\GridAdsorb.ts"
+  },
+  "8feab351-f963-4c53-b08e-f83f774844ce": {
+    "asset": 1668413171889,
+    "meta": 1668413172720,
+    "relativePath": "scripts\\game\\GameLevel.ts"
   }
 }

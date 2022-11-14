@@ -1,28 +1,31 @@
-// Learn TypeScript:
-//  - https://docs.cocos.com/creator/manual/en/scripting/typescript.html
-// Learn Attribute:
-//  - https://docs.cocos.com/creator/manual/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
+import GridAbsorb from '../base/tool/GridAdsorb';
+import ss from "./Setting";
 
-const {ccclass, property} = cc._decorator;
+const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class NewClass extends cc.Component {
-
-    @property(cc.Label)
-    label: cc.Label = null;
-
-    @property
-    text: string = 'hello';
 
     // LIFE-CYCLE CALLBACKS:
 
     // onLoad () {}
 
-    start () {
+    start() {
 
     }
 
-    // update (dt) {}
+    update(dt) {
+        let pos = GridAbsorb.grid.getGridPositionByIndex(new cc.Vec3(0, this.gridIndex, 0));
+        this.node.setPosition(pos);
+    }
+
+    // tag 用户函数
+
+    public init(index) {
+        this.gridIndex = index;
+    }
+
+    // tag 用户参数，宏
+
+    protected gridIndex: number = null;
 }

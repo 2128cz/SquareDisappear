@@ -28,22 +28,30 @@ var Setting_1 = require("./Setting");
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property, executeInEditMode = _a.executeInEditMode;
 var GameLevel = /** @class */ (function (_super) {
     __extends(GameLevel, _super);
+    // @executeInEditMode
     function GameLevel() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.label = null;
-        _this.text = 'hello';
+        _this.gameArea = null;
         return _this;
     }
-    // LIFE-CYCLE CALLBACKS:
+    // tag LIFE-CYCLE CALLBACKS:
     GameLevel.prototype.onLoad = function () {
         // 初始化对齐网格
         new GridAdsorb_1.default(new cc.Vec3(Setting_1.default.Game_Column, Setting_1.default.Game_Row2, 0), new cc.Vec3(Setting_1.default.Cube_width, Setting_1.default.Cube_Height, 0));
         // 基本初始化
         this.init();
     };
-    GameLevel.prototype.start = function () {
+    // start() {}
+    GameLevel.prototype.update = function (dt) {
+        // 如果目标位置小于一定时，创建方块
+        var pos = GridAdsorb_1.default.grid.getGridPositionByIndex(Setting_1.default.GridCurrentPointToVec);
+        if (pos.y <= cc.winSize.height / 2) {
+            cc.log(cc.winSize.height / 2, pos.y);
+            this.SpawnCubeGroup(Setting_1.default.GridPointer);
+        }
+        // 网格移动，这也会驱动方块移动
+        GridAdsorb_1.default.grid.offset = Setting_1.default.GameVector.mul(dt);
     };
-    // update (dt) {}
     // tag 用户函数部分 
     /**
      * 游戏重置及初始化
@@ -51,16 +59,40 @@ var GameLevel = /** @class */ (function (_super) {
     GameLevel.prototype.init = function () {
         // 重置网格指针
         Setting_1.default.GridCurrentPoint = 0;
+        GridAdsorb_1.default.grid.offset = new cc.Vec3(0, cc.winSize.height / 2, 0);
+    };
+    /**
+     * 创建方块组
+     */
+    GameLevel.prototype.SpawnCubeGroup = function (index) {
+        var inst = this.creatActor(Setting_1.default.SquareGroup, this.gameArea);
+        // 提供索引以便吸附到网格上
+        inst.getComponent('BlockGroup').init(index);
+    };
+    // tag 基本操作函数
+    /**
+    * creat instantiate
+    * @param {cc.Prefab} actor 实例化的目标
+    * @param {cc.Node} parent 实例化的对象将要附加的目标，如果留空则为自身
+    * @returns
+    */
+    GameLevel.prototype.creatActor = function (actor, parent) {
+        var actorInst = cc.instantiate(actor);
+        if (parent) {
+            parent.addChild(actorInst);
+        }
+        else {
+            this.node.addChild(actorInst);
+            cc.log(actorInst);
+        }
+        return actorInst;
     };
     __decorate([
-        property(cc.Label)
-    ], GameLevel.prototype, "label", void 0);
-    __decorate([
-        property
-    ], GameLevel.prototype, "text", void 0);
+        property(cc.Node)
+    ], GameLevel.prototype, "gameArea", void 0);
     GameLevel = __decorate([
-        ccclass,
-        executeInEditMode
+        ccclass
+        // @executeInEditMode
     ], GameLevel);
     return GameLevel;
 }(cc.Component));

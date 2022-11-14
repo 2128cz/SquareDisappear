@@ -934,15 +934,16 @@
     "_id": "6d5jMmkaJBxIA8PwHvtuHY"
   },
   {
-    "__type__": "219931QpohMXa9AERY/82Av",
+    "__type__": "8feabNR+WNMU7CO+D93SETO",
     "_name": "",
     "_objFlags": 0,
     "node": {
       "__id__": 2
     },
     "_enabled": true,
-    "label": null,
-    "text": "hello",
-    "_id": "56neQE16FOC5pwjQVyn1Nh"
+    "gameArea": {
+      "__id__": 13
+    },
+    "_id": "87M5VFJ0tDu7S5p8/UCQwG"
   }
 ]
