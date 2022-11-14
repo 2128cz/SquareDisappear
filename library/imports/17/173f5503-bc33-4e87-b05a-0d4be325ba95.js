@@ -1,6 +1,6 @@
 "use strict";
 cc._RF.push(module, '173f5UDvDNOh7BaDUvjJbqV', 'RigorousLibrary');
-// scripts/base/class/RigorousLibrary.ts
+// scripts/base/core/RigorousLibrary.ts
 
 "use strict";
 var __extends = (this && this.__extends) || (function () {
@@ -18,7 +18,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RigorousRingBuffer = exports.RigorousArray = exports.RigorousMap = exports.RigorousSet = exports.RigorousHash = exports.RigorousMatrix2 = exports.RigorousMatrix3 = exports.RigorousMatrix4 = exports.RigorousSize = exports.RigorousVector2 = exports.RigorousScale = exports.RigorousRotation = exports.RigorousPostion = exports.RigorousVector3 = exports.RigorousVector4 = exports.RigorousValueType = void 0;
-var DevelopersToolGlobal_1 = require("./DevelopersToolGlobal");
+var DevelopersToolGlobal_1 = require("../class/DevelopersToolGlobal");
 var SysBaseType;
 (function (SysBaseType) {
     SysBaseType[SysBaseType["number"] = 0] = "number";

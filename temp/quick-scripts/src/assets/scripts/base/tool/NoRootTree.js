@@ -17,7 +17,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var RigorousLibrary_1 = require("../class/RigorousLibrary");
+var RigorousLibrary_1 = require("../core/RigorousLibrary");
 var DevelopersToolGlobal_1 = require("../class/DevelopersToolGlobal");
 /**
  * 无根树

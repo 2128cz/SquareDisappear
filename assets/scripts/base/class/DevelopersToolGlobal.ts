@@ -16,10 +16,6 @@ export interface IToolGlobalInterface {
 export interface IOtherGlobalInterface {
     [key: string]: any;
 }
-/**
- * 层通用标识接口 
- * cc.Node[number]
- */
 export interface IganeralLayerInterface {
     [key: string]: cc.Node;
 }
@@ -63,9 +59,6 @@ export class DevelopersToolGlobal {
             //加载分享图
             "share": { type: cc.SpriteFrame, url: "share" },
         }
-    }
-    public static set loadResourcescatalog(value) {
-        cc.error("不允许修改资源目录");
     }
 
 

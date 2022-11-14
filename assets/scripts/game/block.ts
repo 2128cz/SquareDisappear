@@ -1,6 +1,6 @@
 import { DevelopersToolGlobal as ccvv, mathMacro as mm } from '../base/class/DevelopersToolGlobal';
 import PawnClass from '../base/class/PawnClass';
-import GridAbsorb from '../base/class/GridAdsorb';
+import GridAbsorb from '../base/tool/GridAdsorb';
 import NTR from "../base/tool/NoRootTree";
 
 const { ccclass, property } = cc._decorator;

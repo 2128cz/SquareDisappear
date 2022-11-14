@@ -1,10 +1,10 @@
 "use strict";
 cc._RF.push(module, '32087ASkt9CBbFwJno3IBwU', 'PawnMovement');
-// scripts/base/class/PawnMovement.ts
+// scripts/base/tool/PawnMovement.ts
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var DevelopersToolGlobal_1 = require("./DevelopersToolGlobal");
+var DevelopersToolGlobal_1 = require("../class/DevelopersToolGlobal");
 var PawnMovement = /** @class */ (function () {
     function PawnMovement(context) {
         this.context = null;

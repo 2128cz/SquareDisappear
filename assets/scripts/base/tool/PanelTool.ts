@@ -1,4 +1,4 @@
-import { DevelopersToolGlobal as ccvv } from './DevelopersToolGlobal';
+import { DevelopersToolGlobal as ccvv } from '../class/DevelopersToolGlobal';
 
 const { ccclass, property } = cc._decorator;
 @ccclass

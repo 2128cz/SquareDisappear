@@ -1,6 +1,6 @@
 "use strict";
 cc._RF.push(module, '3d30d0AcIhN+4RMZHACz6v2', 'GridAdsorb');
-// scripts/base/class/GridAdsorb.ts
+// scripts/base/tool/GridAdsorb.ts
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });

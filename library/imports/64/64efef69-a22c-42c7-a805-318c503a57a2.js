@@ -1,6 +1,6 @@
 "use strict";
 cc._RF.push(module, '64efe9poixCx6gFMYxQOlei', 'PanelTool');
-// scripts/base/class/PanelTool.ts
+// scripts/base/tool/PanelTool.ts
 
 "use strict";
 var __extends = (this && this.__extends) || (function () {
@@ -23,7 +23,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var DevelopersToolGlobal_1 = require("./DevelopersToolGlobal");
+var DevelopersToolGlobal_1 = require("../class/DevelopersToolGlobal");
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
 var PanelTool = /** @class */ (function (_super) {
     __extends(PanelTool, _super);

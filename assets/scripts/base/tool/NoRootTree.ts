@@ -1,4 +1,4 @@
-import { RigorousRingBuffer } from '../class/RigorousLibrary';
+import { RigorousRingBuffer } from '../core/RigorousLibrary';
 import { mathMacro as mm } from '../class/DevelopersToolGlobal';
 /**
  * 无根树 

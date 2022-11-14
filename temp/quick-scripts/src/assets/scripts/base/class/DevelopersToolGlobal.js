@@ -39,9 +39,6 @@ var DevelopersToolGlobal = /** @class */ (function () {
                 "share": { type: cc.SpriteFrame, url: "share" },
             };
         },
-        set: function (value) {
-            cc.error("不允许修改资源目录");
-        },
         enumerable: false,
         configurable: true
     });

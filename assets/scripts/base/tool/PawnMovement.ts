@@ -1,6 +1,5 @@
+import { mathMacro as kismit } from '../class/DevelopersToolGlobal';
 
-
-import { mathMacro as kismit } from './DevelopersToolGlobal';
 export default class PawnMovement {
     constructor(context: cc.Node) {
         this.context = context;

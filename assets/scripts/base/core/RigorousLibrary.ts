@@ -1,4 +1,4 @@
-import { mathMacro as mm } from './DevelopersToolGlobal';
+import { mathMacro as mm } from '../class/DevelopersToolGlobal';
 enum SysBaseType {
     number, string, boolean, object, undefined
 }

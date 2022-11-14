@@ -1,6 +1,6 @@
 "use strict";
-cc._RF.push(module, 'f6bc6FrRRVPbpB9I2O8jbmT', 'block');
-// scripts/game/block.ts
+cc._RF.push(module, 'f6bc6FrRRVPbpB9I2O8jbmT', 'Block');
+// scripts/game/Block.ts
 
 "use strict";
 var __extends = (this && this.__extends) || (function () {
@@ -25,7 +25,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var DevelopersToolGlobal_1 = require("../base/class/DevelopersToolGlobal");
 var PawnClass_1 = require("../base/class/PawnClass");
-var GridAdsorb_1 = require("../base/class/GridAdsorb");
+var GridAdsorb_1 = require("../base/tool/GridAdsorb");
 var NoRootTree_1 = require("../base/tool/NoRootTree");
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
 var block = /** @class */ (function (_super) {
