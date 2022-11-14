@@ -24,6 +24,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var GridAdsorb_1 = require("../base/tool/GridAdsorb");
+var Setting_1 = require("./Setting");
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property, executeInEditMode = _a.executeInEditMode;
 var GameLevel = /** @class */ (function (_super) {
     __extends(GameLevel, _super);
@@ -32,13 +33,24 @@ var GameLevel = /** @class */ (function (_super) {
         _this.label = null;
         _this.text = 'hello';
         return _this;
-        // update (dt) {}
     }
     // LIFE-CYCLE CALLBACKS:
     GameLevel.prototype.onLoad = function () {
-        new GridAdsorb_1.default();
+        // 初始化对齐网格
+        new GridAdsorb_1.default(new cc.Vec3(Setting_1.default.Game_Column, Setting_1.default.Game_Row2, 0), new cc.Vec3(Setting_1.default.Cube_width, Setting_1.default.Cube_Height, 0));
+        // 基本初始化
+        this.init();
     };
     GameLevel.prototype.start = function () {
+    };
+    // update (dt) {}
+    // tag 用户函数部分 
+    /**
+     * 游戏重置及初始化
+     */
+    GameLevel.prototype.init = function () {
+        // 重置网格指针
+        Setting_1.default.GridCurrentPoint = 0;
     };
     __decorate([
         property(cc.Label)

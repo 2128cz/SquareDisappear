@@ -1249,19 +1249,19 @@
     "meta": 1668406523157,
     "relativePath": "scripts\\game\\Block.ts"
   },
-  "8feab351-f963-4c53-b08e-f83f774844ce": {
-    "asset": 1668406518861,
-    "meta": 1668406523167,
-    "relativePath": "scripts\\game\\GameLevel.ts"
-  },
   "21993d50-a688-4c5d-af40-11163ff3602f": {
     "asset": 1668406094739,
     "meta": 1668406523215,
     "relativePath": "scripts\\game\\GL.ts"
   },
+  "8feab351-f963-4c53-b08e-f83f774844ce": {
+    "asset": 1668407690948,
+    "meta": 1668407699451,
+    "relativePath": "scripts\\game\\GameLevel.ts"
+  },
   "e5b123df-9d71-4bea-bb61-624054123737": {
-    "asset": 1668406534392,
-    "meta": 1668406538474,
+    "asset": 1668407698814,
+    "meta": 1668407699462,
     "relativePath": "scripts\\game\\Setting.ts"
   }
 }
