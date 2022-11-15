@@ -472,26 +472,34 @@ export default class PawnMovement {
      * 由速度驱动更新
      * 要使用此方法进行移动，需要在其他任意阶段内向此移动组件添加力
      * 
-     * 可以响应瞬时力： addForce(), addDrag(), addInput()
+     * 可以响应瞬时力： addForce(), addDrag(), addInput()  
+     * 可以响应持久力： permanentForce, permanentDrag  
      * 
-     * 可以响应持久力： permanentForce, permanentDrag
-     * 
-     * 比如在默认情况下，不会实现阻力，你的移动就像是在无重力环境下一样
+     * 比如在默认情况下，不会实现阻力，你的移动就像是在无重力环境下一样，
      * 而想要模仿走路或是其他移动模式，需要在此更新事件之前或是之后添加一份力/阻力。  
      * 在通常情况下，你不需要担心添加 力/阻力 执行顺序会造成计算失误
      * 因为这是由单一环路构成的移动模式
      * 
      * 关于模拟阶段更新：  
-     * 你可以在同一帧或是生命周期的不同阶段内多次进行更新  
-     * 但使用更新函数进行迭代会造成速度流逝  
-     * 所以推荐自行对节点坐标进行迭代，而后统一进行驱动更新  
+     * 你可以在同一帧或是生命周期的不同阶段内多次进行更新，
+     * 但使用更新函数进行迭代会造成速度流逝，
+     * 所以建议自行对节点坐标进行迭代，而后统一进行驱动更新  
      * 
      * 如果迭代会造成速度错位，可以获取重力加速度，将速度转为动能  
      * 减淡原始速度，而后在更新前将动能返回给力即可  
      * 
-     * 例如铁链仿真，就可以对每节铁链进行一次运动更新，
+     * 例如铁链仿真，就可以对每节铁链先进行一次运动更新，
      * 而后进行动能转换，将每节铁链的坐标向前一个进行约束仿真，比如进行迭代仿真30次  
-     * 仿真完毕后重新赋能，或是将动能计算为其他粒子效果。  
+     * 仿真完毕后重新赋能，或是将动能计算为其他效果。  
+     * 其余情况下，计算动能并没有什么用处，你可以将其注释。
+     * 
+     * 当然，最好不要用上述方法进行堆栈模拟；  
+     * CPU拥有更多复杂的指令代为处理这些方法。
+     * 
+     * 推荐在cocos中将同屏运算数量控制在200以内
+     * 这个数值是用c++实现后推算的，c++可以达到2000+  
+     * （CPU时间变动不超过±0.01ms的情况下，当然跟平台性能也有关系，所以js的实际表现会更差）
+     * 超过这个数值后会出现一定程度的掉帧
      * 
      * @param {*} dt deltatime 与当前帧率绑定，必要项目
      */
@@ -528,17 +536,30 @@ export default class PawnMovement {
 
     // SIGNPOST 移动更新函数 - 简易力驱动                                                                             
 
-    // fix                
     /**
-     * 由力驱动更新
+     * 由力驱动更新（冲量更新）
      * 
-     * 一般情况下并不推荐使用，这仅仅只是为了高效率而产生的
-     * 如果需要实现PBD，光滑核等函数，请使用updateByVelocity()
+     * 一般情况下并不推荐使用  
+     * 如果需要实现PBD，光滑核等效果，请使用updateByVelocity()  
+     * 
+     * 可以响应瞬时力： addForce(), addInput()  
+     * 可以响应持久力： permanentForce  
+     * 
+     * 如函数名字所示，不会产生速度，只要没有力就会停下  
+     * 且计算方式稍有不同，仅将力与时间相乘，称为冲量
      * 
      * @param {*} dt deltatime 与当前帧率绑定，必要项目
      */
     updateByforce = function (dt) {
         this.addPermanentForceToPhysic();
+        if (this.canMove) {
+            let newPostion = this.context.getPosition();
+            let updateForce = this.force.mul(dt);
+            this.context.setPosition(newPostion.add(updateForce));
+        }
+        this.force.set(cc.Vec3.ZERO);
+        this.drag = 0;
+        return this;
     };
 
 }

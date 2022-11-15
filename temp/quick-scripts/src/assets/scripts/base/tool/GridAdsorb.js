@@ -17,6 +17,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
+var DevelopersToolGlobal_1 = require("../class/DevelopersToolGlobal");
 var GridAbsorb_Private = /** @class */ (function () {
     /**
      * 网格对齐
@@ -27,11 +28,13 @@ var GridAbsorb_Private = /** @class */ (function () {
         this._CellSize = new cc.Vec3(100);
         // 网格计算原点偏移
         this._GridOffset = new cc.Vec3(0);
+        // 网格计算原点偏移
+        // protected _OriginOffset: cc.Vec3 = new cc.Vec3(0);
         // 网格总尺寸
         this._GridSize = null;
         // 各轴晶胞数量
         this._GridAxisCellNum = new cc.Vec3(100);
-        // + -
+        // 网格中心锚点
         this._GridEdgeAnchor = new cc.Vec3(.5);
         if (axisNum) {
             this._GridAxisCellNum = axisNum;
@@ -49,15 +52,21 @@ var GridAbsorb_Private = /** @class */ (function () {
      * 从各轴索引获得网格坐标
      * cocos和unity都是y轴向上，xz为平面
      * 为了适配平面坐标，z为深度轴
+     * 通常情况下网格原点为0，而索引0在底部，如果需要0在原点首先需要将偏移量向上移动整个网格尺寸的一半
      * @param {intVec3} index
      * @return {int}
      */
     GridAbsorb_Private.prototype.getGridPositionByIndex = function (index) {
         var self = this;
         function getPos(axis) {
-            return ((Math.floor(index[axis]) % self._GridAxisCellNum[axis]) *
-                self._CellSize[axis] + self._GridOffset[axis]) %
-                self._GridSize[axis];
+            // 索引限制
+            var axisIndex = DevelopersToolGlobal_1.mathMacro.PMod(Math.floor(index[axis]), self._GridAxisCellNum[axis]);
+            // 索引坐标
+            var axisPos = axisIndex * self._CellSize[axis] + self._GridOffset[axis];
+            // 归一化
+            var normalPos = DevelopersToolGlobal_1.mathMacro.PMod(axisPos / self._GridSize[axis], 1);
+            normalPos - normalPos - Math.floor(normalPos);
+            return (normalPos + (self._GridEdgeAnchor[axis] - .5)) * self._GridSize[axis];
         }
         var x = getPos('x');
         var y = getPos('y');
@@ -182,7 +191,11 @@ var GridAbsorb = /** @class */ (function (_super) {
          * 取值在[0, 1]，跟随引擎
          */
         set: function (anchor) {
-            this._GridEdgeAnchor = anchor;
+            var Anchor = anchor.normalize();
+            Anchor.x = Math.abs(Anchor.x);
+            Anchor.y = Math.abs(Anchor.y);
+            Anchor.z = Math.abs(Anchor.z);
+            this._GridEdgeAnchor = Anchor;
             // function toAnchor(num: number) {
             //     if (!num) return new cc.Vec2(.5);
             //     let axis = Math.max(Math.min(num, 1), 0) - .5;

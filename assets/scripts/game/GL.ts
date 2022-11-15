@@ -1,3 +1,4 @@
+// bug 已废弃 
 import { DevelopersToolGlobal as ccvv, mathMacro as mm } from '../base/class/DevelopersToolGlobal';
 import PawnMovement from '../base/tool/PawnMovement';
 import GridAbsorb from '../base/tool/GridAdsorb';

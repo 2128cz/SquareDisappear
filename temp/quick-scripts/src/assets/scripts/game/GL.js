@@ -23,6 +23,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+// bug 已废弃 
 var DevelopersToolGlobal_1 = require("../base/class/DevelopersToolGlobal");
 var PawnMovement_1 = require("../base/tool/PawnMovement");
 var GridAdsorb_1 = require("../base/tool/GridAdsorb");

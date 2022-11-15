@@ -5,6 +5,7 @@ cc._RF.push(module, 'e5b12PfnXFL6rthYkBUEjc3', 'Setting');
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var DevelopersToolGlobal_1 = require("../base/class/DevelopersToolGlobal");
+var GridAdsorb_1 = require("../base/tool/GridAdsorb");
 // 游戏固定参数设定
 var Setting = /** @class */ (function () {
     function Setting() {
@@ -21,7 +22,7 @@ var Setting = /** @class */ (function () {
         configurable: true
     });
     Object.defineProperty(Setting, "Game_Row2", {
-        get: function () { return 30; },
+        get: function () { return 15; },
         enumerable: false,
         configurable: true
     });
@@ -32,6 +33,34 @@ var Setting = /** @class */ (function () {
     });
     Object.defineProperty(Setting, "Cube_Height", {
         get: function () { return 100; },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Setting, "Cube_Interaval", {
+        get: function () { return 3; },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Setting, "Cube_Perfab_Y", {
+        // 方块在预制体中的y坐标
+        get: function () { return 50; },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Setting, "Separator", {
+        // 底部截止线，用于生成方块位置和判断是否结束游戏
+        get: function () { return -379.4; },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Setting, "Group_0", {
+        // 碰撞组
+        get: function () { return 'default'; },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Setting, "Group_1", {
+        get: function () { return 'player'; },
         enumerable: false,
         configurable: true
     });
@@ -74,6 +103,12 @@ var Setting = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
+    Object.defineProperty(Setting, "GridOriginOffset", {
+        // 网格参数
+        get: function () { return new cc.Vec3(0, GridAdsorb_1.default.grid.gridSize.y / 2 + cc.winSize.height / 2, 0); },
+        enumerable: false,
+        configurable: true
+    });
     Object.defineProperty(Setting, "Square", {
         // 资源常量定义
         get: function () { return DevelopersToolGlobal_1.DevelopersToolGlobal.warehouse['prefabs']['Square']; },
@@ -85,8 +120,29 @@ var Setting = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
+    Object.defineProperty(Setting, "Effect_SquareBreak", {
+        get: function () { return DevelopersToolGlobal_1.DevelopersToolGlobal.warehouse['prefabs']['splintering']; },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Setting, "Effect_Destory", {
+        get: function () { return DevelopersToolGlobal_1.DevelopersToolGlobal.warehouse['prefabs']['Destroy Effect Node']; },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Setting, "blockName", {
+        // 资产常量定义
+        get: function () { return 'Block'; },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Setting, "blockGroupName", {
+        get: function () { return 'BlockGroup'; },
+        enumerable: false,
+        configurable: true
+    });
     // 设定参数定义
-    Setting._GameSpeed = 300;
+    Setting._GameSpeed = 100;
     Setting._CubeSpeed = 400;
     // 网格指针
     Setting._GridCurrentPoint = 0;

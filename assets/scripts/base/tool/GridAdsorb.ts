@@ -26,31 +26,36 @@ class GridAbsorb_Private {
     protected _CellSize: cc.Vec3 = new cc.Vec3(100);
     // 网格计算原点偏移
     protected _GridOffset: cc.Vec3 = new cc.Vec3(0);
+    // 网格计算原点偏移
+    // protected _OriginOffset: cc.Vec3 = new cc.Vec3(0);
     // 网格总尺寸
     protected _GridSize: cc.Vec3 = null;
     // 各轴晶胞数量
     protected _GridAxisCellNum: cc.Vec3 = new cc.Vec3(100);
-    // + -
-    protected _GridEdgeAnchor: cc.Vec3 = new cc.Vec3(.5)
-
+    // 网格中心锚点
+    protected _GridEdgeAnchor: cc.Vec3 = new cc.Vec3(.5);
 
     // SIGNPOST 网格查找                                                                                
 
     /** 
      * 从各轴索引获得网格坐标  
      * cocos和unity都是y轴向上，xz为平面  
-     * 为了适配平面坐标，z为深度轴
+     * 为了适配平面坐标，z为深度轴  
+     * 通常情况下网格原点为0，而索引0在底部，如果需要0在原点首先需要将偏移量向上移动整个网格尺寸的一半
      * @param {intVec3} index
      * @return {int}
      */
     public getGridPositionByIndex<T extends cc.Vec3 | cc.Vec2>(index: T): T {
         let self = this;
         function getPos(axis: string): number {
-            return (
-                (Math.floor(index[axis]) % self._GridAxisCellNum[axis]) *
-                self._CellSize[axis] + self._GridOffset[axis]
-            ) % self._GridSize[axis] +
-                self._GridEdgeAnchor[axis] * self._GridSize[axis];
+            // 索引限制
+            let axisIndex = mm.PMod(Math.floor(index[axis]), self._GridAxisCellNum[axis]);
+            // 索引坐标
+            let axisPos = axisIndex * self._CellSize[axis] + self._GridOffset[axis];
+            // 归一化
+            let normalPos = mm.PMod(axisPos / self._GridSize[axis], 1);
+            normalPos - normalPos - Math.floor(normalPos);
+            return (normalPos + (self._GridEdgeAnchor[axis] - .5)) * self._GridSize[axis];
         }
         let x = getPos('x');
         let y = getPos('y');

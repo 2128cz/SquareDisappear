@@ -32,6 +32,7 @@ require('./assets/scripts/game/BlockGroup');
 require('./assets/scripts/game/GL');
 require('./assets/scripts/game/GameLevel');
 require('./assets/scripts/game/Setting');
+require('./assets/scripts/game/effect/PlayDraAniAndDestory');
 require('./assets/scripts/widget/Botton_LoadEff');
 require('./assets/scripts/widget/GameUI');
 
