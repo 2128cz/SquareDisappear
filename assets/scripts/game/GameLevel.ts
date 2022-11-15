@@ -3,7 +3,12 @@ import GridAbsorb from '../base/tool/GridAdsorb';
 import BlockGroup from './BlockGroup';
 import ss from "./Setting";
 const { ccclass, property, executeInEditMode } = cc._decorator;
-
+/**
+ * 对于关卡蓝图中的参数，都定义在设置中
+ * 而其他蓝图中的参数则会放置在其最强关联处，比如自己本身的类内
+ * 而部分地方可能会用到全局工具的部分，可以改为以设置类全局的模式，全局工具是旧方法
+ * 关于全局工具的用法，可以参考discard-标记的文件，他们是已经确定废弃的用法
+ */
 @ccclass
 // @executeInEditMode
 export default class GameLevel extends cc.Component {
@@ -13,7 +18,9 @@ export default class GameLevel extends cc.Component {
 
     // tag LIFE-CYCLE CALLBACKS:
 
-    onLoad() {
+    // onLoad() {}
+
+    onEnable() {
         // 基本初始化
         this.init();
     }
@@ -23,11 +30,26 @@ export default class GameLevel extends cc.Component {
     update(dt) {
         // 如果目标位置小于一定时，创建方块
         let pos = GridAbsorb.grid.getGridPositionByIndex(ss.GridCurrentPointToVec);
-        if (pos.y <= cc.winSize.height / 2) {
-            this.SpawnCubeGroupAndInit(ss.GridPointer);
+        if (pos.y <= cc.winSize.height / 2) { this.SpawnCubeGroupAndInit(ss.GridPointer); }
+        // 如果最后一行小于一定时，结束游戏
+        if (ss.endCubeGroup && ss.endCubeGroup.node.y < ss.Separator) {
+            if (!this.allChildren) {
+                this.allChildren = this.lastGroup.findAllChildren(this.lastGroup);
+                // 一个一个破掉
+                this.allChildrenCount = this.allChildren.length;
+                cc.log(this.allChildren);
+                this.schedule(() => {
+                    if (this.allChildrenCount--) {
+                        let desAct = this.allChildren[this.allChildrenCount];
+                        desAct.getComponent(ss.blockName).destroyWithAnimation();
+                    } else { this.unscheduleAllCallbacks(); ss.menu.gameOver() }
+                }, .08);
+            }
         }
-        // 网格移动，这也会驱动方块移动
-        GridAbsorb.grid.offset = ss.GameVector.mul(dt);
+        // 否则继续网格移动，这也会驱动方块移动
+        else {
+            GridAbsorb.grid.offset = ss.GameVector.mul(dt);
+        }
     }
 
     // tag 用户函数部分 
@@ -37,7 +59,7 @@ export default class GameLevel extends cc.Component {
      */
     protected init(): void {
         // 初始化对齐网格
-        new GridAbsorb(
+        GridAbsorb.grid = new GridAbsorb(
             new cc.Vec3(ss.Game_Column, ss.Game_Row2, 0),
             new cc.Vec3(ss.Cube_width, ss.Cube_Height, 0)
         );
@@ -56,6 +78,12 @@ export default class GameLevel extends cc.Component {
         ccvv.script = this;
         // 注册触摸
         this.touchRegister();
+        // 清理战场
+        if (this.allChildren) this.allChildren.forEach(e => { e.destroy() });
+        this.allChildren = null;
+        if (this.gameArea.children.length > 0) this.gameArea.children.forEach(e => { e.destroy() });
+        this.allChildrenCount = 0;
+        ss.endCubeGroup = null;
     }
 
     /**
@@ -90,7 +118,6 @@ export default class GameLevel extends cc.Component {
         return inst;
     }
 
-
     /**
      * 注册触摸事件
      */
@@ -109,8 +136,19 @@ export default class GameLevel extends cc.Component {
         inst.setPosition(inx, ss.Separator);
     }
 
+    // tag 特效方法 
 
-    // tag 基本操作函数
+    ice(): void {
+
+    }
+    hit(): void {
+
+    }
+    boom(): void {
+
+    }
+
+    // tag 基本操作函数 
 
     /**
     * creat instantiate
@@ -128,5 +166,12 @@ export default class GameLevel extends cc.Component {
      * 上一组诞生组
      */
     protected lastGroup: BlockGroup = null;
-
+    /**
+     * 全部子项，这在平时是没有用的
+     */
+    protected allChildren: cc.Node[] = null;
+    /**
+     * 计数器，用于辅助上面的属性
+     */
+    protected allChildrenCount: number = 0;
 }

@@ -1,6 +1,6 @@
 "use strict";
-cc._RF.push(module, '219931QpohMXa9AERY/82Av', 'GL');
-// scripts/game/GL.ts
+cc._RF.push(module, '219931QpohMXa9AERY/82Av', 'discard-GameLevel');
+// scripts/game/discard-GameLevel.ts
 
 "use strict";
 var __extends = (this && this.__extends) || (function () {

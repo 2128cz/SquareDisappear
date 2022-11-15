@@ -17,6 +17,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
+// 具有公开的基本类型
 var UObjectBaseUtility_Private = /** @class */ (function () {
     function UObjectBaseUtility_Private() {
     }

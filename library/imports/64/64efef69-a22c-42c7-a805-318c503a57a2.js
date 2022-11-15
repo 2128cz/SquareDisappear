@@ -46,17 +46,26 @@ var PanelTool = /** @class */ (function (_super) {
             for (var nameIndex = 0; nameIndex < residueLayersName.length; nameIndex++) {
                 if (layer.name == residueLayersName[nameIndex]) {
                     residueLayersName[nameIndex] = null;
-                    DevelopersToolGlobal_1.DevelopersToolGlobal.layer = layers[layerIndex];
+                    var nowlayer = layers[layerIndex];
+                    DevelopersToolGlobal_1.DevelopersToolGlobal.layer = nowlayer;
+                    this.LayerDefaultSetting(nowlayer);
                     break;
                 }
             }
         }
     };
+    /**
+     * 层初始设定
+     * @param node
+     */
+    PanelTool.prototype.LayerDefaultSetting = function (node) {
+        node.active = false;
+    };
     __decorate([
         property({
             type: cc.String,
             displayName: '通用层名单',
-            tooltip: '层按放置顺序设定优先级，与名称顺序无关',
+            tooltip: '层按放置顺序设定优先级，与名称顺序无关，默认关闭所有层级，需要在canvas下的脚本进行打开',
             visible: true,
         })
     ], PanelTool.prototype, "_generalLayer", void 0);

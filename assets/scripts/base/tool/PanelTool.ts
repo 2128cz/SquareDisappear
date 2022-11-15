@@ -7,7 +7,7 @@ export default class PanelTool extends cc.Component {
     @property({
         type: cc.String,
         displayName: '通用层名单',
-        tooltip: '层按放置顺序设定优先级，与名称顺序无关',
+        tooltip: '层按放置顺序设定优先级，与名称顺序无关，默认关闭所有层级，需要在canvas下的脚本进行打开',
         visible: true,
     })
     _generalLayer: string[] = ['BackgroundLayer', 'EternalityUILayer', 'DynamicUILayer'];
@@ -27,12 +27,22 @@ export default class PanelTool extends cc.Component {
 
                 if (layer.name == residueLayersName[nameIndex]) {
                     residueLayersName[nameIndex] = null;
-                    ccvv.layer = layers[layerIndex];
+                    let nowlayer = layers[layerIndex];
+                    ccvv.layer = nowlayer;
+                    this.LayerDefaultSetting(nowlayer);
                     break;
                 }
             }
         }
 
+    }
+
+    /**
+     * 层初始设定
+     * @param node 
+     */
+    protected LayerDefaultSetting(node: cc.Node) {
+        node.active = false;
     }
 
 }

@@ -72,9 +72,11 @@ var BlockGroup = /** @class */ (function (_super) {
         // 检查成员是否满了？
         if (this.needCheckMem) {
             var children = this.node.children.filter(function (value) { return value.isValid; });
-            // 满了就销毁
             if (children.length >= Setting_1.default.Game_Column) {
+                // 满了就销毁
                 this.destroyMembers();
+                // 然后将上一个设为最后一组
+                Setting_1.default.endCubeGroup = this._NextGroup;
             }
         }
         // 更新自己的坐标
@@ -82,6 +84,12 @@ var BlockGroup = /** @class */ (function (_super) {
         this.node.setPosition(0, pos.y, 0);
     };
     // tag 用户函数
+    /**
+     * 任何情况下诞生都应该调用初始化
+     * @param index
+     * @param lastGroup
+     * @param nextGroup
+     */
     BlockGroup.prototype.init = function (index, lastGroup, nextGroup) {
         this._GridIndex = index;
         if (lastGroup) {
@@ -91,6 +99,11 @@ var BlockGroup = /** @class */ (function (_super) {
         if (nextGroup) {
             nextGroup._LastGroup = this;
             this._NextGroup = nextGroup;
+        }
+        // 如果诞生时最后一行方块在我的上面
+        if (!Setting_1.default.endCubeGroup || Setting_1.default.endCubeGroup.node.y > this.node.y) {
+            // 那我才是最后一个仔
+            Setting_1.default.endCubeGroup = this;
         }
     };
     /**
@@ -116,13 +129,8 @@ var BlockGroup = /** @class */ (function (_super) {
      * 移除成员
      */
     BlockGroup.prototype.destroyMembers = function () {
-        function findAllChildren(group) {
-            var groupChildren = group.node.children;
-            if (group._LastGroup)
-                groupChildren = __spreadArrays(groupChildren, findAllChildren(group._LastGroup));
-            return groupChildren;
-        }
-        findAllChildren(this).forEach(function (element) {
+        var allChildren = this.findAllChildren(this);
+        allChildren.forEach(function (element) {
             // 将每个成员都替换为销毁效果节点
             var component = element.getComponent(Setting_1.default.blockName);
             if (component)
@@ -131,6 +139,20 @@ var BlockGroup = /** @class */ (function (_super) {
         // 这行消除效果
         var inst = cc.instantiate(Setting_1.default.Effect_Destory);
         this.node.addChild(inst);
+    };
+    /**
+     * 向下寻找所有成员
+     * @param group
+     * @returns
+     */
+    BlockGroup.prototype.findAllChildren = function (group) {
+        if (group.node) {
+            var groupChildren = group.node.children;
+            if (group._LastGroup)
+                groupChildren = __spreadArrays(groupChildren, this.findAllChildren(group._LastGroup));
+            return groupChildren;
+        }
+        return [];
     };
     Object.defineProperty(BlockGroup.prototype, "gridIndex", {
         get: function () { return this._GridIndex; },

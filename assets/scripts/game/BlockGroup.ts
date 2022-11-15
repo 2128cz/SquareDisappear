@@ -22,9 +22,11 @@ export default class BlockGroup extends cc.Component {
         // 检查成员是否满了？
         if (this.needCheckMem) {
             let children = this.node.children.filter(value => { return value.isValid });
-            // 满了就销毁
             if (children.length >= ss.Game_Column) {
+                // 满了就销毁
                 this.destroyMembers();
+                // 然后将上一个设为最后一组
+                ss.endCubeGroup = this._NextGroup;
             }
         }
         // 更新自己的坐标
@@ -34,6 +36,12 @@ export default class BlockGroup extends cc.Component {
 
     // tag 用户函数
 
+    /**
+     * 任何情况下诞生都应该调用初始化
+     * @param index 
+     * @param lastGroup 
+     * @param nextGroup 
+     */
     public init(index: number, lastGroup: BlockGroup, nextGroup?: BlockGroup) {
         this._GridIndex = index;
         if (lastGroup) {
@@ -43,6 +51,11 @@ export default class BlockGroup extends cc.Component {
         if (nextGroup) {
             nextGroup._LastGroup = this;
             this._NextGroup = nextGroup;
+        }
+        // 如果诞生时最后一行方块在我的上面
+        if (!ss.endCubeGroup || ss.endCubeGroup.node.y > this.node.y) {
+            // 那我才是最后一个仔
+            ss.endCubeGroup = this;
         }
     }
 
@@ -69,13 +82,8 @@ export default class BlockGroup extends cc.Component {
      * 移除成员
      */
     protected destroyMembers() {
-        function findAllChildren(group: BlockGroup): cc.Node[] {
-            let groupChildren: cc.Node[] = group.node.children;
-            if (group._LastGroup)
-                groupChildren = [...groupChildren, ...findAllChildren(group._LastGroup)];
-            return groupChildren;
-        }
-        findAllChildren(this).forEach(element => {
+        let allChildren = this.findAllChildren(this);
+        allChildren.forEach(element => {
             // 将每个成员都替换为销毁效果节点
             let component = element.getComponent(ss.blockName);
             if (component)
@@ -86,7 +94,20 @@ export default class BlockGroup extends cc.Component {
         this.node.addChild(inst);
     }
 
-
+    /**
+     * 向下寻找所有成员
+     * @param group 
+     * @returns 
+     */
+    public findAllChildren(group: BlockGroup): cc.Node[] {
+        if (group.node) {
+            let groupChildren: cc.Node[] = group.node.children;
+            if (group._LastGroup)
+                groupChildren = [...groupChildren, ...this.findAllChildren(group._LastGroup)];
+            return groupChildren;
+        }
+        return [];
+    }
 
     // tag 用户参数，宏
 

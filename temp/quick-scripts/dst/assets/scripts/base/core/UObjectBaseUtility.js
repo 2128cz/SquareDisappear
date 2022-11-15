@@ -28,6 +28,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
+// 具有公开的基本类型
 var UObjectBaseUtility_Private = /** @class */ (function () {
     function UObjectBaseUtility_Private() {
     }
@@ -53,4 +54,4 @@ cc._RF.pop();
                         });
                     }
                 })();
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFzc2V0c1xcc2NyaXB0c1xcYmFzZVxcY29yZVxcVU9iamVjdEJhc2VVdGlsaXR5LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQUNBO0lBQUE7SUFFQSxDQUFDO0lBQUQsaUNBQUM7QUFBRCxDQUZBLEFBRUMsSUFBQTtBQUNEO0lBQWdELHNDQUEwQjtJQUExRTs7SUFFQSxDQUFDO0lBQUQseUJBQUM7QUFBRCxDQUZBLEFBRUMsQ0FGK0MsMEJBQTBCLEdBRXpFIiwiZmlsZSI6IiIsInNvdXJjZVJvb3QiOiIvIiwic291cmNlc0NvbnRlbnQiOlsiXHJcbmNsYXNzIFVPYmplY3RCYXNlVXRpbGl0eV9Qcml2YXRlIHtcclxuXHJcbn1cclxuZXhwb3J0IGRlZmF1bHQgY2xhc3MgVU9iamVjdEJhc2VVdGlsaXR5IGV4dGVuZHMgVU9iamVjdEJhc2VVdGlsaXR5X1ByaXZhdGUge1xyXG5cclxufSJdfQ==
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFzc2V0c1xcc2NyaXB0c1xcYmFzZVxcY29yZVxcVU9iamVjdEJhc2VVdGlsaXR5LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQUFBLFlBQVk7QUFDWjtJQUFBO0lBRUEsQ0FBQztJQUFELGlDQUFDO0FBQUQsQ0FGQSxBQUVDLElBQUE7QUFDRDtJQUFnRCxzQ0FBMEI7SUFBMUU7O0lBRUEsQ0FBQztJQUFELHlCQUFDO0FBQUQsQ0FGQSxBQUVDLENBRitDLDBCQUEwQixHQUV6RSIsImZpbGUiOiIiLCJzb3VyY2VSb290IjoiLyIsInNvdXJjZXNDb250ZW50IjpbIi8vIOWFt+acieWFrOW8gOeahOWfuuacrOexu+Wei1xyXG5jbGFzcyBVT2JqZWN0QmFzZVV0aWxpdHlfUHJpdmF0ZSB7XHJcblxyXG59XHJcbmV4cG9ydCBkZWZhdWx0IGNsYXNzIFVPYmplY3RCYXNlVXRpbGl0eSBleHRlbmRzIFVPYmplY3RCYXNlVXRpbGl0eV9Qcml2YXRlIHtcclxuXHJcbn0iXX0=

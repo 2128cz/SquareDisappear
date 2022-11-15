@@ -29,6 +29,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var UObjectBaseUtility_1 = require("./UObjectBaseUtility");
+// 所有类型基本，提供了基本的反射
 var UObject_Private = /** @class */ (function (_super) {
     __extends(UObject_Private, _super);
     function UObject_Private() {
@@ -56,4 +57,4 @@ cc._RF.pop();
                         });
                     }
                 })();
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFzc2V0c1xcc2NyaXB0c1xcYmFzZVxcY29yZVxcVU9iamVjdC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSwyREFBc0Q7QUFFdEQ7SUFBOEIsbUNBQWtCO0lBQWhEOztJQUVBLENBQUM7SUFBRCxzQkFBQztBQUFELENBRkEsQUFFQyxDQUY2Qiw0QkFBa0IsR0FFL0M7QUFFRDtJQUFxQywyQkFBZTtJQUFwRDs7SUFHQSxDQUFDO0lBQUQsY0FBQztBQUFELENBSEEsQUFHQyxDQUhvQyxlQUFlLEdBR25EIiwiZmlsZSI6IiIsInNvdXJjZVJvb3QiOiIvIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IFVPYmplY3RCYXNlVXRpbGl0eSBmcm9tIFwiLi9VT2JqZWN0QmFzZVV0aWxpdHlcIjtcclxuXHJcbmNsYXNzIFVPYmplY3RfUHJpdmF0ZSBleHRlbmRzIFVPYmplY3RCYXNlVXRpbGl0eSB7XHJcblxyXG59XHJcblxyXG5leHBvcnQgZGVmYXVsdCBjbGFzcyBVT2JqZWN0IGV4dGVuZHMgVU9iamVjdF9Qcml2YXRlIHtcclxuXHJcblxyXG59XHJcblxyXG4iXX0=
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFzc2V0c1xcc2NyaXB0c1xcYmFzZVxcY29yZVxcVU9iamVjdC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSwyREFBc0Q7QUFDdEQsa0JBQWtCO0FBQ2xCO0lBQThCLG1DQUFrQjtJQUFoRDs7SUFFQSxDQUFDO0lBQUQsc0JBQUM7QUFBRCxDQUZBLEFBRUMsQ0FGNkIsNEJBQWtCLEdBRS9DO0FBRUQ7SUFBcUMsMkJBQWU7SUFBcEQ7O0lBR0EsQ0FBQztJQUFELGNBQUM7QUFBRCxDQUhBLEFBR0MsQ0FIb0MsZUFBZSxHQUduRCIsImZpbGUiOiIiLCJzb3VyY2VSb290IjoiLyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBVT2JqZWN0QmFzZVV0aWxpdHkgZnJvbSBcIi4vVU9iamVjdEJhc2VVdGlsaXR5XCI7XHJcbi8vIOaJgOacieexu+Wei+WfuuacrO+8jOaPkOS+m+S6huWfuuacrOeahOWPjeWwhFxyXG5jbGFzcyBVT2JqZWN0X1ByaXZhdGUgZXh0ZW5kcyBVT2JqZWN0QmFzZVV0aWxpdHkge1xyXG5cclxufVxyXG5cclxuZXhwb3J0IGRlZmF1bHQgY2xhc3MgVU9iamVjdCBleHRlbmRzIFVPYmplY3RfUHJpdmF0ZSB7XHJcblxyXG5cclxufVxyXG5cclxuIl19

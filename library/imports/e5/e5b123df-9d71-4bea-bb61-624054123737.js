@@ -7,6 +7,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var DevelopersToolGlobal_1 = require("../base/class/DevelopersToolGlobal");
 var GridAdsorb_1 = require("../base/tool/GridAdsorb");
 // 游戏固定参数设定
+// 用法定位 类似于宏转义
+/**
+ * 这里定义基本的全局参数
+ */
 var Setting = /** @class */ (function () {
     function Setting() {
     }
@@ -49,7 +53,7 @@ var Setting = /** @class */ (function () {
     });
     Object.defineProperty(Setting, "Separator", {
         // 底部截止线，用于生成方块位置和判断是否结束游戏
-        get: function () { return -379.4; },
+        get: function () { return cc.winSize.height * (.17 - .5); },
         enumerable: false,
         configurable: true
     });
@@ -61,6 +65,56 @@ var Setting = /** @class */ (function () {
     });
     Object.defineProperty(Setting, "Group_1", {
         get: function () { return 'player'; },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Setting, "ice_CoolDownTime", {
+        get: function () { return this._SkillIce_CoolDownTime; },
+        set: function (value) { this._SkillIce_CoolDownTime = value; },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Setting, "ice_Duration", {
+        get: function () { return this._SkillIce_Duration; },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Setting, "hit_Force", {
+        get: function () { return this._SkillHit_Force; },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Setting, "hit_CoolDownTime", {
+        get: function () { return this._SkillHit_CoolDownTime; },
+        set: function (value) { this._SkillHit_CoolDownTime = value; },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Setting, "boom_CoolDownTime", {
+        get: function () { return this._SkillBoom_CoolDownTime; },
+        set: function (value) { this._SkillBoom_CoolDownTime = value; },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Setting, "score", {
+        get: function () { return this._Score; },
+        set: function (value) { this._Score = value; },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Setting, "score_add", {
+        set: function (value) { this._Score += value; },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Setting, "score_sub", {
+        set: function (value) { this._Score -= value; },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Setting, "endCubeGroup", {
+        get: function () { return this._EndCubeGroup; },
+        set: function (value) { this._EndCubeGroup = value; },
         enumerable: false,
         configurable: true
     });
@@ -86,6 +140,12 @@ var Setting = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
+    Object.defineProperty(Setting, "SkillEvent", {
+        // 到关卡的事件转发
+        set: function (event) { DevelopersToolGlobal_1.DevelopersToolGlobal.fristScript[event](); },
+        enumerable: false,
+        configurable: true
+    });
     Object.defineProperty(Setting, "GridCurrentPoint", {
         get: function () { return this._GridCurrentPoint; },
         set: function (value) { this._GridCurrentPoint = value; },
@@ -106,6 +166,12 @@ var Setting = /** @class */ (function () {
     Object.defineProperty(Setting, "GridOriginOffset", {
         // 网格参数
         get: function () { return new cc.Vec3(0, GridAdsorb_1.default.grid.gridSize.y / 2 + cc.winSize.height / 2, 0); },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Setting, "menu", {
+        get: function () { return this._Menu; },
+        set: function (value) { this._Menu = value; },
         enumerable: false,
         configurable: true
     });
@@ -141,11 +207,23 @@ var Setting = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
+    // 技能设定
+    Setting._SkillIce_CoolDownTime = 8;
+    Setting._SkillIce_Duration = 1;
+    Setting._SkillHit_CoolDownTime = 5;
+    Setting._SkillHit_Force = 1200;
+    Setting._SkillBoom_CoolDownTime = 15;
+    // 计分器
+    Setting._Score = 0;
+    // 场景中最后一组方块
+    Setting._EndCubeGroup = null;
     // 设定参数定义
     Setting._GameSpeed = 100;
-    Setting._CubeSpeed = 400;
+    Setting._CubeSpeed = 950;
     // 网格指针
     Setting._GridCurrentPoint = 0;
+    // 关卡菜单界面脚本
+    Setting._Menu = null;
     return Setting;
 }());
 exports.default = Setting;

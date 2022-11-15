@@ -27,6 +27,12 @@ var DevelopersToolGlobal_1 = require("../base/class/DevelopersToolGlobal");
 var GridAdsorb_1 = require("../base/tool/GridAdsorb");
 var Setting_1 = require("./Setting");
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property, executeInEditMode = _a.executeInEditMode;
+/**
+ * 对于关卡蓝图中的参数，都定义在设置中
+ * 而其他蓝图中的参数则会放置在其最强关联处，比如自己本身的类内
+ * 而部分地方可能会用到全局工具的部分，可以改为以设置类全局的模式，全局工具是旧方法
+ * 关于全局工具的用法，可以参考discard-标记的文件，他们是已经确定废弃的用法
+ */
 var GameLevel = /** @class */ (function (_super) {
     __extends(GameLevel, _super);
     // @executeInEditMode
@@ -38,22 +44,53 @@ var GameLevel = /** @class */ (function (_super) {
          * 上一组诞生组
          */
         _this.lastGroup = null;
+        /**
+         * 全部子项，这在平时是没有用的
+         */
+        _this.allChildren = null;
+        /**
+         * 计数器，用于辅助上面的属性
+         */
+        _this.allChildrenCount = 0;
         return _this;
     }
     // tag LIFE-CYCLE CALLBACKS:
-    GameLevel.prototype.onLoad = function () {
+    // onLoad() {}
+    GameLevel.prototype.onEnable = function () {
         // 基本初始化
         this.init();
     };
     // start() {}
     GameLevel.prototype.update = function (dt) {
+        var _this = this;
         // 如果目标位置小于一定时，创建方块
         var pos = GridAdsorb_1.default.grid.getGridPositionByIndex(Setting_1.default.GridCurrentPointToVec);
         if (pos.y <= cc.winSize.height / 2) {
             this.SpawnCubeGroupAndInit(Setting_1.default.GridPointer);
         }
-        // 网格移动，这也会驱动方块移动
-        GridAdsorb_1.default.grid.offset = Setting_1.default.GameVector.mul(dt);
+        // 如果最后一行小于一定时，结束游戏
+        if (Setting_1.default.endCubeGroup && Setting_1.default.endCubeGroup.node.y < Setting_1.default.Separator) {
+            if (!this.allChildren) {
+                this.allChildren = this.lastGroup.findAllChildren(this.lastGroup);
+                // 一个一个破掉
+                this.allChildrenCount = this.allChildren.length;
+                cc.log(this.allChildren);
+                this.schedule(function () {
+                    if (_this.allChildrenCount--) {
+                        var desAct = _this.allChildren[_this.allChildrenCount];
+                        desAct.getComponent(Setting_1.default.blockName).destroyWithAnimation();
+                    }
+                    else {
+                        _this.unscheduleAllCallbacks();
+                        Setting_1.default.menu.gameOver();
+                    }
+                }, .08);
+            }
+        }
+        // 否则继续网格移动，这也会驱动方块移动
+        else {
+            GridAdsorb_1.default.grid.offset = Setting_1.default.GameVector.mul(dt);
+        }
     };
     // tag 用户函数部分 
     /**
@@ -61,7 +98,7 @@ var GameLevel = /** @class */ (function (_super) {
      */
     GameLevel.prototype.init = function () {
         // 初始化对齐网格
-        new GridAdsorb_1.default(new cc.Vec3(Setting_1.default.Game_Column, Setting_1.default.Game_Row2, 0), new cc.Vec3(Setting_1.default.Cube_width, Setting_1.default.Cube_Height, 0));
+        GridAdsorb_1.default.grid = new GridAdsorb_1.default(new cc.Vec3(Setting_1.default.Game_Column, Setting_1.default.Game_Row2, 0), new cc.Vec3(Setting_1.default.Cube_width, Setting_1.default.Cube_Height, 0));
         // 开启碰撞
         var manager = cc.director.getCollisionManager();
         manager.enabled = true;
@@ -76,6 +113,14 @@ var GameLevel = /** @class */ (function (_super) {
         DevelopersToolGlobal_1.DevelopersToolGlobal.script = this;
         // 注册触摸
         this.touchRegister();
+        // 清理战场
+        if (this.allChildren)
+            this.allChildren.forEach(function (e) { e.destroy(); });
+        this.allChildren = null;
+        if (this.gameArea.children.length > 0)
+            this.gameArea.children.forEach(function (e) { e.destroy(); });
+        this.allChildrenCount = 0;
+        Setting_1.default.endCubeGroup = null;
     };
     /**
      * 创建方块组，并按链初始化
@@ -124,7 +169,14 @@ var GameLevel = /** @class */ (function (_super) {
         // let inx = Math.ceil(touchArea) * 177 - ((cc.winSize.width + ss.Cube_width) / 2) - 5
         inst.setPosition(inx, Setting_1.default.Separator);
     };
-    // tag 基本操作函数
+    // tag 特效方法 
+    GameLevel.prototype.ice = function () {
+    };
+    GameLevel.prototype.hit = function () {
+    };
+    GameLevel.prototype.boom = function () {
+    };
+    // tag 基本操作函数 
     /**
     * creat instantiate
     * @param {cc.Prefab} actor 实例化的目标

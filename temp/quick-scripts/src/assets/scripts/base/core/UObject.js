@@ -18,6 +18,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var UObjectBaseUtility_1 = require("./UObjectBaseUtility");
+// 所有类型基本，提供了基本的反射
 var UObject_Private = /** @class */ (function (_super) {
     __extends(UObject_Private, _super);
     function UObject_Private() {
