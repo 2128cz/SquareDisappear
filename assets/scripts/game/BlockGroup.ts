@@ -23,10 +23,11 @@ export default class BlockGroup extends cc.Component {
         if (this.needCheckMem) {
             let children = this.node.children.filter(value => { return value.isValid });
             if (children.length >= ss.Game_Column) {
-                // 满了就销毁
-                this.destroyMembers();
+                // 满了就销毁，并加分
+                ss.score_add = this.destroyMembers();
                 // 然后将上一个设为最后一组
                 ss.endCubeGroup = this._NextGroup;
+
             }
         }
         // 更新自己的坐标
@@ -79,9 +80,10 @@ export default class BlockGroup extends cc.Component {
     }
 
     /**
-     * 移除成员
+     * 消除这行及以下的所有成员
+     * 
      */
-    protected destroyMembers() {
+    public destroyMembers(palyEffect = true): number {
         let allChildren = this.findAllChildren(this);
         allChildren.forEach(element => {
             // 将每个成员都替换为销毁效果节点
@@ -90,8 +92,11 @@ export default class BlockGroup extends cc.Component {
                 component.destroyWithAnimation();
         });
         // 这行消除效果
-        let inst = cc.instantiate(ss.Effect_Destory);
-        this.node.addChild(inst);
+        if (palyEffect) {
+            let inst = cc.instantiate(ss.Effect_Destory);
+            this.node.addChild(inst);
+        }
+        return allChildren.length;
     }
 
     /**

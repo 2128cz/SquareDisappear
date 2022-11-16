@@ -149,7 +149,7 @@
   },
   {
     "__type__": "cc.Sprite",
-    "_name": "",
+    "_name": "bottom line<Sprite>",
     "_objFlags": 0,
     "node": {
       "__id__": 2
@@ -212,7 +212,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "5a9d70a3-d764-44dc-b889-3bc2f15d0d31"
     },
     "fileId": "39jwr8s5pBw6Hi4iOgqnTW",
     "sync": false
@@ -286,7 +286,7 @@
   },
   {
     "__type__": "cc.Sprite",
-    "_name": "",
+    "_name": "img lines<Sprite>",
     "_objFlags": 0,
     "node": {
       "__id__": 6
@@ -349,7 +349,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "5a9d70a3-d764-44dc-b889-3bc2f15d0d31"
     },
     "fileId": "c4jv38gpVHhZWB4XxuaLPf",
     "sync": false
@@ -387,7 +387,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "5a9d70a3-d764-44dc-b889-3bc2f15d0d31"
     },
     "fileId": "2cdoE57VNJ2ag2QrAqb1Ph",
     "sync": false

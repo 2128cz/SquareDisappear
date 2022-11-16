@@ -23,6 +23,7 @@ require('./assets/scripts/game/Setting');
 require('./assets/scripts/game/discard-Block');
 require('./assets/scripts/game/discard-GameLevel');
 require('./assets/scripts/game/effect/ButtonSkill');
+require('./assets/scripts/game/effect/IceEffectDextory');
 require('./assets/scripts/game/effect/PlayDraAniAndDestory');
 require('./assets/scripts/widget/Botton_LoadEff');
 require('./assets/scripts/widget/GameUI');

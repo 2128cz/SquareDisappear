@@ -73,8 +73,8 @@ var BlockGroup = /** @class */ (function (_super) {
         if (this.needCheckMem) {
             var children = this.node.children.filter(function (value) { return value.isValid; });
             if (children.length >= Setting_1.default.Game_Column) {
-                // 满了就销毁
-                this.destroyMembers();
+                // 满了就销毁，并加分
+                Setting_1.default.score_add = this.destroyMembers();
                 // 然后将上一个设为最后一组
                 Setting_1.default.endCubeGroup = this._NextGroup;
             }
@@ -126,9 +126,11 @@ var BlockGroup = /** @class */ (function (_super) {
         });
     };
     /**
-     * 移除成员
+     * 消除这行及以下的所有成员
+     *
      */
-    BlockGroup.prototype.destroyMembers = function () {
+    BlockGroup.prototype.destroyMembers = function (palyEffect) {
+        if (palyEffect === void 0) { palyEffect = true; }
         var allChildren = this.findAllChildren(this);
         allChildren.forEach(function (element) {
             // 将每个成员都替换为销毁效果节点
@@ -137,8 +139,11 @@ var BlockGroup = /** @class */ (function (_super) {
                 component.destroyWithAnimation();
         });
         // 这行消除效果
-        var inst = cc.instantiate(Setting_1.default.Effect_Destory);
-        this.node.addChild(inst);
+        if (palyEffect) {
+            var inst = cc.instantiate(Setting_1.default.Effect_Destory);
+            this.node.addChild(inst);
+        }
+        return allChildren.length;
     };
     /**
      * 向下寻找所有成员

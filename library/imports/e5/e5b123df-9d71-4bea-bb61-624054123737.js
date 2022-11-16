@@ -26,7 +26,7 @@ var Setting = /** @class */ (function () {
         configurable: true
     });
     Object.defineProperty(Setting, "Game_Row2", {
-        get: function () { return 15; },
+        get: function () { return 30; },
         enumerable: false,
         configurable: true
     });
@@ -124,8 +124,18 @@ var Setting = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
+    Object.defineProperty(Setting, "GameAutoSpeed", {
+        get: function () { return new cc.Vec3(0, -((this.endCubeGroup ? (this.endCubeGroup.node.y + cc.winSize.height / 2) / cc.winSize.height : 1) * this.GameSpeed), 0); },
+        enumerable: false,
+        configurable: true
+    });
     Object.defineProperty(Setting, "GameVector", {
-        get: function () { return new cc.Vec3(0, -this._GameSpeed, 0); },
+        get: function () { return new cc.Vec3(0, -80, 0); },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Setting, "GameAutoDrag", {
+        get: function () { return (this.endCubeGroup ? 1 - (this.endCubeGroup.node.y + cc.winSize.height / 2) / cc.winSize.height : 0); },
         enumerable: false,
         configurable: true
     });
@@ -169,6 +179,12 @@ var Setting = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
+    Object.defineProperty(Setting, "movement", {
+        get: function () { return this._Movement; },
+        set: function (value) { this._Movement = value; },
+        enumerable: false,
+        configurable: true
+    });
     Object.defineProperty(Setting, "menu", {
         get: function () { return this._Menu; },
         set: function (value) { this._Menu = value; },
@@ -196,6 +212,21 @@ var Setting = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
+    Object.defineProperty(Setting, "Effect_Boom", {
+        get: function () { return DevelopersToolGlobal_1.DevelopersToolGlobal.warehouse['prefabs']['Boom Effect Node']; },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Setting, "Effect_Hit", {
+        get: function () { return DevelopersToolGlobal_1.DevelopersToolGlobal.warehouse['prefabs']['Hit Effect Node']; },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Setting, "Effect_Ice", {
+        get: function () { return DevelopersToolGlobal_1.DevelopersToolGlobal.warehouse['prefabs']['Ice Effect Node']; },
+        enumerable: false,
+        configurable: true
+    });
     Object.defineProperty(Setting, "blockName", {
         // 资产常量定义
         get: function () { return 'Block'; },
@@ -208,20 +239,22 @@ var Setting = /** @class */ (function () {
         configurable: true
     });
     // 技能设定
-    Setting._SkillIce_CoolDownTime = 8;
-    Setting._SkillIce_Duration = 1;
+    Setting._SkillIce_CoolDownTime = 15;
+    Setting._SkillIce_Duration = 8;
     Setting._SkillHit_CoolDownTime = 5;
-    Setting._SkillHit_Force = 1200;
-    Setting._SkillBoom_CoolDownTime = 15;
+    Setting._SkillHit_Force = 880000; // 单位n/ccmm2 （牛顿/cocos平方单位）
+    Setting._SkillBoom_CoolDownTime = 39;
     // 计分器
     Setting._Score = 0;
     // 场景中最后一组方块
     Setting._EndCubeGroup = null;
     // 设定参数定义
-    Setting._GameSpeed = 100;
+    Setting._GameSpeed = 120;
     Setting._CubeSpeed = 950;
     // 网格指针
     Setting._GridCurrentPoint = 0;
+    // 网格驱动器
+    Setting._Movement = null;
     // 关卡菜单界面脚本
     Setting._Menu = null;
     return Setting;

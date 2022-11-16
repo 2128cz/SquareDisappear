@@ -108,6 +108,8 @@ export default class Block extends cc.Component {
      * 替换为动画节点后销毁  
      */
     public destroyWithAnimation() {
+
+
         let inst = cc.instantiate(ss.Effect_SquareBreak);
         inst.setPosition(this.node.getPosition());
         this.node.parent.addChild(inst);

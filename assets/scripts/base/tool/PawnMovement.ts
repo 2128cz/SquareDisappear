@@ -1,12 +1,17 @@
 import { mathMacro as kismit } from '../class/DevelopersToolGlobal';
 
+interface IPawnMovementInterface {
+    getPosition(): cc.Vec3;
+    setPosition(x: cc.Vec3 | cc.Vec2 | number, y?: number, z?: number);
+}
+
 export default class PawnMovement {
-    constructor(context: cc.Node) {
+    constructor(context: cc.Node | IPawnMovementInterface) {
         this.context = context;
         this.arrivePosition = context.getPosition();
     }
 
-    protected context: cc.Node = null;
+    protected context: cc.Node | IPawnMovementInterface = null;
 
     // TAG position                                                                                                 
 
@@ -180,9 +185,9 @@ export default class PawnMovement {
      */
     public set addforce(force: cc.Vec3 | cc.Vec2) {
         if (force instanceof cc.Vec2)
-            this._Physicforce = this._Physicforce.add(new cc.Vec3(force.x, force.y, 0));
+            this._Physicforce = new cc.Vec3(force.x, force.y, 0).add(this._Physicforce);
         else
-            this._Physicforce = this._Physicforce.add(force);
+            this._Physicforce = force.add(this._Physicforce);
     };
 
     /**

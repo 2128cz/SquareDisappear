@@ -291,9 +291,9 @@ var PawnMovement = /** @class */ (function () {
          */
         set: function (force) {
             if (force instanceof cc.Vec2)
-                this._Physicforce = this._Physicforce.add(new cc.Vec3(force.x, force.y, 0));
+                this._Physicforce = new cc.Vec3(force.x, force.y, 0).add(this._Physicforce);
             else
-                this._Physicforce = this._Physicforce.add(force);
+                this._Physicforce = force.add(this._Physicforce);
         },
         enumerable: false,
         configurable: true

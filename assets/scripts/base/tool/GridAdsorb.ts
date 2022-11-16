@@ -26,8 +26,6 @@ class GridAbsorb_Private {
     protected _CellSize: cc.Vec3 = new cc.Vec3(100);
     // 网格计算原点偏移
     protected _GridOffset: cc.Vec3 = new cc.Vec3(0);
-    // 网格计算原点偏移
-    // protected _OriginOffset: cc.Vec3 = new cc.Vec3(0);
     // 网格总尺寸
     protected _GridSize: cc.Vec3 = null;
     // 各轴晶胞数量
@@ -173,5 +171,21 @@ export default class GridAbsorb extends GridAbsorb_Private {
         // this._GridEdgeAnchor_X = toAnchor(anchor.x);
         // this._GridEdgeAnchor_Y = toAnchor(anchor.y);
         // this._GridEdgeAnchor_Z = toAnchor(anchor.z);
+    }
+
+    /**
+     * 设置坐标  
+     * 用于与官方设置方法匹配
+     */
+    public setPosition(pos: cc.Vec3) {
+        this._GridOffset = pos;
+    }
+
+    /**
+     * 获取坐标  
+     * 用于与官方设置方法匹配
+     */
+    public getPosition(): cc.Vec3 {
+        return this._GridOffset;
     }
 }

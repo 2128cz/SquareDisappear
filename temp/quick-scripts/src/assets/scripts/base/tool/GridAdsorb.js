@@ -28,8 +28,6 @@ var GridAbsorb_Private = /** @class */ (function () {
         this._CellSize = new cc.Vec3(100);
         // 网格计算原点偏移
         this._GridOffset = new cc.Vec3(0);
-        // 网格计算原点偏移
-        // protected _OriginOffset: cc.Vec3 = new cc.Vec3(0);
         // 网格总尺寸
         this._GridSize = null;
         // 各轴晶胞数量
@@ -208,6 +206,20 @@ var GridAbsorb = /** @class */ (function (_super) {
         enumerable: false,
         configurable: true
     });
+    /**
+     * 设置坐标
+     * 用于与官方设置方法匹配
+     */
+    GridAbsorb.prototype.setPosition = function (pos) {
+        this._GridOffset = pos;
+    };
+    /**
+     * 获取坐标
+     * 用于与官方设置方法匹配
+     */
+    GridAbsorb.prototype.getPosition = function () {
+        return this._GridOffset;
+    };
     return GridAbsorb;
 }(GridAbsorb_Private));
 exports.default = GridAbsorb;

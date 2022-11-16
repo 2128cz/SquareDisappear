@@ -33,7 +33,9 @@ var MenuLevel = /** @class */ (function (_super) {
     }
     MenuLevel.prototype.onLoad = function () {
         DevelopersToolGlobal_1.DevelopersToolGlobal.layers[0].active = true;
-        DevelopersToolGlobal_1.DevelopersToolGlobal.layers[2].active = true;
+        DevelopersToolGlobal_1.DevelopersToolGlobal.layers[1].active = false;
+        DevelopersToolGlobal_1.DevelopersToolGlobal.layers[2].active = false;
+        DevelopersToolGlobal_1.DevelopersToolGlobal.layers[3].active = true;
         Setting_1.default.menu = this;
     };
     // start () {}
@@ -43,15 +45,28 @@ var MenuLevel = /** @class */ (function (_super) {
      * 游戏开始
      */
     MenuLevel.prototype.gameStart = function () {
+        DevelopersToolGlobal_1.DevelopersToolGlobal.layers[0].active = true;
         DevelopersToolGlobal_1.DevelopersToolGlobal.layers[1].active = true;
         DevelopersToolGlobal_1.DevelopersToolGlobal.layers[2].active = false;
+        DevelopersToolGlobal_1.DevelopersToolGlobal.layers[3].active = false;
     };
     /**
      * 游戏结束
      */
     MenuLevel.prototype.gameOver = function () {
-        DevelopersToolGlobal_1.DevelopersToolGlobal.layers[1].active = false;
+        DevelopersToolGlobal_1.DevelopersToolGlobal.layers[0].active = true;
+        DevelopersToolGlobal_1.DevelopersToolGlobal.layers[1].active = true;
         DevelopersToolGlobal_1.DevelopersToolGlobal.layers[2].active = true;
+        DevelopersToolGlobal_1.DevelopersToolGlobal.layers[3].active = false;
+    };
+    /**
+    * 打开菜单
+    */
+    MenuLevel.prototype.openMenu = function () {
+        DevelopersToolGlobal_1.DevelopersToolGlobal.layers[0].active = true;
+        DevelopersToolGlobal_1.DevelopersToolGlobal.layers[1].active = false;
+        DevelopersToolGlobal_1.DevelopersToolGlobal.layers[2].active = false;
+        DevelopersToolGlobal_1.DevelopersToolGlobal.layers[3].active = true;
     };
     // tag 按钮事件 
     MenuLevel.prototype.onButtonClick = function (event, cusData) {

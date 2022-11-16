@@ -8,7 +8,10 @@ export default class MenuLevel extends cc.Component {
 
     onLoad() {
         ccvv.layers[0].active = true;
-        ccvv.layers[2].active = true;
+        ccvv.layers[1].active = false;
+        ccvv.layers[2].active = false;
+        ccvv.layers[3].active = true;
+
         ss.menu = this;
     }
 
@@ -21,16 +24,30 @@ export default class MenuLevel extends cc.Component {
      * 游戏开始
      */
     public gameStart() {
+        ccvv.layers[0].active = true;
         ccvv.layers[1].active = true;
         ccvv.layers[2].active = false;
+        ccvv.layers[3].active = false;
     }
 
     /**
      * 游戏结束
      */
     public gameOver() {
-        ccvv.layers[1].active = false;
+        ccvv.layers[0].active = true;
+        ccvv.layers[1].active = true;
         ccvv.layers[2].active = true;
+        ccvv.layers[3].active = false;
+    }
+
+    /**
+    * 打开菜单
+    */
+    public openMenu() {
+        ccvv.layers[0].active = true;
+        ccvv.layers[1].active = false;
+        ccvv.layers[2].active = false;
+        ccvv.layers[3].active = true;
     }
 
     // tag 按钮事件 
