@@ -78,7 +78,6 @@ var GameLevel = /** @class */ (function (_super) {
             // 简单的移动方式
             // GridAbsorb.grid.offset = ss.GameVector.mul(dt);
             // 移动组件移动方式
-            cc.log(Setting_1.default.GameAutoDrag);
             Setting_1.default.movement.addforce = Setting_1.default.GameAutoSpeed;
             Setting_1.default.movement.addDrag = Setting_1.default.GameAutoDrag;
             Setting_1.default.movement.updateByVelocity(dt);

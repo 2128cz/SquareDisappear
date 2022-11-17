@@ -1,4 +1,5 @@
 
+require('./assets/CompTable');
 require('./assets/load/Loading');
 require('./assets/scripts/base/class/ActorClass');
 require('./assets/scripts/base/class/DevelopersToolClass');
@@ -15,15 +16,16 @@ require('./assets/scripts/base/tool/GridAdsorb');
 require('./assets/scripts/base/tool/NoRootTree');
 require('./assets/scripts/base/tool/PanelTool');
 require('./assets/scripts/base/tool/PawnMovement');
+require('./assets/scripts/base/tool/SoundListener');
+require('./assets/scripts/base/tool/SoundPlayer');
 require('./assets/scripts/game/Block');
 require('./assets/scripts/game/BlockGroup');
 require('./assets/scripts/game/GameLevel');
 require('./assets/scripts/game/MenuLevel');
 require('./assets/scripts/game/Setting');
-require('./assets/scripts/game/discard-Block');
-require('./assets/scripts/game/discard-GameLevel');
+require('./assets/scripts/game/deprecated-Block');
+require('./assets/scripts/game/deprecated-GameLevel');
 require('./assets/scripts/game/effect/ButtonSkill');
+require('./assets/scripts/game/effect/GetGameScroe');
 require('./assets/scripts/game/effect/IceEffectDextory');
 require('./assets/scripts/game/effect/PlayDraAniAndDestory');
-require('./assets/scripts/widget/Botton_LoadEff');
-require('./assets/scripts/widget/GameUI');

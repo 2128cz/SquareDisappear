@@ -227,6 +227,61 @@ var Setting = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
+    Object.defineProperty(Setting, "Sound_bgm", {
+        get: function () { return DevelopersToolGlobal_1.DevelopersToolGlobal.warehouse['sounds']['bgm']; },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Setting, "Sound_btnn", {
+        get: function () { return DevelopersToolGlobal_1.DevelopersToolGlobal.warehouse['sounds']['button']; },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Setting, "Sound_btny", {
+        get: function () { return DevelopersToolGlobal_1.DevelopersToolGlobal.warehouse['sounds']['button_yes']; },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Setting, "Sound_lose", {
+        get: function () { return DevelopersToolGlobal_1.DevelopersToolGlobal.warehouse['sounds']['lose']; },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Setting, "Sound_boom", {
+        get: function () { return DevelopersToolGlobal_1.DevelopersToolGlobal.warehouse['sounds']['prop_bomb']; },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Setting, "Sound_hit", {
+        get: function () { return DevelopersToolGlobal_1.DevelopersToolGlobal.warehouse['sounds']['prop_hit']; },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Setting, "Sound_ice", {
+        get: function () { return DevelopersToolGlobal_1.DevelopersToolGlobal.warehouse['sounds']['prop_ice']; },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Setting, "Sound_shot", {
+        get: function () { return DevelopersToolGlobal_1.DevelopersToolGlobal.warehouse['sounds']['shot']; },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Setting, "Sound_des1", {
+        get: function () { return DevelopersToolGlobal_1.DevelopersToolGlobal.warehouse['sounds']['xiaochu1']; },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Setting, "Sound_des2", {
+        get: function () { return DevelopersToolGlobal_1.DevelopersToolGlobal.warehouse['sounds']['xiaochu2']; },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Setting, "Sound_des3", {
+        get: function () { return DevelopersToolGlobal_1.DevelopersToolGlobal.warehouse['sounds']['xiaochu3']; },
+        enumerable: false,
+        configurable: true
+    });
     Object.defineProperty(Setting, "blockName", {
         // 资产常量定义
         get: function () { return 'Block'; },

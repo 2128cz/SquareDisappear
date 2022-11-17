@@ -1,4 +1,5 @@
 import { DevelopersToolGlobal as ccvv } from "../base/class/DevelopersToolGlobal";
+import { SoundPlayer } from "../base/tool/SoundPlayer";
 import ss from "./Setting";
 
 const { ccclass, property } = cc._decorator;
@@ -13,9 +14,13 @@ export default class MenuLevel extends cc.Component {
         ccvv.layers[3].active = true;
 
         ss.menu = this;
+        
+
     }
 
-    // start () {}
+    start () {
+        new SoundPlayer(ss.Sound_bgm);
+    }
     // update (dt) {}
 
     // tag 用户逻辑

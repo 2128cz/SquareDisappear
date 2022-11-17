@@ -31,6 +31,8 @@ export default class GameLevel extends cc.Component {
         manager.enabled = true;
         manager.enabledDebugDraw = true;
         manager.enabledDrawBoundingBox = true;
+
+        
     }
 
     onEnable() {
@@ -56,11 +58,11 @@ export default class GameLevel extends cc.Component {
             // GridAbsorb.grid.offset = ss.GameVector.mul(dt);
 
             // 移动组件移动方式
-            cc.log(ss.GameAutoDrag);
             ss.movement.addforce = ss.GameAutoSpeed;
             ss.movement.addDrag = ss.GameAutoDrag;
             ss.movement.updateByVelocity(dt);
         }
+        
     }
 
     // tag 用户函数部分 

@@ -24,6 +24,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var DevelopersToolGlobal_1 = require("../base/class/DevelopersToolGlobal");
+var SoundPlayer_1 = require("../base/tool/SoundPlayer");
 var Setting_1 = require("./Setting");
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
 var MenuLevel = /** @class */ (function (_super) {
@@ -38,7 +39,9 @@ var MenuLevel = /** @class */ (function (_super) {
         DevelopersToolGlobal_1.DevelopersToolGlobal.layers[3].active = true;
         Setting_1.default.menu = this;
     };
-    // start () {}
+    MenuLevel.prototype.start = function () {
+        new SoundPlayer_1.SoundPlayer(Setting_1.default.Sound_bgm);
+    };
     // update (dt) {}
     // tag 用户逻辑
     /**

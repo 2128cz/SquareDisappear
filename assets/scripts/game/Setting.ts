@@ -103,6 +103,18 @@ export default class Setting {
     public static get Effect_Hit() { return ccvv.warehouse['prefabs']['Hit Effect Node'] }
     public static get Effect_Ice() { return ccvv.warehouse['prefabs']['Ice Effect Node'] }
 
+    public static get Sound_bgm() { return ccvv.warehouse['sounds']['bgm'] }
+    public static get Sound_btnn() { return ccvv.warehouse['sounds']['button'] }
+    public static get Sound_btny() { return ccvv.warehouse['sounds']['button_yes'] }
+    public static get Sound_lose() { return ccvv.warehouse['sounds']['lose'] }
+    public static get Sound_boom() { return ccvv.warehouse['sounds']['prop_bomb'] }
+    public static get Sound_hit() { return ccvv.warehouse['sounds']['prop_hit'] }
+    public static get Sound_ice() { return ccvv.warehouse['sounds']['prop_ice'] }
+    public static get Sound_shot() { return ccvv.warehouse['sounds']['shot'] }
+    public static get Sound_des1() { return ccvv.warehouse['sounds']['xiaochu1'] }
+    public static get Sound_des2() { return ccvv.warehouse['sounds']['xiaochu2'] }
+    public static get Sound_des3() { return ccvv.warehouse['sounds']['xiaochu3'] }
+
     // 资产常量定义
     public static get blockName() { return 'Block' }
     public static get blockGroupName() { return 'BlockGroup' }
