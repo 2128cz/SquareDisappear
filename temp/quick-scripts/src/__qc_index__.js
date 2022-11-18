@@ -2,11 +2,13 @@
 require('./assets/CompTable');
 require('./assets/load/Loading');
 require('./assets/scripts/base/class/ActorClass');
+require('./assets/scripts/base/class/AudioClass');
 require('./assets/scripts/base/class/DevelopersToolClass');
 require('./assets/scripts/base/class/DevelopersToolGlobal');
 require('./assets/scripts/base/class/DiologClass');
 require('./assets/scripts/base/class/DynamicPanelClass');
 require('./assets/scripts/base/class/PawnClass');
+require('./assets/scripts/base/class/SoundPlayerClass');
 require('./assets/scripts/base/core/RigorousLibrary');
 require('./assets/scripts/base/core/RigorousType');
 require('./assets/scripts/base/core/UObject');

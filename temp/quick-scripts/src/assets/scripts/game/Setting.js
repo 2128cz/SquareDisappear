@@ -124,6 +124,11 @@ var Setting = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
+    Object.defineProperty(Setting, "GameSpeed_MulMax", {
+        get: function () { return 250 - 130; },
+        enumerable: false,
+        configurable: true
+    });
     Object.defineProperty(Setting, "GameAutoSpeed", {
         get: function () { return new cc.Vec3(0, -((this.endCubeGroup ? (this.endCubeGroup.node.y + cc.winSize.height / 2) / cc.winSize.height : 1) * this.GameSpeed), 0); },
         enumerable: false,
@@ -303,8 +308,8 @@ var Setting = /** @class */ (function () {
     Setting._Score = 0;
     // 场景中最后一组方块
     Setting._EndCubeGroup = null;
-    // 设定参数定义
-    Setting._GameSpeed = 120;
+    // 设定参数定义 我认为极限速度大概在250左右，再快了就反应不过来了
+    Setting._GameSpeed = 130;
     Setting._CubeSpeed = 950;
     // 网格指针
     Setting._GridCurrentPoint = 0;

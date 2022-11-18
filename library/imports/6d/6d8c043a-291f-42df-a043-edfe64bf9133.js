@@ -3,6 +3,24 @@ cc._RF.push(module, '6d8c0Q6KR9C36BD7f5kv5Ez', 'SoundPlayer');
 // scripts/base/tool/SoundPlayer.ts
 
 "use strict";
+/**
+ * cocos2.4 2d部分只提供了音量的设置，所以这里只实现包络与并发控制的功能
+ * 以及在包络的基础上扩展出倾听者功能。
+ *
+ * 如何使用：
+ * 你可以只导入SoundPlayer这个类，并用new SoundPlayer( $soundClip )的方式来播放一次音频
+ * new的音频不需要保存，等待播放完毕后会自动销毁；
+ * 不过销毁后依然可以继续持有soundpalyer实例，并通过调用play等播放方法重新播放，这是符合用户直觉的。
+ * 如果需要完成多音频并发，可以通过在new音频前 预先指定将要存入的播放序列，
+ * 而这可以通过new声音库预设器来完成。
+ *
+ * 播放序列过程：
+ * 在进行'new SoundPlayer'时，'SoundPlayer'会自动推入到剪辑发射列表，
+ * 并等待用户后续的所有操作完成，在随后的生命周期函数中，效果器与播放器都会被一一处理。
+ *
+ *
+ *
+ */
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -23,29 +41,36 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SoundConcurrency = exports.SoundSubmix = exports.SoundAttenuation = exports.SoundPreinstall = exports.SoundPlayer = exports.SoundPlayercontroller = void 0;
+exports.SoundConcurrency = exports.SoundSubmix = exports.SoundAttenuation = exports.SoundPlayer = exports.SceneSoundPlaybackController = void 0;
+var AudioClass_1 = require("../class/AudioClass");
+Object.defineProperty(exports, "SoundPlayer", { enumerable: true, get: function () { return AudioClass_1.SoundPlayer; } });
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property, executeInEditMode = _a.executeInEditMode, playOnFocus = _a.playOnFocus, requireComponent = _a.requireComponent, menu = _a.menu, executionOrder = _a.executionOrder, disallowMultiple = _a.disallowMultiple, inspector = _a.inspector, help = _a.help;
-var SoundPlayercontroller = /** @class */ (function (_super) {
-    __extends(SoundPlayercontroller, _super);
+var SceneSoundPlaybackController = /** @class */ (function (_super) {
+    __extends(SceneSoundPlaybackController, _super);
     /**
      * 播放器组件类
      */
-    function SoundPlayercontroller() {
+    function SceneSoundPlaybackController() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    // TAG LIFE-CYCLE callbacks                                                                              
-    SoundPlayercontroller.prototype.onLoad = function () { SoundLibrary.soundManager = this; };
+    SceneSoundPlaybackController.prototype.onLoad = function () { AudioClass_1.SoundLibrary.soundManager = this; };
     // start() { }
-    SoundPlayercontroller.prototype.update = function (dt) {
-        SoundLibrary.readyLaunchedList.forEach(function (element) {
-        });
+    SceneSoundPlaybackController.prototype.update = function (dt) {
+        if (AudioClass_1.SoundLibrary.readyLaunchedList.length > 0) {
+            var nowInst_1 = null;
+            AudioClass_1.SoundLibrary.readyLaunchedList.forEach(function (element) {
+                if (element instanceof AudioClass_1.SoundPlayer) {
+                    nowInst_1 = element;
+                    nowInst_1.play();
+                }
+                else {
+                }
+            });
+            AudioClass_1.SoundLibrary.readyLaunchedList = [];
+        }
     };
-    // lateUpdate() {}
-    // onDestory() {}
-    // onEnable() {}
-    SoundPlayercontroller.prototype.onDisable = function () { console.warn("音乐播放器被隐藏"); };
-    SoundPlayercontroller = __decorate([
-        ccclass('cc.SoundPlayer'),
+    SceneSoundPlaybackController = __decorate([
+        ccclass(),
         menu('Audio/SoundPlayerManager'),
         help('https://github.com/2128cz/CocosCopilot'),
         disallowMultiple
@@ -56,144 +81,42 @@ var SoundPlayercontroller = /** @class */ (function (_super) {
         /**
          * 播放器组件类
          */
-    ], SoundPlayercontroller);
-    return SoundPlayercontroller;
+    ], SceneSoundPlaybackController);
+    return SceneSoundPlaybackController;
 }(cc.Component));
-exports.SoundPlayercontroller = SoundPlayercontroller;
+exports.SceneSoundPlaybackController = SceneSoundPlaybackController;
 /**
- * 声音预设器
+ * 播放器预设器
  * 是所有声音和效果的基类
  * 提供了基本的与控制器处理的方式
+ * 你可以在一个播放器后跟随多个播放预设，它们会根据当前所处的库预设器来动态调整
  */
-var SoundPreinstall = /** @class */ (function () {
-    function SoundPreinstall(contor) {
-        this.isControl = false;
-        this.isControl = contor;
+var SoundPlayerPreinstall = /** @class */ (function () {
+    /**
+     *
+     */
+    function SoundPlayerPreinstall(contor) {
+        this.ignoreSequence = false;
+        this.ignoreSequence = contor;
     }
-    return SoundPreinstall;
+    SoundPlayerPreinstall.prototype.clong = function () {
+        return new SoundPlayerPreinstall(this.ignoreSequence);
+    };
+    return SoundPlayerPreinstall;
 }());
-exports.SoundPreinstall = SoundPreinstall;
 /**
- * 声音播放器实例类
+ * 声音单例库预设器
+ * 提供了规范的库单例控制方式
  */
-var SoundPlayer = /** @class */ (function (_super) {
-    __extends(SoundPlayer, _super);
-    function SoundPlayer(AudioClip, loop, volume) {
-        var _this = _super.call(this, true) || this;
-        // tag 宏                                                                                                
-        /**
-         * 声音组件实例
-         */
-        _this._AudioSourceInstantiate = null;
-        /**
-         * 循环次数
-         * 如果为null则为无限循环，但是否为无限循环不该从这里进行判断
-         */
-        _this._LoopTime = null;
-        cc.log(SoundLibrary.soundManager);
-        if (SoundLibrary.soundManager) {
-            _this._AudioSourceInstantiate = SoundLibrary.soundManager.node.addComponent(cc.AudioSource);
-        }
-        else {
-            _this = _super.call(this, false) || this;
-            cc.audioEngine.playMusic(AudioClip, typeof loop == 'boolean' ? loop : loop < 0);
-            cc.warn("\u8BF7\u68C0\u67E5\u573A\u666F\u4E2D\u662F\u5426\u5B58\u5728\u64AD\u653E\u7BA1\u7406\u5668\u7EC4\u4EF6\uFF0C\u6216\u662F\u5B58\u5728\u5728onload\u9636\u6BB5\u64AD\u653E\u7684\u97F3\u9891\uFF0C\n            \u5F53\u524D\u64AD\u653E\u5668\u5DF2\u9000\u5316\u4E3A\u5355\u4F8B\uFF0C\u65E0\u6CD5\u5E76\u53D1\u64AD\u653E\uFF0C\u8BF7\u6089\u77E5\uFF0C\u64AD\u653E\u8D44\u6E90\uFF1A" + AudioClip);
-            return _this;
-        }
-        _this.clip = AudioClip;
-        if (typeof loop == 'boolean')
-            _this.loop = loop;
-        else {
-            var loopTime = loop ? Math.floor(loop) : 0;
-            _this.loop = loopTime < 0;
-            _this._LoopTime = loopTime < 0 ? null : Math.min(loopTime, 1);
-        }
-        _this.volume = volume ? Math.max(Math.min(volume, 1), 0) : 1;
-        SoundLibrary.readyLaunched = _this;
-        return _this;
-    }
-    Object.defineProperty(SoundPlayer.prototype, "audioSourceInstantiate", {
-        get: function () { return this._AudioSourceInstantiate; },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(SoundPlayer.prototype, "isPlaying", {
-        get: function () { return this._AudioSourceInstantiate.isPlaying; },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(SoundPlayer.prototype, "clip", {
-        // 资源
-        get: function () { return this._AudioSourceInstantiate.clip; },
-        set: function (value) { this._AudioSourceInstantiate.clip = value; },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(SoundPlayer.prototype, "loop", {
-        // 循环
-        get: function () { return this._AudioSourceInstantiate.loop; },
-        set: function (value) { this._AudioSourceInstantiate.loop = value; },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(SoundPlayer.prototype, "volume", {
-        // 音量
-        get: function () { return this._AudioSourceInstantiate.volume; },
-        set: function (value) { this._AudioSourceInstantiate.volume = value; },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(SoundPlayer.prototype, "mute", {
-        // 静音
-        get: function () { return this._AudioSourceInstantiate.mute; },
-        set: function (value) { this._AudioSourceInstantiate.mute = value; },
-        enumerable: false,
-        configurable: true
-    });
-    /**
-     * 播放音频剪辑。
-     * @returns
-     */
-    SoundPlayer.prototype.play = function () { return this._AudioSourceInstantiate.play(); };
-    /**
-     * 停止当前音频剪辑。
-     * @returns
-     */
-    SoundPlayer.prototype.stop = function () { return this._AudioSourceInstantiate.stop(); };
-    /**
-     * 暂停当前音频剪辑。
-     * @returns
-     */
-    SoundPlayer.prototype.pause = function () { return this._AudioSourceInstantiate.pause(); };
-    /**
-     * 恢复播放。
-     * @returns
-     */
-    SoundPlayer.prototype.resume = function () { return this._AudioSourceInstantiate.resume(); };
-    /**
-     * 从头开始播放。
-     * @returns
-     */
-    SoundPlayer.prototype.rewind = function () { return this._AudioSourceInstantiate.rewind(); };
-    /**
-     * 获取当前的播放时间
-     * @returns
-     */
-    SoundPlayer.prototype.getCurrentTime = function () { return this._AudioSourceInstantiate.getCurrentTime(); };
-    /**
-     * 设置当前的播放时间
-     * @param time
-     * @returns
-     */
-    SoundPlayer.prototype.setCurrentTime = function (time) { return this._AudioSourceInstantiate.setCurrentTime(time); };
-    /**
-     * 获取当前音频的长度
-     * @returns
-     */
-    SoundPlayer.prototype.getDuration = function () { return this._AudioSourceInstantiate.getDuration(); };
-    return SoundPlayer;
-}(SoundPreinstall));
-exports.SoundPlayer = SoundPlayer;
+// class SoundLibraryPreinstall implements IPreinstallInterface {
+//     /**
+//      *
+//      */
+//     constructor() {
+//     }
+//     public clong(): IPreinstallInterface {
+//     }
+// }
 /**
  * 声音衰减器
  */
@@ -203,7 +126,7 @@ var SoundAttenuation = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     return SoundAttenuation;
-}(SoundPreinstall));
+}(SoundPlayerPreinstall));
 exports.SoundAttenuation = SoundAttenuation;
 /**
  * 声音混合器
@@ -216,7 +139,7 @@ var SoundSubmix = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     return SoundSubmix;
-}(SoundPreinstall));
+}(SoundPlayerPreinstall));
 exports.SoundSubmix = SoundSubmix;
 /**
  * 声音并发器
@@ -271,68 +194,7 @@ var SoundConcurrency = /** @class */ (function (_super) {
         return _this;
     }
     return SoundConcurrency;
-}(SoundPreinstall));
+}(SoundPlayerPreinstall));
 exports.SoundConcurrency = SoundConcurrency;
-/**
- * 声音播放器静态类
- * 不应该被导出或是实例化
- */
-var SoundLibrary = /** @class */ (function (_super) {
-    __extends(SoundLibrary, _super);
-    function SoundLibrary() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    Object.defineProperty(SoundLibrary, "readyLaunchedList", {
-        /**
-         * 获取待发列表
-         */
-        get: function () { return this._SoundList_ReadyLaunched; },
-        /**
-         * 设置待发列表
-         */
-        set: function (sl) { this._SoundList_ReadyLaunched = sl; },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(SoundLibrary, "readyLaunched", {
-        /**
-         * 添加待发列表项目
-         */
-        set: function (sl) { this.readyLaunchedList.push(sl); },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(SoundLibrary, "soundManager", {
-        /**
-         * 获取声音控制管理器
-         */
-        get: function () { return this._SoundManager; },
-        /**
-         * 设置声音控制管理器
-         */
-        set: function (SPM) { this._SoundManager = SPM; },
-        enumerable: false,
-        configurable: true
-    });
-    SoundLibrary._SoundList_ReadyLaunched = [];
-    /**
-     * 背景音乐列表
-     */
-    SoundLibrary._SoundList_AmbientMusic = null;
-    /**
-     * 背景音效列表
-     */
-    SoundLibrary._SoundList_AmbientEffect = null;
-    /**
-     * 前景音乐列表
-     */
-    SoundLibrary._SoundList_Music = null;
-    /**
-     * 前景音效列表
-     */
-    SoundLibrary._SoundList_Effect = null;
-    SoundLibrary._SoundManager = null;
-    return SoundLibrary;
-}(SoundPreinstall));
 
 cc._RF.pop();

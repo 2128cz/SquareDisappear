@@ -1,8 +1,29 @@
+/**
+ * cocos2.4 2d部分只提供了音量的设置，所以这里只实现包络与并发控制的功能
+ * 以及在包络的基础上扩展出倾听者功能。
+ * 
+ * 如何使用：
+ * 你可以只导入SoundPlayer这个类，并用new SoundPlayer( $soundClip )的方式来播放一次音频  
+ * new的音频不需要保存，等待播放完毕后会自动销毁；  
+ * 不过销毁后依然可以继续持有soundpalyer实例，并通过调用play等播放方法重新播放，这是符合用户直觉的。  
+ * 如果需要完成多音频并发，可以通过在new音频前 预先指定将要存入的播放序列，
+ * 而这可以通过new声音库预设器来完成。
+ * 
+ * 播放序列过程：
+ * 在进行'new SoundPlayer'时，'SoundPlayer'会自动推入到剪辑发射列表，
+ * 并等待用户后续的所有操作完成，在随后的生命周期函数中，效果器与播放器都会被一一处理。
+ * 
+ * 
+ * 
+ */
+
+import { SoundLibrary, IPreinstallInterface, SoundPlayer, ISoundTrackSequenceInterface, ISceneSoundPlaybackControllerInterface } from "../class/AudioClass";
 import SoundListener from "./SoundListener";
 
 const { ccclass, property, executeInEditMode, playOnFocus, requireComponent, menu, executionOrder, disallowMultiple, inspector, help } = cc._decorator;
 
-@ccclass('cc.SoundPlayer')
+
+@ccclass()
 @menu('Audio/SoundPlayerManager')
 @help('https://github.com/2128cz/CocosCopilot')
 @disallowMultiple
@@ -12,185 +33,85 @@ const { ccclass, property, executeInEditMode, playOnFocus, requireComponent, men
 /**
  * 播放器组件类
  */
-class SoundPlayercontroller extends cc.Component {
-
-    // TAG LIFE-CYCLE callbacks                                                                              
+class SceneSoundPlaybackController extends cc.Component implements ISceneSoundPlaybackControllerInterface {
 
     onLoad() { SoundLibrary.soundManager = this; }
+
     // start() { }
 
     update(dt) {
-        SoundLibrary.readyLaunchedList.forEach(element => {
+        if (SoundLibrary.readyLaunchedList.length > 0) {
+            let nowInst: SoundPlayer = null;
+            SoundLibrary.readyLaunchedList.forEach((element) => {
+                if (element instanceof SoundPlayer) {
+                    nowInst = element;
+                    nowInst.play();
+                }
+                else {
 
-        });
+                }
+            });
+            SoundLibrary.readyLaunchedList = []
+        }
     }
 
     // lateUpdate() {}
     // onDestory() {}
     // onEnable() {}
-
-    onDisable() { console.warn("音乐播放器被隐藏"); }
+    // onDisable() { console.warn("音乐播放器被隐藏"); }
 }
 /**
- * 声音预设器  
+ * 播放器预设器  
  * 是所有声音和效果的基类  
  * 提供了基本的与控制器处理的方式
+ * 你可以在一个播放器后跟随多个播放预设，它们会根据当前所处的库预设器来动态调整
  */
-class SoundPreinstall {
+class SoundPlayerPreinstall implements IPreinstallInterface {
+    /**
+     * 
+     */
     constructor(contor: boolean) {
-        this.isControl = contor;
+        this.ignoreSequence = contor;
     }
-    public isControl: boolean = false;
+
+    public clong(): IPreinstallInterface {
+        return new SoundPlayerPreinstall(this.ignoreSequence);
+    }
+    public ignoreSequence: boolean = false;
 }
 /**
- * 声音播放器实例类
+ * 声音单例库预设器
+ * 提供了规范的库单例控制方式
  */
-class SoundPlayer extends SoundPreinstall {
-    /**
-     * 创建一个音乐播放器实例  
-     * 注意，不要在onload阶段进行实例化，会造成引用链断裂
-     * @param AudioClip 声音资源
-     */
-    constructor(AudioClip: cc.AudioClip)
-    /**
-     * 创建一个音乐播放器实例  
-     * 注意，不要在onload阶段进行实例化，会造成引用链断裂
-     * @param AudioClip 声音资源
-     * @param loop 循环次数，-1为无限循环，0为播放一次，>0为循环指定次数
-     */
-    constructor(AudioClip: cc.AudioClip, loop: number)
-    /**
-     * 创建一个音乐播放器实例  
-     * 注意，不要在onload阶段进行实例化，会造成引用链断裂
-     * @param AudioClip 声音资源
-     * @param loop 是否循环
-     */
-    constructor(AudioClip: cc.AudioClip, loop: boolean)
-    /**
-     * 创建一个音乐播放器实例  
-     * 注意，不要在onload阶段进行实例化，会造成引用链断裂
-     * @param AudioClip 声音资源
-     * @param loop 循环次数，-1为无限循环，0为播放一次，>0为循环指定次数
-     * @param volume 音量0-1
-     */
-    constructor(AudioClip: cc.AudioClip, loop: number, volume: number)
-    /**
-     * 创建一个音乐播放器实例  
-     * 注意，不要在onload阶段进行实例化，会造成引用链断裂
-     * @param AudioClip 声音资源
-     * @param loop 是否循环
-     * @param volume 音量0-1
-     */
-    constructor(AudioClip: cc.AudioClip, loop: boolean, volume: number)
-    constructor(AudioClip: cc.AudioClip, loop?: number | boolean, volume?: number) {
-        super(true);
-        cc.log(SoundLibrary.soundManager);
-        if (SoundLibrary.soundManager) {
-            this._AudioSourceInstantiate = SoundLibrary.soundManager.node.addComponent(cc.AudioSource);
-        }
-        else {
-            super(false);
-            cc.audioEngine.playMusic(AudioClip, typeof loop == 'boolean' ? loop : loop < 0)
-            cc.warn(`请检查场景中是否存在播放管理器组件，或是存在在onload阶段播放的音频，
-            当前播放器已退化为单例，无法并发播放，请悉知，播放资源：${AudioClip}`);
-            return;
-        }
-        this.clip = AudioClip;
-        if (typeof loop == 'boolean')
-            this.loop = loop;
-        else {
-            let loopTime = loop ? Math.floor(loop) : 0;
-            this.loop = loopTime < 0;
-            this._LoopTime = loopTime < 0 ? null : Math.min(loopTime, 1);
-        }
-        this.volume = volume ? Math.max(Math.min(volume, 1), 0) : 1;
-        SoundLibrary.readyLaunched = this;
-    }
+// class SoundLibraryPreinstall implements IPreinstallInterface {
+//     /**
+//      *
+//      */
+//     constructor() {
 
-    // tag 宏                                                                                                
+//     }
+//     public clong(): IPreinstallInterface {
 
-    /**
-     * 声音组件实例
-     */
-    protected _AudioSourceInstantiate: cc.AudioSource = null;
-    public get audioSourceInstantiate(): cc.AudioSource { return this._AudioSourceInstantiate }
-    public get isPlaying(): boolean { return this._AudioSourceInstantiate.isPlaying }
-    // 资源
-    public get clip(): cc.AudioClip { return this._AudioSourceInstantiate.clip }
-    public set clip(value: cc.AudioClip) { this._AudioSourceInstantiate.clip = value }
-    // 循环
-    public get loop(): boolean { return this._AudioSourceInstantiate.loop }
-    public set loop(value: boolean) { this._AudioSourceInstantiate.loop = value }
-    // 音量
-    public get volume(): number { return this._AudioSourceInstantiate.volume }
-    public set volume(value: number) { this._AudioSourceInstantiate.volume = value }
-    // 静音
-    public get mute(): boolean { return this._AudioSourceInstantiate.mute }
-    public set mute(value: boolean) { this._AudioSourceInstantiate.mute = value }
-    /**
-     * 播放音频剪辑。
-     * @returns 
-     */
-    public play(): void { return this._AudioSourceInstantiate.play() }
-    /**
-     * 停止当前音频剪辑。
-     * @returns 
-     */
-    public stop(): void { return this._AudioSourceInstantiate.stop() }
-    /**
-     * 暂停当前音频剪辑。
-     * @returns 
-     */
-    public pause(): void { return this._AudioSourceInstantiate.pause() }
-    /**
-     * 恢复播放。
-     * @returns 
-     */
-    public resume(): void { return this._AudioSourceInstantiate.resume() }
-    /**
-     * 从头开始播放。
-     * @returns 
-     */
-    public rewind(): void { return this._AudioSourceInstantiate.rewind() }
-    /**
-     * 获取当前的播放时间
-     * @returns 
-     */
-    public getCurrentTime(): number { return this._AudioSourceInstantiate.getCurrentTime() }
-    /**
-     * 设置当前的播放时间
-     * @param time 
-     * @returns 
-     */
-    public setCurrentTime(time: number): number { return this._AudioSourceInstantiate.setCurrentTime(time) }
-    /**
-     * 获取当前音频的长度
-     * @returns 
-     */
-    public getDuration(): number { return this._AudioSourceInstantiate.getDuration() }
-    /**
-     * 循环次数
-     * 如果为null则为无限循环，但是否为无限循环不该从这里进行判断
-     */
-    protected _LoopTime: number = null;
-}
-
+//     }
+// }
 /**
  * 声音衰减器  
  */
-class SoundAttenuation extends SoundPreinstall { }
+class SoundAttenuation extends SoundPlayerPreinstall { }
 /**
  * 声音混合器  
  * 混合器内的声音会根据自身所处的维度对混合曲线进行采样，
  * 自动设定自身的参数
  */
-class SoundSubmix extends SoundPreinstall { }
+class SoundSubmix extends SoundPlayerPreinstall {
+
+}
 /**
  * 声音并发器  
  * 并发器可以设定并发数量，并自动设定延时与音量模拟混响  
  * 但并发器并非发射器，不可以推入音乐资产
  */
-class SoundConcurrency extends SoundPreinstall {
+class SoundConcurrency extends SoundPlayerPreinstall {
 
     // 并发性
     /**
@@ -236,60 +157,13 @@ class SoundConcurrency extends SoundPreinstall {
     // 抢断后释放时间
     public VoiceStealReleaseTime: number = 0.1;
 }
-/**
- * 声音播放器静态类
- * 不应该被导出或是实例化
- */
-class SoundLibrary extends SoundPreinstall {
-
-    protected static _SoundList_ReadyLaunched: SoundPlayer[] = [];
-    /**
-     * 获取待发列表
-     */
-    public static get readyLaunchedList(): SoundPlayer[] { return this._SoundList_ReadyLaunched }
-    /**
-     * 设置待发列表
-     */
-    public static set readyLaunchedList(sl: SoundPlayer[]) { this._SoundList_ReadyLaunched = sl }
-    /**
-     * 添加待发列表项目
-     */
-    public static set readyLaunched(sl: SoundPlayer) { this.readyLaunchedList.push(sl) }
-
-    /**
-     * 背景音乐列表
-     */
-    protected static _SoundList_AmbientMusic: SoundPlayer[] = null;
-    /**
-     * 背景音效列表
-     */
-    protected static _SoundList_AmbientEffect: SoundPlayer[] = null;
-    /**
-     * 前景音乐列表
-     */
-    protected static _SoundList_Music: SoundPlayer[] = null;
-    /**
-     * 前景音效列表
-     */
-    protected static _SoundList_Effect: SoundPlayer[] = null;
-
-    protected static _SoundManager: SoundPlayercontroller = null;
-    /**
-     * 获取声音控制管理器
-     */
-    public static get soundManager(): SoundPlayercontroller { return this._SoundManager }
-    /**
-     * 设置声音控制管理器
-     */
-    public static set soundManager(SPM: SoundPlayercontroller) { this._SoundManager = SPM }
-
-}
 
 export {
-    SoundPlayercontroller, // 播放器组件类
+    SceneSoundPlaybackController, // 播放器控制器组件类
+    // SoundPlayerPreinstall, // 播放器预设类，此类不参与运算
     SoundPlayer, // 声音播放器实例类，只播放音乐可以就只导入这个
-    SoundPreinstall, // 音效预设类
-    // 以下为预制特效类
+    // 以下为预制器类
+    // SoundLibraryPreinstall, // 声音单例库预设器
     SoundAttenuation, // 声音衰减器
     SoundSubmix, // 声音混合器
     SoundConcurrency, // 声音并发器

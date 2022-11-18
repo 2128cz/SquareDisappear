@@ -49,14 +49,14 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        250,
+        300,
         0,
         0,
         0,
         0,
         1,
-        1,
-        1,
+        2,
+        2,
         1
       ]
     },
@@ -184,9 +184,7 @@
       "__id__": 2
     },
     "_enabled": true,
-    "label": {
-      "__id__": 3
-    },
+    "label": null,
     "animationTime": 0.6,
     "randomPositionRange": 50,
     "_id": ""
@@ -199,7 +197,7 @@
     "asset": {
       "__uuid__": "397be29c-3d3c-4aa7-aee2-38ee8d2aef7a"
     },
-    "fileId": "a4vPX0ziJGIKhpdEkdQ5Fn",
+    "fileId": "b2R+J1dcNHrL80DNMj7aRJ",
     "sync": false
   },
   {

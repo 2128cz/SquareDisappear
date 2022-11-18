@@ -40,7 +40,8 @@ var MenuLevel = /** @class */ (function (_super) {
         Setting_1.default.menu = this;
     };
     MenuLevel.prototype.start = function () {
-        new SoundPlayer_1.SoundPlayer(Setting_1.default.Sound_bgm);
+        // todo 播放音乐
+        new SoundPlayer_1.SoundPlayer(Setting_1.default.Sound_bgm, 1, .5);
     };
     // update (dt) {}
     // tag 用户逻辑
@@ -57,6 +58,8 @@ var MenuLevel = /** @class */ (function (_super) {
      * 游戏结束
      */
     MenuLevel.prototype.gameOver = function () {
+        // todo 播放音效
+        new SoundPlayer_1.SoundPlayer(Setting_1.default.Sound_lose);
         DevelopersToolGlobal_1.DevelopersToolGlobal.layers[0].active = true;
         DevelopersToolGlobal_1.DevelopersToolGlobal.layers[1].active = true;
         DevelopersToolGlobal_1.DevelopersToolGlobal.layers[2].active = true;
@@ -76,10 +79,16 @@ var MenuLevel = /** @class */ (function (_super) {
         this[cusData]();
     };
     MenuLevel.prototype.onMusic = function () {
+        // todo 播放音效
+        new SoundPlayer_1.SoundPlayer(Setting_1.default.Sound_btnn);
     };
     MenuLevel.prototype.onShare = function () {
+        // todo 播放音效
+        new SoundPlayer_1.SoundPlayer(Setting_1.default.Sound_btnn);
     };
     MenuLevel.prototype.onStart = function () {
+        // todo 播放音效
+        new SoundPlayer_1.SoundPlayer(Setting_1.default.Sound_btny);
         this.gameStart();
     };
     MenuLevel = __decorate([

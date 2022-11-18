@@ -1,4 +1,5 @@
 import GridAbsorb from '../base/tool/GridAdsorb';
+import { SoundPlayer } from '../base/tool/SoundPlayer';
 import ss from "./Setting";
 
 const { ccclass, property } = cc._decorator;
@@ -84,6 +85,9 @@ export default class BlockGroup extends cc.Component {
      * 
      */
     public destroyMembers(palyEffect = true): number {
+        // todo 播放音效
+        new SoundPlayer(ss.Sound_des2);
+
         let allChildren = this.findAllChildren(this);
         allChildren.forEach(element => {
             // 将每个成员都替换为销毁效果节点

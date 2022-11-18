@@ -14,12 +14,13 @@ export default class MenuLevel extends cc.Component {
         ccvv.layers[3].active = true;
 
         ss.menu = this;
-        
+
 
     }
 
-    start () {
-        new SoundPlayer(ss.Sound_bgm);
+    start() {
+        // todo 播放音乐
+        new SoundPlayer(ss.Sound_bgm, 1, .5);
     }
     // update (dt) {}
 
@@ -39,6 +40,9 @@ export default class MenuLevel extends cc.Component {
      * 游戏结束
      */
     public gameOver() {
+        // todo 播放音效
+        new SoundPlayer(ss.Sound_lose);
+
         ccvv.layers[0].active = true;
         ccvv.layers[1].active = true;
         ccvv.layers[2].active = true;
@@ -62,14 +66,18 @@ export default class MenuLevel extends cc.Component {
     }
 
     public onMusic() {
-
+        // todo 播放音效
+        new SoundPlayer(ss.Sound_btnn);
     }
 
     public onShare() {
-
+        // todo 播放音效
+        new SoundPlayer(ss.Sound_btnn);
     }
 
     public onStart() {
+        // todo 播放音效
+        new SoundPlayer(ss.Sound_btny);
         this.gameStart();
     }
 }

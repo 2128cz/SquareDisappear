@@ -58,10 +58,11 @@ export default class Setting {
     public static get endCubeGroup(): BlockGroup { return this._EndCubeGroup }
     public static set endCubeGroup(value: BlockGroup) { this._EndCubeGroup = value }
 
-    // 设定参数定义
-    protected static _GameSpeed: number = 120;
+    // 设定参数定义 我认为极限速度大概在250左右，再快了就反应不过来了
+    protected static _GameSpeed: number = 130;
     public static get GameSpeed(): number { return this._GameSpeed; }
     public static set GameSpeed(value) { this._GameSpeed = value; }
+    public static get GameSpeed_MulMax(): number { return 250 - 130; }
     public static get GameAutoSpeed(): cc.Vec3 { return new cc.Vec3(0, -((this.endCubeGroup ? (this.endCubeGroup.node.y + cc.winSize.height / 2) / cc.winSize.height : 1) * this.GameSpeed), 0); }
     public static get GameVector(): cc.Vec3 { return new cc.Vec3(0, -80, 0); }
     public static get GameAutoDrag(): number { return (this.endCubeGroup ? 1 - (this.endCubeGroup.node.y + cc.winSize.height / 2) / cc.winSize.height : 0) }

@@ -1,6 +1,7 @@
 import { DevelopersToolGlobal as ccvv, mathMacro as mm } from '../base/class/DevelopersToolGlobal';
 import GridAbsorb from '../base/tool/GridAdsorb';
 import PawnMovement from '../base/tool/PawnMovement';
+import { SoundPlayer } from '../base/tool/SoundPlayer';
 import BlockGroup from './BlockGroup';
 import ss from "./Setting";
 const { ccclass, property, executeInEditMode } = cc._decorator;
@@ -9,6 +10,12 @@ const { ccclass, property, executeInEditMode } = cc._decorator;
  * 而其他蓝图中的参数则会放置在其最强关联处，比如自己本身的类内
  * 而部分地方可能会用到全局工具的部分，可以改为以设置类全局的模式，全局工具是旧方法
  * 关于全局工具的用法，可以参考discard-标记的文件，他们是已经确定废弃的用法
+ * 
+ * 游戏的基本运行与玩家交互是在 GameLevel 中完成的
+ * 游戏会发射方块组 BlockGroup 而不是方块，由每一行的方块完成初始化，销毁检测
+ * 每个方块组内包含四个方块 Block ，它们会在诞生时自动消灭一部分，留空给玩家，当产生销毁时会播放音效，并切换为动画预制体
+ * 除此之外，所有公用的参数都在 setting 中，而对于更加更加具有通用性质的 globaltool 只在部分场景使用
+ * 你可以忽略base中的大部分文件，它们没什么用。
  */
 @ccclass
 // @executeInEditMode
@@ -32,7 +39,6 @@ export default class GameLevel extends cc.Component {
         manager.enabledDebugDraw = true;
         manager.enabledDrawBoundingBox = true;
 
-        
     }
 
     onEnable() {
@@ -62,7 +68,8 @@ export default class GameLevel extends cc.Component {
             ss.movement.addDrag = ss.GameAutoDrag;
             ss.movement.updateByVelocity(dt);
         }
-        
+        this.setGameSpeed(dt * ss.score * 3);
+        cc.log(this.GameSpeed);
     }
 
     // tag 用户函数部分 
@@ -79,7 +86,7 @@ export default class GameLevel extends cc.Component {
         );
         // 赋予移动组件
         ss.movement = new PawnMovement(GridAbsorb.grid);
-        ss.movement.maxSpeed = ss.GameSpeed;
+        ss.movement.maxSpeed = this.GameSpeed;
         // 设置网格边界锚点
         // GridAbsorb.grid.anchor = new cc.Vec3(0, 0, 0);
         // 设置网格起点
@@ -95,6 +102,9 @@ export default class GameLevel extends cc.Component {
         ss.endCubeGroup = null;
         if (this.gameArea.children.length > 0) this.gameArea.children.forEach(e => { e.destroy() });
         if (this.effectArea.children.length > 0) this.effectArea.children.forEach(e => { e.destroy() });
+
+        // 复位游戏标记
+        this.gameOverSign = false;
     }
 
     /**
@@ -134,24 +144,36 @@ export default class GameLevel extends cc.Component {
     * 游戏结束时调用一次
     */
     protected gameOver() {
-        // 暂停触摸
-        // ccvv.layers[0].pauseSystemEvents(true);
-        ss.menu.gameOver()
 
-        let allChildren = this.lastGroup.findAllChildren(this.lastGroup);
-        // 一个一个破掉的效果
-        let allChildrenCount = allChildren.length;
-        cc.log(allChildren);
-        this.schedule(() => {
-            if (allChildrenCount--) {
-                let desAct = allChildren[allChildrenCount];
-                desAct.getComponent(ss.blockName).destroyWithAnimation();
-            } else {
-                this.unscheduleAllCallbacks();
-                ss.menu.openMenu();
-            }
-        }, .08);
+        if (!this.gameOverSign) {
+            this.gameOverSign = true;
+
+            // 暂停触摸
+            // ccvv.layers[0].pauseSystemEvents(true);
+            ss.menu.gameOver()
+
+            let allChildren = this.lastGroup.findAllChildren(this.lastGroup);
+            // 一个一个破掉的效果
+            let allChildrenCount = allChildren.length;
+            cc.log(allChildren);
+            this.schedule(() => {
+                if (allChildrenCount--) {
+                    let desAct = allChildren[allChildrenCount];
+                    desAct.getComponent(ss.blockName).destroyWithAnimation();
+                } else {
+                    this.unscheduleAllCallbacks();
+                    ss.menu.openMenu();
+                }
+            }, .08);
+        }
     }
+    /**
+     * 游戏结束标记，避免重复调用结束事件
+     * 不可以在其他任何地方调用，以免逻辑混乱
+     */
+    private _GameOverSign: boolean = false;
+    protected set gameOverSign(value: boolean) { this._GameOverSign = value };
+    public get gameOverSign(): boolean { return this._GameOverSign };
 
 
     // tag 用户触摸事件
@@ -175,6 +197,8 @@ export default class GameLevel extends cc.Component {
         let inx = Math.ceil(touchArea) * (ss.Cube_width + ss.Cube_Interaval) - ((cc.winSize.width + ss.Cube_width) / 2);
         // let inx = Math.ceil(touchArea) * 177 - ((cc.winSize.width + ss.Cube_width) / 2) - 5
         inst.setPosition(inx, ss.Separator);
+        // todo 播放音效
+        new SoundPlayer(ss.Sound_shot);
     }
 
 
@@ -186,6 +210,9 @@ export default class GameLevel extends cc.Component {
      * 赋予两倍阻力
      */
     ice(): void {
+        // todo 播放音效
+        new SoundPlayer(ss.Sound_ice);
+
         let inst = this.creatActor(ss.Effect_Ice, this.effectArea);
         ss.movement.permDrag = 2;
         this.scheduleOnce(() => {
@@ -197,17 +224,27 @@ export default class GameLevel extends cc.Component {
      * 赋予一个反方向的力  
      */
     hit(): void {
+        // todo 播放音效
+        new SoundPlayer(ss.Sound_hit);
+
+        this.setGameSpeed(0);
+
         let inst = this.creatActor(ss.Effect_Hit, this.effectArea);
         inst.setPosition(ss.endCubeGroup.node.getPosition());
         ss.movement.addforce = new cc.Vec2(0, ss.hit_Force);
         ss.movement.drag = 0;
-        ss.movement.maxSpeed = ss.GameSpeed;
+        ss.movement.maxSpeed = this.GameSpeed;
     }
     /**
      * 清屏特效  
      * 将屏幕内的所有方块都进行清理，使用的是方块自身的消除方法，所以也会播放销毁特效
      */
     boom(): void {
+        // todo 播放音效
+        new SoundPlayer(ss.Sound_boom);
+
+        this.setGameSpeed(0);
+
         let inst = this.creatActor(ss.Effect_Boom, this.effectArea);
         ss.endCubeGroup = this.lastGroup.nextGroup;
         this.lastGroup.destroyMembers(false);
@@ -231,4 +268,20 @@ export default class GameLevel extends cc.Component {
      * 上一组诞生组
      */
     protected lastGroup: BlockGroup = null;
+    /**
+     * 上叠运行速度
+     */
+    protected _MultiplyGameSpeed: number = 0;
+    /**
+     * 上叠运行速度
+     */
+    protected get GameSpeed(): number { return ss.GameSpeed + this._MultiplyGameSpeed };
+    /**
+     * 添加上叠运行速度
+     */
+    protected set GameSpeed(value: number) { this._MultiplyGameSpeed = Math.max(Math.min(this._MultiplyGameSpeed + value, ss.GameSpeed_MulMax), 0) };
+    /**
+     * 直接设置上叠运行速度
+     */
+    protected setGameSpeed(value: number) { this._MultiplyGameSpeed = value };
 }

@@ -26,6 +26,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var DevelopersToolGlobal_1 = require("../base/class/DevelopersToolGlobal");
 var GridAdsorb_1 = require("../base/tool/GridAdsorb");
 var PawnMovement_1 = require("../base/tool/PawnMovement");
+var SoundPlayer_1 = require("../base/tool/SoundPlayer");
 var Setting_1 = require("./Setting");
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property, executeInEditMode = _a.executeInEditMode;
 /**
@@ -33,6 +34,12 @@ var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property, executeInE
  * 而其他蓝图中的参数则会放置在其最强关联处，比如自己本身的类内
  * 而部分地方可能会用到全局工具的部分，可以改为以设置类全局的模式，全局工具是旧方法
  * 关于全局工具的用法，可以参考discard-标记的文件，他们是已经确定废弃的用法
+ *
+ * 游戏的基本运行与玩家交互是在 GameLevel 中完成的
+ * 游戏会发射方块组 BlockGroup 而不是方块，由每一行的方块完成初始化，销毁检测
+ * 每个方块组内包含四个方块 Block ，它们会在诞生时自动消灭一部分，留空给玩家，当产生销毁时会播放音效，并切换为动画预制体
+ * 除此之外，所有公用的参数都在 setting 中，而对于更加更加具有通用性质的 globaltool 只在部分场景使用
+ * 你可以忽略base中的大部分文件，它们没什么用。
  */
 var GameLevel = /** @class */ (function (_super) {
     __extends(GameLevel, _super);
@@ -41,11 +48,20 @@ var GameLevel = /** @class */ (function (_super) {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.gameArea = null;
         _this.effectArea = null;
+        /**
+         * 游戏结束标记，避免重复调用结束事件
+         * 不可以在其他任何地方调用，以免逻辑混乱
+         */
+        _this._GameOverSign = false;
         _this.readyTouch = false;
         /**
          * 上一组诞生组
          */
         _this.lastGroup = null;
+        /**
+         * 上叠运行速度
+         */
+        _this._MultiplyGameSpeed = 0;
         return _this;
     }
     // tag LIFE-CYCLE CALLBACKS:
@@ -82,6 +98,8 @@ var GameLevel = /** @class */ (function (_super) {
             Setting_1.default.movement.addDrag = Setting_1.default.GameAutoDrag;
             Setting_1.default.movement.updateByVelocity(dt);
         }
+        this.setGameSpeed(dt * Setting_1.default.score * 3);
+        cc.log(this.GameSpeed);
     };
     // tag 用户函数部分 
     /**
@@ -93,7 +111,7 @@ var GameLevel = /** @class */ (function (_super) {
         GridAdsorb_1.default.grid = new GridAdsorb_1.default(new cc.Vec3(Setting_1.default.Game_Column, Setting_1.default.Game_Row2, 0), new cc.Vec3(Setting_1.default.Cube_width, Setting_1.default.Cube_Height, 0));
         // 赋予移动组件
         Setting_1.default.movement = new PawnMovement_1.default(GridAdsorb_1.default.grid);
-        Setting_1.default.movement.maxSpeed = Setting_1.default.GameSpeed;
+        Setting_1.default.movement.maxSpeed = this.GameSpeed;
         // 设置网格边界锚点
         // GridAbsorb.grid.anchor = new cc.Vec3(0, 0, 0);
         // 设置网格起点
@@ -108,6 +126,8 @@ var GameLevel = /** @class */ (function (_super) {
             this.gameArea.children.forEach(function (e) { e.destroy(); });
         if (this.effectArea.children.length > 0)
             this.effectArea.children.forEach(function (e) { e.destroy(); });
+        // 复位游戏标记
+        this.gameOverSign = false;
     };
     /**
      * 创建方块组，并按链初始化
@@ -146,24 +166,35 @@ var GameLevel = /** @class */ (function (_super) {
     */
     GameLevel.prototype.gameOver = function () {
         var _this = this;
-        // 暂停触摸
-        // ccvv.layers[0].pauseSystemEvents(true);
-        Setting_1.default.menu.gameOver();
-        var allChildren = this.lastGroup.findAllChildren(this.lastGroup);
-        // 一个一个破掉的效果
-        var allChildrenCount = allChildren.length;
-        cc.log(allChildren);
-        this.schedule(function () {
-            if (allChildrenCount--) {
-                var desAct = allChildren[allChildrenCount];
-                desAct.getComponent(Setting_1.default.blockName).destroyWithAnimation();
-            }
-            else {
-                _this.unscheduleAllCallbacks();
-                Setting_1.default.menu.openMenu();
-            }
-        }, .08);
+        if (!this.gameOverSign) {
+            this.gameOverSign = true;
+            // 暂停触摸
+            // ccvv.layers[0].pauseSystemEvents(true);
+            Setting_1.default.menu.gameOver();
+            var allChildren_1 = this.lastGroup.findAllChildren(this.lastGroup);
+            // 一个一个破掉的效果
+            var allChildrenCount_1 = allChildren_1.length;
+            cc.log(allChildren_1);
+            this.schedule(function () {
+                if (allChildrenCount_1--) {
+                    var desAct = allChildren_1[allChildrenCount_1];
+                    desAct.getComponent(Setting_1.default.blockName).destroyWithAnimation();
+                }
+                else {
+                    _this.unscheduleAllCallbacks();
+                    Setting_1.default.menu.openMenu();
+                }
+            }, .08);
+        }
     };
+    Object.defineProperty(GameLevel.prototype, "gameOverSign", {
+        get: function () { return this._GameOverSign; },
+        set: function (value) { this._GameOverSign = value; },
+        enumerable: false,
+        configurable: true
+    });
+    ;
+    ;
     // tag 用户触摸事件
     /**
      * 注册触摸事件
@@ -183,6 +214,8 @@ var GameLevel = /** @class */ (function (_super) {
         var inx = Math.ceil(touchArea) * (Setting_1.default.Cube_width + Setting_1.default.Cube_Interaval) - ((cc.winSize.width + Setting_1.default.Cube_width) / 2);
         // let inx = Math.ceil(touchArea) * 177 - ((cc.winSize.width + ss.Cube_width) / 2) - 5
         inst.setPosition(inx, Setting_1.default.Separator);
+        // todo 播放音效
+        new SoundPlayer_1.SoundPlayer(Setting_1.default.Sound_shot);
     };
     // tag 特效方法 
     /**
@@ -190,6 +223,8 @@ var GameLevel = /** @class */ (function (_super) {
      * 赋予两倍阻力
      */
     GameLevel.prototype.ice = function () {
+        // todo 播放音效
+        new SoundPlayer_1.SoundPlayer(Setting_1.default.Sound_ice);
         var inst = this.creatActor(Setting_1.default.Effect_Ice, this.effectArea);
         Setting_1.default.movement.permDrag = 2;
         this.scheduleOnce(function () {
@@ -201,17 +236,23 @@ var GameLevel = /** @class */ (function (_super) {
      * 赋予一个反方向的力
      */
     GameLevel.prototype.hit = function () {
+        // todo 播放音效
+        new SoundPlayer_1.SoundPlayer(Setting_1.default.Sound_hit);
+        this.setGameSpeed(0);
         var inst = this.creatActor(Setting_1.default.Effect_Hit, this.effectArea);
         inst.setPosition(Setting_1.default.endCubeGroup.node.getPosition());
         Setting_1.default.movement.addforce = new cc.Vec2(0, Setting_1.default.hit_Force);
         Setting_1.default.movement.drag = 0;
-        Setting_1.default.movement.maxSpeed = Setting_1.default.GameSpeed;
+        Setting_1.default.movement.maxSpeed = this.GameSpeed;
     };
     /**
      * 清屏特效
      * 将屏幕内的所有方块都进行清理，使用的是方块自身的消除方法，所以也会播放销毁特效
      */
     GameLevel.prototype.boom = function () {
+        // todo 播放音效
+        new SoundPlayer_1.SoundPlayer(Setting_1.default.Sound_boom);
+        this.setGameSpeed(0);
         var inst = this.creatActor(Setting_1.default.Effect_Boom, this.effectArea);
         Setting_1.default.endCubeGroup = this.lastGroup.nextGroup;
         this.lastGroup.destroyMembers(false);
@@ -234,6 +275,25 @@ var GameLevel = /** @class */ (function (_super) {
         }
         return actorInst;
     };
+    Object.defineProperty(GameLevel.prototype, "GameSpeed", {
+        /**
+         * 上叠运行速度
+         */
+        get: function () { return Setting_1.default.GameSpeed + this._MultiplyGameSpeed; },
+        /**
+         * 添加上叠运行速度
+         */
+        set: function (value) { this._MultiplyGameSpeed = Math.max(Math.min(this._MultiplyGameSpeed + value, Setting_1.default.GameSpeed_MulMax), 0); },
+        enumerable: false,
+        configurable: true
+    });
+    ;
+    ;
+    /**
+     * 直接设置上叠运行速度
+     */
+    GameLevel.prototype.setGameSpeed = function (value) { this._MultiplyGameSpeed = value; };
+    ;
     __decorate([
         property(cc.Node)
     ], GameLevel.prototype, "gameArea", void 0);

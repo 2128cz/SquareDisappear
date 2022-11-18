@@ -31,6 +31,7 @@ var __spreadArrays = (this && this.__spreadArrays) || function () {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var GridAdsorb_1 = require("../base/tool/GridAdsorb");
+var SoundPlayer_1 = require("../base/tool/SoundPlayer");
 var Setting_1 = require("./Setting");
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
 var BlockGroup = /** @class */ (function (_super) {
@@ -131,6 +132,8 @@ var BlockGroup = /** @class */ (function (_super) {
      */
     BlockGroup.prototype.destroyMembers = function (palyEffect) {
         if (palyEffect === void 0) { palyEffect = true; }
+        // todo 播放音效
+        new SoundPlayer_1.SoundPlayer(Setting_1.default.Sound_des2);
         var allChildren = this.findAllChildren(this);
         allChildren.forEach(function (element) {
             // 将每个成员都替换为销毁效果节点
