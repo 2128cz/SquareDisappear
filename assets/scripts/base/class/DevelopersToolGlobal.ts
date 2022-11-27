@@ -537,6 +537,6 @@ export enum EAnimPhySimSpace {
 
 
 // 测试语句，可以在控制台中能够看到这里
-cc["vv"] = cc["vv"] || DevelopersToolGlobal;
+// cc["vv"] = cc["vv"] || DevelopersToolGlobal;
 
 

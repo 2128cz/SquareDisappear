@@ -41,7 +41,72 @@ enum ESoundChannel {
     _track_0,
     _track_1
 }
+/**
+ * 包络模型
+ */
+enum EBundleModel {
+    /**
+     * 关闭
+     */
+    OFF,
+    /**
+     * 普通模型  
+     * 在未指定S时，退化为AHR（AHDSR）
+     */
+    ADSR, 
+    /**
+     * 静默模型  
+     * 同样适用DAHDSR
+     */
+    DADSR,
 
+}
+/**
+ * 声音播放模式  
+ * 用于表示在何种方式下进行播放
+ */
+enum EAudioPlayMode{
+    /**
+     * 即刻播放
+     */
+    now,
+    /**
+     * 下一个小节处播放
+     */
+    atNextBeat,
+    /**
+     * 下一个1/2小节处播放
+     */
+    atNextBeat2,
+    /**
+     * 下一个1/4小节处播放
+     */
+    atNextBeat4,
+    /**
+     * 下一个1/8小节处播放
+     */
+    atNextBeat8,
+    /**
+     * 下一个1/16小节处播放
+     */
+    atNextBeat16,
+    /**
+     * 下一个1/32小节处播放
+     */
+    atNextBeat32,
+    /**
+     * 在一段时间后播放（大于的部分会换成循环次数）
+     */
+    delay,
+    /**
+     * 等待当前播放完毕后播放
+     */
+    waitCurEnd,
+    /**
+     * 等待循环完毕后播放
+     */
+    waitLoopEnd,
+}
 /**
  * 声音单例库类
  */
@@ -113,7 +178,8 @@ export {
     SoundPlayer,
     ISoundTrackSequenceInterface,
     ISceneSoundPlaybackControllerInterface,
-
+    EBundleModel,   // 包络模型枚举，外部一般情况下不需要引用
+    EAudioPlayMode, // 播放模式枚举
     ESoundTrack,    // 声音轨道枚举
     ESoundChannel,  // 声音通道枚举
     SoundLibrary,   // 声音库

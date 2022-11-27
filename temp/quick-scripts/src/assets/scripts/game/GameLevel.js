@@ -40,10 +40,11 @@ var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property, executeInE
  * 每个方块组内包含四个方块 Block ，它们会在诞生时自动消灭一部分，留空给玩家，当产生销毁时会播放音效，并切换为动画预制体
  * 除此之外，所有公用的参数都在 setting 中，而对于更加更加具有通用性质的 globaltool 只在部分场景使用
  * 你可以忽略base中的大部分文件，它们没什么用。
+ *
+ * 关于音乐触发，你应该去MenuLevel上看看，
  */
 var GameLevel = /** @class */ (function (_super) {
     __extends(GameLevel, _super);
-    // @executeInEditMode
     function GameLevel() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.gameArea = null;
@@ -89,19 +90,20 @@ var GameLevel = /** @class */ (function (_super) {
         if (Setting_1.default.endCubeGroup && Setting_1.default.endCubeGroup.node.y < Setting_1.default.Separator) {
             this.gameOver();
         }
-        // 否则继续网格移动，这也会驱动方块移动
         else {
+            // 否则继续网格移动，这也会驱动方块移动
             // 简单的移动方式
             // GridAbsorb.grid.offset = ss.GameVector.mul(dt);
+            // 根据当前分数计算新速度
+            this.setGameSpeed(0.5 / dt * Setting_1.default.score);
             // 移动组件移动方式
             Setting_1.default.movement.addforce = Setting_1.default.GameAutoSpeed;
             Setting_1.default.movement.addDrag = Setting_1.default.GameAutoDrag;
+            Setting_1.default.movement.maxSpeed = this.GameSpeed;
             Setting_1.default.movement.updateByVelocity(dt);
         }
-        this.setGameSpeed(dt * Setting_1.default.score * 3);
-        cc.log(this.GameSpeed);
     };
-    // tag 用户函数部分 
+    // tag 用户函数部分
     /**
      * 游戏重置及初始化
      * 开始时调用一次
@@ -123,9 +125,14 @@ var GameLevel = /** @class */ (function (_super) {
         // 清理战场
         Setting_1.default.endCubeGroup = null;
         if (this.gameArea.children.length > 0)
-            this.gameArea.children.forEach(function (e) { e.destroy(); });
+            this.gameArea.children.forEach(function (e) {
+                e.destroy();
+            });
         if (this.effectArea.children.length > 0)
-            this.effectArea.children.forEach(function (e) { e.destroy(); });
+            this.effectArea.children.forEach(function (e) {
+                e.destroy();
+            });
+        this.lastGroup = null;
         // 复位游戏标记
         this.gameOverSign = false;
     };
@@ -157,7 +164,7 @@ var GameLevel = /** @class */ (function (_super) {
     GameLevel.prototype.SpawnPlayerCube = function () {
         var inst = this.creatActor(Setting_1.default.Square, this.gameArea);
         // 提供索引以便吸附到网格上
-        inst.getComponent('Block').init();
+        inst.getComponent("Block").init();
         return inst;
     };
     /**
@@ -171,10 +178,11 @@ var GameLevel = /** @class */ (function (_super) {
             // 暂停触摸
             // ccvv.layers[0].pauseSystemEvents(true);
             Setting_1.default.menu.gameOver();
+            // 记录分数，但不要处理
+            Setting_1.default.highScore = Setting_1.default.score;
             var allChildren_1 = this.lastGroup.findAllChildren(this.lastGroup);
             // 一个一个破掉的效果
             var allChildrenCount_1 = allChildren_1.length;
-            cc.log(allChildren_1);
             this.schedule(function () {
                 if (allChildrenCount_1--) {
                     var desAct = allChildren_1[allChildrenCount_1];
@@ -184,17 +192,19 @@ var GameLevel = /** @class */ (function (_super) {
                     _this.unscheduleAllCallbacks();
                     Setting_1.default.menu.openMenu();
                 }
-            }, .08);
+            }, 0.08);
         }
     };
     Object.defineProperty(GameLevel.prototype, "gameOverSign", {
-        get: function () { return this._GameOverSign; },
-        set: function (value) { this._GameOverSign = value; },
+        get: function () {
+            return this._GameOverSign;
+        },
+        set: function (value) {
+            this._GameOverSign = value;
+        },
         enumerable: false,
         configurable: true
     });
-    ;
-    ;
     // tag 用户触摸事件
     /**
      * 注册触摸事件
@@ -211,13 +221,14 @@ var GameLevel = /** @class */ (function (_super) {
     GameLevel.prototype.onTouchStart = function (event) {
         var touchArea = event.getLocation().x / Setting_1.default.Cube_width;
         var inst = this.SpawnPlayerCube();
-        var inx = Math.ceil(touchArea) * (Setting_1.default.Cube_width + Setting_1.default.Cube_Interaval) - ((cc.winSize.width + Setting_1.default.Cube_width) / 2);
+        var inx = Math.ceil(touchArea) * (Setting_1.default.Cube_width + Setting_1.default.Cube_Interaval) -
+            (cc.winSize.width + Setting_1.default.Cube_width) / 2;
         // let inx = Math.ceil(touchArea) * 177 - ((cc.winSize.width + ss.Cube_width) / 2) - 5
         inst.setPosition(inx, Setting_1.default.Separator);
         // todo 播放音效
         new SoundPlayer_1.SoundPlayer(Setting_1.default.Sound_shot);
     };
-    // tag 特效方法 
+    // tag 特效方法
     /**
      * 冰冻特效
      * 赋予两倍阻力
@@ -257,7 +268,7 @@ var GameLevel = /** @class */ (function (_super) {
         Setting_1.default.endCubeGroup = this.lastGroup.nextGroup;
         this.lastGroup.destroyMembers(false);
     };
-    // tag 基本操作函数 
+    // tag 基本操作函数
     /**
     * creat instantiate
     * @param {cc.Prefab} actor 实例化的目标
@@ -279,21 +290,24 @@ var GameLevel = /** @class */ (function (_super) {
         /**
          * 上叠运行速度
          */
-        get: function () { return Setting_1.default.GameSpeed + this._MultiplyGameSpeed; },
+        get: function () {
+            return Setting_1.default.GameSpeed + this._MultiplyGameSpeed;
+        },
         /**
          * 添加上叠运行速度
          */
-        set: function (value) { this._MultiplyGameSpeed = Math.max(Math.min(this._MultiplyGameSpeed + value, Setting_1.default.GameSpeed_MulMax), 0); },
+        set: function (value) {
+            this._MultiplyGameSpeed = Math.max(Math.min(this._MultiplyGameSpeed + value, Setting_1.default.GameSpeed_MulMax), 0);
+        },
         enumerable: false,
         configurable: true
     });
-    ;
-    ;
     /**
      * 直接设置上叠运行速度
      */
-    GameLevel.prototype.setGameSpeed = function (value) { this._MultiplyGameSpeed = value; };
-    ;
+    GameLevel.prototype.setGameSpeed = function (value) {
+        this._MultiplyGameSpeed = value;
+    };
     __decorate([
         property(cc.Node)
     ], GameLevel.prototype, "gameArea", void 0);
@@ -302,7 +316,6 @@ var GameLevel = /** @class */ (function (_super) {
     ], GameLevel.prototype, "effectArea", void 0);
     GameLevel = __decorate([
         ccclass
-        // @executeInEditMode
     ], GameLevel);
     return GameLevel;
 }(cc.Component));

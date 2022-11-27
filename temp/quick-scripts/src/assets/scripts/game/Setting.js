@@ -112,20 +112,26 @@ var Setting = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
+    Object.defineProperty(Setting, "highScore", {
+        get: function () { return this._HighScroe; },
+        set: function (value) { this._HighScroe = Math.max(value, this._HighScroe); },
+        enumerable: false,
+        configurable: true
+    });
     Object.defineProperty(Setting, "endCubeGroup", {
         get: function () { return this._EndCubeGroup; },
         set: function (value) { this._EndCubeGroup = value; },
         enumerable: false,
         configurable: true
     });
-    Object.defineProperty(Setting, "GameSpeed", {
-        get: function () { return this._GameSpeed; },
-        set: function (value) { this._GameSpeed = value; },
+    Object.defineProperty(Setting, "GameSpeed_MulMax", {
+        get: function () { return 250 - this._GameSpeed; },
         enumerable: false,
         configurable: true
     });
-    Object.defineProperty(Setting, "GameSpeed_MulMax", {
-        get: function () { return 250 - 130; },
+    Object.defineProperty(Setting, "GameSpeed", {
+        get: function () { return this._GameSpeed; },
+        set: function (value) { this._GameSpeed = value; },
         enumerable: false,
         configurable: true
     });
@@ -287,6 +293,18 @@ var Setting = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
+    Object.defineProperty(Setting, "Sound_bgm_bpm", {
+        // 背景音乐bpm，用于节拍对齐，如果没有在menu中看到相关代码就可以删了
+        get: function () { return 180; },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Setting, "mute", {
+        get: function () { return this._Mute; },
+        set: function (value) { this._Mute = value; },
+        enumerable: false,
+        configurable: true
+    });
     Object.defineProperty(Setting, "blockName", {
         // 资产常量定义
         get: function () { return 'Block'; },
@@ -306,9 +324,10 @@ var Setting = /** @class */ (function () {
     Setting._SkillBoom_CoolDownTime = 39;
     // 计分器
     Setting._Score = 0;
+    Setting._HighScroe = 0;
     // 场景中最后一组方块
     Setting._EndCubeGroup = null;
-    // 设定参数定义 我认为极限速度大概在250左右，再快了就反应不过来了
+    // 设定参数定义 我认为极限速度大概在250左右，再快了就反应不过来了，不过由于存在自动阻力，所以最终速度很难达到250
     Setting._GameSpeed = 130;
     Setting._CubeSpeed = 950;
     // 网格指针
@@ -317,6 +336,8 @@ var Setting = /** @class */ (function () {
     Setting._Movement = null;
     // 关卡菜单界面脚本
     Setting._Menu = null;
+    // 是否静音
+    Setting._Mute = false;
     return Setting;
 }());
 exports.default = Setting;

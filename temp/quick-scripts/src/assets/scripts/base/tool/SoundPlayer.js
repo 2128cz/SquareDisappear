@@ -18,8 +18,6 @@ cc._RF.push(module, '6d8c0Q6KR9C36BD7f5kv5Ez', 'SoundPlayer');
  * 在进行'new SoundPlayer'时，'SoundPlayer'会自动推入到剪辑发射列表，
  * 并等待用户后续的所有操作完成，在随后的生命周期函数中，效果器与播放器都会被一一处理。
  *
- *
- *
  */
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {

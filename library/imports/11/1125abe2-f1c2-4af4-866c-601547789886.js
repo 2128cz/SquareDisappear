@@ -30,18 +30,16 @@ var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
 var MenuLevel = /** @class */ (function (_super) {
     __extends(MenuLevel, _super);
     function MenuLevel() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        // tag 参数
+        _this._bgm1 = null;
+        return _this;
     }
     MenuLevel.prototype.onLoad = function () {
-        DevelopersToolGlobal_1.DevelopersToolGlobal.layers[0].active = true;
-        DevelopersToolGlobal_1.DevelopersToolGlobal.layers[1].active = false;
-        DevelopersToolGlobal_1.DevelopersToolGlobal.layers[2].active = false;
-        DevelopersToolGlobal_1.DevelopersToolGlobal.layers[3].active = true;
         Setting_1.default.menu = this;
     };
     MenuLevel.prototype.start = function () {
-        // todo 播放音乐
-        new SoundPlayer_1.SoundPlayer(Setting_1.default.Sound_bgm, 1, .5);
+        this.openMenu();
     };
     // update (dt) {}
     // tag 用户逻辑
@@ -53,17 +51,28 @@ var MenuLevel = /** @class */ (function (_super) {
         DevelopersToolGlobal_1.DevelopersToolGlobal.layers[1].active = true;
         DevelopersToolGlobal_1.DevelopersToolGlobal.layers[2].active = false;
         DevelopersToolGlobal_1.DevelopersToolGlobal.layers[3].active = false;
+        // 复位分数
+        Setting_1.default.score = 0;
+        if (Setting_1.default.mute)
+            return;
+        // todo 音乐切换
+        var newbgm = new SoundPlayer_1.SoundPlayer(Setting_1.default.Sound_bgm, -1, 0.5);
+        newbgm.bpm = Setting_1.default.Sound_bgm_bpm;
+        this._bgm1.stop();
+        this._bgm1.switch(newbgm).crossfade(3);
+        this._bgm1 = newbgm;
     };
     /**
      * 游戏结束
      */
     MenuLevel.prototype.gameOver = function () {
-        // todo 播放音效
-        new SoundPlayer_1.SoundPlayer(Setting_1.default.Sound_lose);
         DevelopersToolGlobal_1.DevelopersToolGlobal.layers[0].active = true;
         DevelopersToolGlobal_1.DevelopersToolGlobal.layers[1].active = true;
         DevelopersToolGlobal_1.DevelopersToolGlobal.layers[2].active = true;
         DevelopersToolGlobal_1.DevelopersToolGlobal.layers[3].active = false;
+        // todo 播放音效
+        // this._bgm1.setting().crossfade(1);
+        new SoundPlayer_1.SoundPlayer(Setting_1.default.Sound_lose);
     };
     /**
     * 打开菜单
@@ -73,20 +82,54 @@ var MenuLevel = /** @class */ (function (_super) {
         DevelopersToolGlobal_1.DevelopersToolGlobal.layers[1].active = false;
         DevelopersToolGlobal_1.DevelopersToolGlobal.layers[2].active = false;
         DevelopersToolGlobal_1.DevelopersToolGlobal.layers[3].active = true;
+        if (Setting_1.default.mute)
+            return;
+        // todo 播放音乐
+        if (!this._bgm1) {
+            this._bgm1 = new SoundPlayer_1.SoundPlayer(Setting_1.default.Sound_bgm, -1, 0.5);
+            this._bgm1.bpm = Setting_1.default.Sound_bgm_bpm;
+        }
     };
-    // tag 按钮事件 
+    // tag 按钮事件
     MenuLevel.prototype.onButtonClick = function (event, cusData) {
-        this[cusData]();
+        this[cusData](event);
     };
-    MenuLevel.prototype.onMusic = function () {
+    MenuLevel.prototype.onMusic = function (event) {
         // todo 播放音效
         new SoundPlayer_1.SoundPlayer(Setting_1.default.Sound_btnn);
+        Setting_1.default.mute = !Setting_1.default.mute;
+        var spriteComponent = event.currentTarget.getComponent(cc.Sprite);
+        spriteComponent.spriteFrame = Setting_1.default.mute ? DevelopersToolGlobal_1.DevelopersToolGlobal.warehouse['frames']['btn soundClose'] : DevelopersToolGlobal_1.DevelopersToolGlobal.warehouse['frames']['btn sound'];
+        this._bgm1.mute = Setting_1.default.mute;
     };
-    MenuLevel.prototype.onShare = function () {
+    MenuLevel.prototype.onShare = function (event) {
         // todo 播放音效
         new SoundPlayer_1.SoundPlayer(Setting_1.default.Sound_btnn);
+        if (window.wx) {
+            var that = this;
+            cc.resources.load("share/share1", function (err, data) {
+                var options = {
+                    title: "方块消吧！",
+                    imageUrl: data["url"],
+                };
+                wx.shareAppMessage(options);
+                //share为分享的图片名称这是路径（assets/resources/share）
+                wx.onShareAppMessage(function (res) {
+                    return {
+                        title: "来比一比谁的反应更快！",
+                        imageUrl: data["url"],
+                        success: function (res) {
+                            console.log(res);
+                        },
+                        fail: function (res) {
+                            console.log(res);
+                        }
+                    };
+                });
+            });
+        }
     };
-    MenuLevel.prototype.onStart = function () {
+    MenuLevel.prototype.onStart = function (event) {
         // todo 播放音效
         new SoundPlayer_1.SoundPlayer(Setting_1.default.Sound_btny);
         this.gameStart();

@@ -13,8 +13,6 @@
  * 在进行'new SoundPlayer'时，'SoundPlayer'会自动推入到剪辑发射列表，
  * 并等待用户后续的所有操作完成，在随后的生命周期函数中，效果器与播放器都会被一一处理。
  * 
- * 
- * 
  */
 
 import { SoundLibrary, IPreinstallInterface, SoundPlayer, ISoundTrackSequenceInterface, ISceneSoundPlaybackControllerInterface } from "../class/AudioClass";

@@ -561,6 +561,6 @@ var EAnimPhySimSpace;
     EAnimPhySimSpace[EAnimPhySimSpace["relativeNode"] = 4] = "relativeNode";
 })(EAnimPhySimSpace = exports.EAnimPhySimSpace || (exports.EAnimPhySimSpace = {}));
 // 测试语句，可以在控制台中能够看到这里
-cc["vv"] = cc["vv"] || DevelopersToolGlobal;
+// cc["vv"] = cc["vv"] || DevelopersToolGlobal;
 
 cc._RF.pop();

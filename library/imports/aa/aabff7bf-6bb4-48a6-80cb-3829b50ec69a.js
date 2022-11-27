@@ -97,7 +97,7 @@ var Block = /** @class */ (function (_super) {
                 // 重新定义自己的组
                 selfGroup = selfGroupInst.getComponent(Setting_1.default.blockGroupName);
                 // 初始化自己的组
-                var selfGroupIndex = otherGroup.gridIndex - 1;
+                var selfGroupIndex = DevelopersToolGlobal_1.mathMacro.PMod(otherGroup.gridIndex - 1, Setting_1.default.Game_Row2);
                 selfGroup.init(selfGroupIndex, null, otherGroup);
                 // 指定不需要自动初始化
                 selfGroup.needStart = false;
@@ -106,6 +106,8 @@ var Block = /** @class */ (function (_super) {
                     element.destroy();
                     element.isValid = false;
                 });
+                // 都已经新建了，应当是末尾项目
+                Setting_1.default.endCubeGroup = selfGroup;
             }
             // 加入到组中
             this.node.setPosition(this.node.x, Setting_1.default.Cube_Perfab_Y, 0);

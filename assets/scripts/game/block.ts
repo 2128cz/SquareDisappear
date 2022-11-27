@@ -1,4 +1,4 @@
-import { DevelopersToolGlobal as ccvv } from "../base/class/DevelopersToolGlobal";
+import { DevelopersToolGlobal as ccvv, mathMacro as mm } from "../base/class/DevelopersToolGlobal";
 import PawnMovement from "../base/tool/PawnMovement";
 import BlockGroup from "./BlockGroup";
 import ss from "./Setting";
@@ -71,7 +71,7 @@ export default class Block extends cc.Component {
                 // 重新定义自己的组
                 selfGroup = selfGroupInst.getComponent(ss.blockGroupName);
                 // 初始化自己的组
-                let selfGroupIndex = otherGroup.gridIndex - 1;
+                let selfGroupIndex = mm.PMod(otherGroup.gridIndex - 1, ss.Game_Row2);
                 selfGroup.init(selfGroupIndex, null, otherGroup);
                 // 指定不需要自动初始化
                 selfGroup.needStart = false;
@@ -80,6 +80,8 @@ export default class Block extends cc.Component {
                     element.destroy();
                     element.isValid = false;
                 });
+                // 都已经新建了，应当是末尾项目
+                ss.endCubeGroup = selfGroup;
             }
             // 加入到组中
             this.node.setPosition(this.node.x, ss.Cube_Perfab_Y, 0);

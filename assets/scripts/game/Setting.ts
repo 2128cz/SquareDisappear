@@ -52,17 +52,20 @@ export default class Setting {
     public static set score(value: number) { this._Score = value }
     public static set score_add(value: number) { this._Score += value }
     public static set score_sub(value: number) { this._Score -= value }
+    protected static _HighScroe: number = 0;
+    public static get highScore(): number{ return this._HighScroe }
+    public static set highScore(value:number){this._HighScroe = Math.max(value,this._HighScroe)}
 
     // 场景中最后一组方块
     protected static _EndCubeGroup: BlockGroup = null;
     public static get endCubeGroup(): BlockGroup { return this._EndCubeGroup }
     public static set endCubeGroup(value: BlockGroup) { this._EndCubeGroup = value }
 
-    // 设定参数定义 我认为极限速度大概在250左右，再快了就反应不过来了
+    // 设定参数定义 我认为极限速度大概在250左右，再快了就反应不过来了，不过由于存在自动阻力，所以最终速度很难达到250
     protected static _GameSpeed: number = 130;
+    public static get GameSpeed_MulMax(): number { return 250 - this._GameSpeed; }
     public static get GameSpeed(): number { return this._GameSpeed; }
     public static set GameSpeed(value) { this._GameSpeed = value; }
-    public static get GameSpeed_MulMax(): number { return 250 - 130; }
     public static get GameAutoSpeed(): cc.Vec3 { return new cc.Vec3(0, -((this.endCubeGroup ? (this.endCubeGroup.node.y + cc.winSize.height / 2) / cc.winSize.height : 1) * this.GameSpeed), 0); }
     public static get GameVector(): cc.Vec3 { return new cc.Vec3(0, -80, 0); }
     public static get GameAutoDrag(): number { return (this.endCubeGroup ? 1 - (this.endCubeGroup.node.y + cc.winSize.height / 2) / cc.winSize.height : 0) }
@@ -96,25 +99,32 @@ export default class Setting {
     public static set menu(value: MenuLevel) { this._Menu = value }
 
     // 资源常量定义
-    public static get Square() { return ccvv.warehouse['prefabs']['Square'] }
-    public static get SquareGroup() { return ccvv.warehouse['prefabs']['Square Node'] }
-    public static get Effect_SquareBreak() { return ccvv.warehouse['prefabs']['splintering'] }
-    public static get Effect_Destory() { return ccvv.warehouse['prefabs']['Destroy Effect Node'] }
-    public static get Effect_Boom() { return ccvv.warehouse['prefabs']['Boom Effect Node'] }
-    public static get Effect_Hit() { return ccvv.warehouse['prefabs']['Hit Effect Node'] }
-    public static get Effect_Ice() { return ccvv.warehouse['prefabs']['Ice Effect Node'] }
+    public static get Square(): cc.Prefab { return ccvv.warehouse['prefabs']['Square'] }
+    public static get SquareGroup(): cc.Prefab { return ccvv.warehouse['prefabs']['Square Node'] }
+    public static get Effect_SquareBreak(): cc.Prefab { return ccvv.warehouse['prefabs']['splintering'] }
+    public static get Effect_Destory(): cc.Prefab { return ccvv.warehouse['prefabs']['Destroy Effect Node'] }
+    public static get Effect_Boom(): cc.Prefab { return ccvv.warehouse['prefabs']['Boom Effect Node'] }
+    public static get Effect_Hit(): cc.Prefab { return ccvv.warehouse['prefabs']['Hit Effect Node'] }
+    public static get Effect_Ice(): cc.Prefab { return ccvv.warehouse['prefabs']['Ice Effect Node'] }
 
-    public static get Sound_bgm() { return ccvv.warehouse['sounds']['bgm'] }
-    public static get Sound_btnn() { return ccvv.warehouse['sounds']['button'] }
-    public static get Sound_btny() { return ccvv.warehouse['sounds']['button_yes'] }
-    public static get Sound_lose() { return ccvv.warehouse['sounds']['lose'] }
-    public static get Sound_boom() { return ccvv.warehouse['sounds']['prop_bomb'] }
-    public static get Sound_hit() { return ccvv.warehouse['sounds']['prop_hit'] }
-    public static get Sound_ice() { return ccvv.warehouse['sounds']['prop_ice'] }
-    public static get Sound_shot() { return ccvv.warehouse['sounds']['shot'] }
-    public static get Sound_des1() { return ccvv.warehouse['sounds']['xiaochu1'] }
-    public static get Sound_des2() { return ccvv.warehouse['sounds']['xiaochu2'] }
-    public static get Sound_des3() { return ccvv.warehouse['sounds']['xiaochu3'] }
+    public static get Sound_bgm(): cc.AudioClip { return ccvv.warehouse['sounds']['bgm'] }
+    public static get Sound_btnn(): cc.AudioClip { return ccvv.warehouse['sounds']['button'] }
+    public static get Sound_btny(): cc.AudioClip { return ccvv.warehouse['sounds']['button_yes'] }
+    public static get Sound_lose(): cc.AudioClip { return ccvv.warehouse['sounds']['lose'] }
+    public static get Sound_boom(): cc.AudioClip { return ccvv.warehouse['sounds']['prop_bomb'] }
+    public static get Sound_hit(): cc.AudioClip { return ccvv.warehouse['sounds']['prop_hit'] }
+    public static get Sound_ice(): cc.AudioClip { return ccvv.warehouse['sounds']['prop_ice'] }
+    public static get Sound_shot(): cc.AudioClip { return ccvv.warehouse['sounds']['shot'] }
+    public static get Sound_des1(): cc.AudioClip { return ccvv.warehouse['sounds']['xiaochu1'] }
+    public static get Sound_des2(): cc.AudioClip { return ccvv.warehouse['sounds']['xiaochu2'] }
+    public static get Sound_des3(): cc.AudioClip { return ccvv.warehouse['sounds']['xiaochu3'] }
+    
+    // 背景音乐bpm，用于节拍对齐，如果没有在menu中看到相关代码就可以删了
+    public static get Sound_bgm_bpm() { return 180 }
+    // 是否静音
+    protected static _Mute: boolean = false;
+    public static get mute(): boolean { return this._Mute }
+    public static set mute(value: boolean) { this._Mute = value }
 
     // 资产常量定义
     public static get blockName() { return 'Block' }

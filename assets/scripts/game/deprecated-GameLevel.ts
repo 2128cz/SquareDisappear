@@ -5,7 +5,7 @@ import GridAbsorb from '../base/tool/GridAdsorb';
 import NTR from "../base/tool/NoRootTree";
 
 /**
- * 牛头人 NTR 继承自ringbuffer继承自RigorousArray
+ * 无根树 NTR 继承自ringbuffer继承自RigorousArray 
  * 驱动网格 GridAbsorb 用来驱动其他方块的对齐与运动
  * 移动组件 PawnMovement 简单的运动解算器，仅保留了速度解算和抵达解算，没事可以换着玩
  * 数学宏库 mm 效率低，没事别用
